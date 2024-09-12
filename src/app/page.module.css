@@ -35,7 +35,7 @@
 }
 
 .rightSide {
-  width: 50%;
+  width: 70%;
   background-color:var(--background); 
   color: #333; 
   display: flex;
@@ -46,7 +46,7 @@
 }
 
 .message {
-  font-size: 40px;
+  font-size: calc(32px + 1.2vw);
   text-align: center;
   margin-bottom: 30px;
   width: 80%;
@@ -61,7 +61,7 @@
 }
 
 .button {
-  padding: 20px 110px;
+  padding: 20px 150px;
   border: 2px solid var(--roxo-claro);
   border-radius: 20px;
   background-color: transparent;
