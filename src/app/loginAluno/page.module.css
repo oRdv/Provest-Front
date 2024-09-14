@@ -1,0 +1,108 @@
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.left-side {
+  width: 30%;
+  background-color: var(--roxo-escuro); 
+  color: var(--verde-claro);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+}
+
+.provest {
+  font-size: 64px;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.provest h1 {
+  font-size: 64px;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.illustration {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.right-side {
+  width: 70%;
+  background-color:var(--background); 
+  color: #333; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.welcome {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.welcome h1 {
+  font-size: 1.5em;
+}
+
+.login-form {
+  width: 80%;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #d9d9d9;
+  color: #282c34;
+  cursor: pointer;
+}
+
+.forgot-password {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.forgot-password a {
+  color: #282c34;
+  text-decoration: none;
+}
+
+.create-account {
+  text-align: center;
+}
+
+.create-account a {
+  color: #282c34;
+  text-decoration: none;
+}
