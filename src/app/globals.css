@@ -4,6 +4,7 @@
   --roxo-claro: #D4A4E2;
   --roxo-escuro: #201F4B;
   --lilas: #BCB3DF;
+  --cinza: #000000b6;
 }
 
 @media (prefers-color-scheme: light) {
