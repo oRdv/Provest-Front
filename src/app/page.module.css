@@ -18,14 +18,15 @@
 }
 
 .title {
-  font-size: 64px;
-  margin-bottom: 40px;
+  font-size: 48px;
   font-style: italic;
+  color: var(--verde-claro);
+  margin-bottom: 60px;
 }
 
 .imageContainer {
-  width: 70%;
-  margin-bottom: 20px;
+  width: 80%;
+  max-width: 300px;
 }
 
 .image {
@@ -69,6 +70,7 @@
   font-size: 24px;
   cursor: pointer;
   transition: all 0.2s ease;
+  text-align: center;
 }
 
 .button:hover {

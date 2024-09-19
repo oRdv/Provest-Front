@@ -1,10 +1,67 @@
+"use client"; 
 import Image from 'next/image';
 import styles from './page.module.css';
+import React, { useState } from 'react';
+import Link from 'next/link';
+
+const baseUrl = 'https://jengt-provest-backend.onrender.com/v1/jengt_provest/login'; // Altere para o endpoint de login correto
 
 function Login() {
+  const [formData, setFormData] = useState({
+    email: '',
+    senha: ''
+  });
+
+  const [erros, setErros] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    if (!formData.email || !formData.senha) {
+      setErros({ msg: "Por favor, preencha todos os campos." });
+      return;
+    }
+  
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    };
+  
+    try {
+      const response = await fetch(baseUrl, options);
+  
+      if (!response.ok) {
+        throw new Error(`Erro na requisição: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      localStorage.setItem('userId', data.id);
+      window.location.href = '/home';  // Redireciona após login bem-sucedido
+  
+    } catch (error) {
+      console.error("Erro:", error);
+      setErros({ msg: "Falha no login. Verifique suas credenciais." });
+    }
+  };
+  
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className={styles.container}>
-
       <div className={styles['left-side']}>
         <div className={styles.provest}>
           <h1>ProVest</h1>
@@ -26,16 +83,35 @@ function Login() {
 
         <div className={styles['login-form']}>
           <h1>Login</h1>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className={styles['form-group']}>
               <label htmlFor="email">E-mail</label>
-              <input type="email" id="email" />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
             </div>
 
             <div className={styles['form-group']}>
-              <label htmlFor="password">Senha</label>
-              <input type="password" id="password" />
+              <label htmlFor="senha">Senha</label>
+              <input
+                type={showPassword ? "text" : "password"}
+                id="senha"
+                name="senha"
+                value={formData.senha}
+                onChange={handleInputChange}
+                required
+              />
+              <button type="button" onClick={togglePassword}>
+                {showPassword ? "Ocultar" : "Mostrar"} Senha
+              </button>
             </div>
+
+            {erros.msg && <p className={styles.error}>{erros.msg}</p>}
 
             <div className={styles['button-container']}>
               <button type="submit" className={styles['btn-login']}>
@@ -56,7 +132,7 @@ function Login() {
 
         <div className={styles['create-account']}>
           <a href="#">Não possui cadastro?</a>
-          <a href="#">Criar conta</a>
+          <Link href="/criar-conta">Criar conta</Link>
         </div>
 
         <hr className="horizontal-line" />
