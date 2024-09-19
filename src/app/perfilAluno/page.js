@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import './globals.css';
+import styles from './page.module.css';
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState({
@@ -23,12 +23,13 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="profile-page">
-      <div className="header">
+    <div className={styles["profile-page"]}>
+      <div className={styles["top-banner"]} />
+      <div className={styles["header"]}>
         <h1>NYCOLLE LIMA</h1>
       </div>
-      <form className="profile-form" onSubmit={handleSubmit}>
-        <div className="form-group">
+      <form className={styles["profile-form"]} onSubmit={handleSubmit}>
+        <div className={styles["form-group"]}>
           <label htmlFor="photo">Foto de Perfil</label>
           <input
             type="file"
@@ -38,7 +39,7 @@ const ProfilePage = () => {
             onChange={(e) => setProfile({ ...profile, photo: URL.createObjectURL(e.target.files[0]) })}
           />
         </div>
-        <div className="form-group">
+        <div className={styles["form-group"]}>
           <label htmlFor="name">Nome</label>
           <input
             type="text"
@@ -48,7 +49,7 @@ const ProfilePage = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group">
+        <div className={styles["form-group"]}>
           <label htmlFor="phone">Telefone</label>
           <input
             type="tel"
@@ -58,7 +59,7 @@ const ProfilePage = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group">
+        <div className={styles["form-group"]}>
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -68,7 +69,7 @@ const ProfilePage = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group">
+        <div className={styles["form-group"]}>
           <label htmlFor="password">Senha</label>
           <input
             type="password"
@@ -78,7 +79,7 @@ const ProfilePage = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="save-button">Salvar</button>
+        <button type="submit" className={styles["save-button"]}>Salvar</button>
       </form>
     </div>
   );

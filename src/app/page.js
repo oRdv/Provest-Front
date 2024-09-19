@@ -26,16 +26,16 @@ function App() {
           </p>
 
           <div className={styles.buttonsContainer}>
-            <Link href="./loginAluno/page">
-              <a className={styles.button}>
+            <Link href="./loginAluno/page" className={styles.button}>
+              
                 SOU ALUNO
-              </a>
+              
             </Link>
 
-            <Link href="./loginProfessor/page">
-              <a className={styles.button}>
+            <Link href="./loginProfessor/page" className={styles.button}>
+              
                 SOU PROFESSOR
-              </a>
+              
             </Link>
 
           </div>
