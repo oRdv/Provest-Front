@@ -1,12 +1,8 @@
-"use client";  // Adicione esta linha no início do arquivo
-
 import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import imagem from '../../public/img/female.png';
 import Link from 'next/link';
-
-const baseUrl = 'https://jengt-provest-backend.onrender.com';
 
 function Login() {
 
