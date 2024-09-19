@@ -6,8 +6,6 @@ import styles from './page.module.css';
 import imagem from '../../public/img/female.png';
 import Link from 'next/link';
 
-const baseUrl = 'https://jengt-provest-backend.onrender.com';
-
 function Login() {
 
   return (
