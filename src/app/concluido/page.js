@@ -13,10 +13,10 @@ export default function Success() {
       />
       <p className={styles.text}>Cadastro Concluído com Sucesso!</p>
       <div className={styles.buttons}>
-        <Link href="/">
+        <Link href="/" legacyBehavior>
           <span className={styles.button}>Home</span>
         </Link>
-        <Link href="/profile">
+        <Link href="/profile" legacyBehavior>
           <span className={styles.button}>Acessar Meu Perfil</span>
         </Link>
       </div>
