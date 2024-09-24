@@ -59,9 +59,11 @@
 }
 
 .login-form h1 {
+  display: flex;
+  justify-content: flex-start;
   font-size: 36px;
   margin-bottom: 30px;
-  text-align: start;
+  text-align: flex- start;
   color: #333;
   font-weight: 300;
 }

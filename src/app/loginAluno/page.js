@@ -1,63 +1,54 @@
-"use client"; 
+"use client";
 import Image from 'next/image';
 import styles from './page.module.css';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation'
 
-const baseUrl = 'https://jengt-provest-backend.onrender.com/v1/jengt_provest/login'; // Altere para o endpoint de login correto
+const Login = () => {
 
-function Login() {
-  const [formData, setFormData] = useState({
-    email: '',
-    senha: ''
-  });
+  const router = useRouter()
 
-  const [erros, setErros] = useState({});
-  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({ email: '', senha: '' });
+  const [erros, setErros] = useState({ msg: '' });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    
-    if (!formData.email || !formData.senha) {
-      setErros({ msg: "Por favor, preencha todos os campos." });
-      return;
-    }
-  
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    };
-  
-    try {
-      const response = await fetch(baseUrl, options);
-  
-      if (!response.ok) {
-        throw new Error(`Erro na requisição: ${response.status}`);
+
+  const loginValidation = async (e) => {
+    e.preventDefault();
+    const { email, senha } = formData;
+
+    const getUsers = async () => {
+      const url = 'https://jengt-provest-backend.onrender.com/v1/jengt_provest/alunos';
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data
+      } catch (error) {
+        alert('Houve um problema com a solicitação de login.');
+        return [];
       }
-  
-      const data = await response.json();
-      localStorage.setItem('userId', data.id);
-      window.location.href = '/home';  // Redireciona após login bem-sucedido
-  
-    } catch (error) {
-      console.error("Erro:", error);
-      setErros({ msg: "Falha no login. Verifique suas credenciais." });
-    }
-  };
-  
+    };
 
-  const togglePassword = () => {
-    setShowPassword(!showPassword);
+    const usuarios = await getUsers();
+    let userStatus = false;
+
+    if (usuarios) {
+      usuarios.alunos.forEach(user => {
+        if (user.email === email && user.senha === senha) {
+          userStatus = true;
+          localStorage.setItem('userId', user.id);
+          router.push('/home ')
+        }
+      });
+    }
+
+    if (!userStatus) {
+      setErros({ msg: 'Credenciais inválidas. Tente novamente.' });
+    }
   };
 
   return (
@@ -83,7 +74,7 @@ function Login() {
 
         <div className={styles['login-form']}>
           <h1>Login</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={loginValidation}>
             <div className={styles['form-group']}>
               <label htmlFor="email">E-mail</label>
               <input
@@ -99,16 +90,13 @@ function Login() {
             <div className={styles['form-group']}>
               <label htmlFor="senha">Senha</label>
               <input
-                type={showPassword ? "text" : "password"}
+                type="password"
                 id="senha"
                 name="senha"
                 value={formData.senha}
                 onChange={handleInputChange}
                 required
               />
-              <button type="button" onClick={togglePassword}>
-                {showPassword ? "Ocultar" : "Mostrar"} Senha
-              </button>
             </div>
 
             {erros.msg && <p className={styles.error}>{erros.msg}</p>}
@@ -139,6 +127,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;
