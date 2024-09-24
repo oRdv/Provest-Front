@@ -1,0 +1,80 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFFFF1; /* Light blue background */
+    font-family: Arial, sans-serif;
+  }
+  
+  .content {
+    width: 80vw;
+    padding: 45px;
+  }
+  
+  .title {
+    background-color: #201F4B;
+    width: 100vw;
+    color: #DEFEA0;
+    font-size: 2em;
+    text-align: center;
+    font-weight: 300; 
+    padding: 45px; 
+    border-radius: 0 0 32px 32px;
+  }
+  
+  
+  .arrow {
+    font-size: 1.5em;
+  }
+  
+  .infoBox {
+    background-color: transparent;
+    border: 4px solid #e1bee7;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center; /* Centraliza o texto */
+    display: flex; /* Ativa o Flexbox */
+    flex-direction: column; /* Organiza os itens em coluna */
+    align-items: center; /* Centraliza os itens horizontalmente */
+}
+
+  
+  .infoBox h2, .footer{
+    text-align: center;
+  }
+  
+  .subtitle {
+    font-size: 2em;
+    margin: 30px 0;
+  }
+
+
+  
+  .competencias {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .button {
+    
+    background-color: #201F4B;
+    color: white; 
+    padding: 10px 20px; 
+    font-size: 25px;   
+    border-radius: 5px; 
+    margin: 15px 0;
+    width: 1100px; 
+    text-align: center; 
+  }
+  
+  .button:hover {
+    background-color: #373661;
+  }
+  
+  .navButton {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
