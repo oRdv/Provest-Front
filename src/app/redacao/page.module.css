@@ -1,0 +1,76 @@
+/* page.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: #FFFFF1; /* Light blue background */
+  font-family: Arial, sans-serif;
+}
+
+.content {
+  width: 100vw;
+  padding: 45px;
+}
+
+.title {
+  background-color: #201F4B;
+  width: 100vw;
+  color: #DEFEA0;
+  font-size: 2em;
+  text-align: center;
+  font-weight: 300; 
+  padding: 45px; 
+  border-radius: 0 0 32px 32px;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #e1bee7;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.arrow {
+  font-size: 1.5em;
+}
+
+.infoBox {
+  background-color: #E4E2ED;
+  padding: 45px;
+  border-radius: 12px;
+  margin-top: 30px;
+}
+
+.infoBox h2, .footer{
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+.competencias {
+  list-style-type: none;
+  padding: 0;
+}
+
+.competencias li {
+  margin-bottom: 10px;
+}
+
+
+.navButton {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
