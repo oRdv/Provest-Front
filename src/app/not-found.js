@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 function notFound() {
         return (
-          <>
+        </>
           </>
         );
       }
