@@ -2,11 +2,11 @@
     display: flex;
     width: 100vw;
     height: 100vh;
-    justify-content: space-between; /* Alinha os itens nos lados opostos */
+    justify-content: space-between;
 }
 
 .left-side {
-    width: 40%; /* Define uma largura menor para a imagem */
+    width: 40%;
     background-color: var(--roxo-escuro); 
     color: var(--verde-claro);
     display: flex;
@@ -19,12 +19,12 @@
 }
 
 .right-side {
-    width: 60%; /* Define mais espaço para o formulário */
+    width: 60%; 
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centraliza verticalmente o formulário */
-    padding: 40px; /* Ajusta o padding conforme necessário */
+    justify-content: center; 
+    padding: 40px; 
 }
 
 .welcome h1 {
@@ -35,21 +35,43 @@
     font-weight: 400;
 }
 
+
 .login-form {
     background-color: var(--background);
     padding: 40px;
     border-radius: 15px;
-    width: 100%; /* Faz o formulário ocupar todo o espaço disponível */
-    max-width: 500px; /* Limita a largura máxima */
+    width: calc(720px + 15vh);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
+  
+  }
+  
+  .login-form h1 {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-align: flex- start;
+    color: #333;
+    font-weight: 300;
+  }
+  
+  .form-group {
+    width: 100%;
     margin-bottom: 20px;
-}
-
-.form-group input {
-    width: 100%; /* Faz os inputs ocuparem todo o espaço disponível */
-    max-width: 400px; /* Limita a largura máxima dos inputs */
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .form-group input {
+    width: 500px;
     padding: 15px;
     border: 1px solid var(--lilas);
     border-radius: 25px;
@@ -57,21 +79,20 @@
     background-color: var(--background);
     color: #333;
     box-sizing: border-box;
-}
-
-.form-group input::placeholder {
+  }
+  
+  .form-group input::placeholder {
     color: var(--lilas);
-}
-
-.button-container {
+  }
+  
+  .button-container {
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     width: 100%;
-}
-
-.btn-login {
-    width: 350px;
-    /* Largura fixa do botão */
+  }
+  
+  .btn-login {
+    width: 350px; 
     padding: 15px;
     background-color: var(--lilas);
     border-radius: 25px;
@@ -81,11 +102,12 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-align: center;
-}
-
-.btn-login:hover {
+  }
+  
+  .btn-login:hover {
     background-color: var(--lilas);
-}
+  }
+  
 
 .custom-checkbox {
     display: flex;
