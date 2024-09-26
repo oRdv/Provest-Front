@@ -3,7 +3,6 @@ import Image from 'next/image';
 
 const WomanSection = () => {
     return (
-        <div className={styles.container}>
             <div className={styles['left-side']}>
                 <div className={styles.provest}>
                     <h1>ProVest</h1>
@@ -17,7 +16,6 @@ const WomanSection = () => {
                     />
                 </div>
             </div>
-        </div>
     )
 
 }

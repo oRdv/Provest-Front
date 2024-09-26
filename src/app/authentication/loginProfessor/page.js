@@ -20,7 +20,7 @@ const Login = () => {
         const { email, senha } = formData;
 
         const getUsers = async () => {
-            const url = 'https://jengt-provest-backend.onrender.com/v1/jengt_provest/alunos';
+            const url = 'https://jengt-provest-backend.onrender.com/v1/jengt_provest/profs';
             try {
                 const response = await fetch(url);
                 const data = await response.json();
@@ -35,7 +35,7 @@ const Login = () => {
         let userStatus = false;
 
         if (usuarios) {
-            usuarios.alunos.forEach(user => {
+            usuarios.professores.forEach(user => {
                 if (user.email === email && user.senha === senha) {
                     userStatus = true;
                     localStorage.setItem('userId', user.id);
@@ -53,7 +53,7 @@ const Login = () => {
 
         <div className={styles['right-side']}>
             <div className={styles.welcome}>
-                <h1>BEM VINDO PROFESSOR!</h1> {/* Ajuste o texto conforme necessário */}
+                <h1>BEM VINDO PROFESSOR!</h1>
             </div>
     
             <div className={styles['login-form']}>
