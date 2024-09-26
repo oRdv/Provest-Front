@@ -28,17 +28,8 @@ const ProfilePage = () => {
       <div className={styles["header"]}>
         <h1>NYCOLLE LIMA</h1>
       </div>
+      
       <form className={styles["profile-form"]} onSubmit={handleSubmit}>
-        <div className={styles["form-group"]}>
-          <label htmlFor="photo">Foto de Perfil</label>
-          <input
-            type="file"
-            id="photo"
-            name="photo"
-            accept="image/*"
-            onChange={(e) => setProfile({ ...profile, photo: URL.createObjectURL(e.target.files[0]) })}
-          />
-        </div>
         <div className={styles["form-group"]}>
           <label htmlFor="name">Nome</label>
           <input
@@ -79,8 +70,9 @@ const ProfilePage = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className={styles["save-button"]}>Salvar</button>
       </form>
+      <button type="submit" className={styles["save-button"]}>Salvar</button>
+
     </div>
   );
 };

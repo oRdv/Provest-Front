@@ -1,6 +1,5 @@
 .profile-page {
     font-family: Arial, sans-serif;
-    border-bottom: 2px solid #000; 
   }
   
   .header {
@@ -29,6 +28,7 @@
   .form-group {
     margin-bottom: 30px;
     color: #BCB3DF;
+    font-style: italic;
   }
   
   .form-group label {
@@ -48,6 +48,8 @@
   .save-button {
     background-color: #BCB3DF;
     width: 30vh;
+    display: flex;
+    justify-content: center;
     align-items: center;
     color: white;
     border: none;
