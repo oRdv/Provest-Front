@@ -4,13 +4,18 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    gap: 10px;
     text-align: center;
-    color: #DEFEA0;
-    background-color: #201F4B;
+    color: var(--verde-claro);
+    background-color: var(--roxo-escuro);
   }
 
+  .pro{
+    background-color: var(--roxo-escuro);
+  }
+  
   .container-text {
-  font-size: 40px;
+  font-size: 36px;
   }
 
   .image {
@@ -18,26 +23,36 @@
   }
   
   .text {
-    font-size: 24px;
+    font-size: 36px;
     margin-bottom: 20px;
+    font-weight: 700;
+   
   }
   
   .buttons {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 60px;
   }
   
   .button {
     padding: 10px 20px;
-    font-size: 20px;
+    font-size: 24px;
     color: black;
-    background-color: #BCB3DF;
+    background-color: var(--lilas);
     border: none;
     border-radius: 10px;
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.2s ease;
     text-align: center;
+   
   }
+
+  .button:hover {
+    background-color: var(--verde-claro);
+    color: var(--roxo-escuro);
+  }
+
+  
   
