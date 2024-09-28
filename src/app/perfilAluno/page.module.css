@@ -1,18 +1,14 @@
-.profile-page {
-    font-family: Arial, sans-serif;
-  }
-  
-  .header {
-    background-color: #201F4B;
+    .header {
+    background-color: var(--roxo-escuro);
     width: 100%;
     height: 30vh;
-    color: #DEFEA0;
+    color: var(--verde-claro);
     text-align: center;
     margin-bottom: 50px;
   }
 
   .top-banner {
-    background-color: #201F4B;
+    background-color: var(--roxo-escuro);
     height: 50px;
     width: 100%;
   }
@@ -22,12 +18,12 @@
     margin: 0 auto;
     padding: 20px;
     border-radius: 8px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  
   }
   
   .form-group {
     margin-bottom: 30px;
-    color: #BCB3DF;
+    color: var(--lilas);
     font-style: italic;
   }
   
@@ -42,11 +38,11 @@
     outline: none;
     background: transparent;
     border: none;
-    border-bottom: 1px solid #BCB3DF;
+    border-bottom: 1px solid var(--lilas);
   }
   
   .save-button {
-    background-color: #BCB3DF;
+    background-color: var(--lilas);
     width: 30vh;
     display: flex;
     justify-content: center;
@@ -60,6 +56,30 @@
   }
   
   .save-button:hover {
-    background-color: #a8a1c2;
+    background-color: var(--roxo-claro);
   }
   
+  .button {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 265px;
+    padding: 10px 20px;
+    font-size: 24px;
+    color: black;
+    background-color: var(--lilas);
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+   
+  }
+
+  .button:hover {
+    background-color: var(--verde-claro);
+    color: var(--roxo-escuro);
+  }
