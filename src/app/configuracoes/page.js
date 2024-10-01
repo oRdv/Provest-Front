@@ -1,5 +1,4 @@
 import React from 'react';
-import '../configuracoes/page.css'
 
 function Config() {
 

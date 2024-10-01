@@ -49,3 +49,11 @@ a {
     color-scheme: light;
   }
 }
+
+.tamara{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  padding: 10vh;
+  margin: 0 auto;
+}
