@@ -103,8 +103,8 @@ const Login = () => {
             </div>
     
             <div className={styles['create-account']}>
-                <a href="#">Não possui cadastro?</a>
-                <Link href="/criar-conta">Criar conta</Link>
+                <p>Não possui cadastro?</p>
+                <Link href="./cadastroAluno">Criar conta</Link>
             </div>
         </div>
     );

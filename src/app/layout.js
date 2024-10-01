@@ -1,8 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
 
-<div id="__next"></div>
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -24,6 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="pt-br">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
+        <div id="modal-root"></div>
       </body>
     </html>
   );
