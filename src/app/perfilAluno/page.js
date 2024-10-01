@@ -49,7 +49,7 @@ const ProfilePage = () => {
       </div>
       <button onClick={() => setIsModalOpen(true)}>Escolher Avatar</button>
 
-      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} contentLabel="Select Avatar">
+      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} className={'tamara'} contentLabel="Select Avatar">
         <AvatarSelector onSelect={handleAvatarSelect} />
       </Modal>
     </div>
