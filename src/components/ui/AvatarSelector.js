@@ -1,71 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
+import React, { useState } from 'react';
+import './AvatarSelector.module.css';
 
 const AvatarSelector = ({ icons, onSelect, onClose }) => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    const checkAppElement = () => {
-      const appElement = document.getElementById('__next');
-      if (appElement) {
-        Modal.setAppElement('#__next');
-        setIsClient(true);
-      } else {
-        setTimeout(checkAppElement, 100);
-      }
-    };
-
-    if (typeof window !== 'undefined') {
-      checkAppElement();
-    }
-  }, []);
-
-  const [selectedAvatar, setSelectedAvatar] = useState(null);
-  const [uploadedImage, setUploadedImage] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleIconClick = (icon) => {
-    setSelectedAvatar(icon);
+    onSelect(icon);
+    setIsOpen(false); 
   };
 
-  const handleUpload = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
+  const icon = [
+    '@/../public/img/gatinho.png',
+    '@/../public/img/vaquinha.png',
+    '@/../public/img/macaquinho.png',
+   
+  ];
 
-    reader.onloadend = () => {
-      setUploadedImage(reader.result);
-      onSelect(reader.result);
-    };
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
 
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+  const handleSelectAvatar = (index) => {
+    setSelectedAvatar(index);
   };
-
-  const handleSelect = () => {
-    onSelect(selectedAvatar || uploadedImage);
-    onClose();
-  };
-
-  if (!isClient) {
-    return null;
-  }
 
   return (
-    <Modal isOpen onRequestClose={onClose} contentLabel="Select Avatar" className="modal-content">
-      <h2>Escolha um avatar</h2>
-      <div className="avatar-grid">
-        {icons.map((icon, index) => (
-          <div key={index} onClick={() => handleIconClick(icon)} className="avatar-item">
-            <img src={icon} alt={`Icon ${index}`} className={`avatar-icon ${selectedAvatar === icon ? 'selected' : ''}`} />
+   <div className="avatar-selector">
+      <h3>Escolha um avatar</h3>
+      <div className="avatars-grid">
+        {icon.map((avatar, index) => (
+          <div
+            key={index}
+            className={`avatar-item ${selectedAvatar === index ? "selected" : ""}`}
+            onClick={() => handleSelectAvatar(index)}
+          >
+            <img src={avatar} alt={`Avatar ${index + 1}`} />
           </div>
         ))}
-        <div className="avatar-item upload">
-          <input type="file" accept="image/*" onChange={handleUpload} />
-          {uploadedImage && <img src={uploadedImage} alt="Uploaded" className="avatar-icon" />}
-        </div>
       </div>
-      <button onClick={handleSelect}>Selecionar Avatar</button>
-    </Modal>
+    </div>
   );
 };
 
