@@ -1,0 +1,100 @@
+.digital-notebook-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .header {
+    width: 500px;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .headerText {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .notebook-container {
+    width: 500px;
+    height: 600px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0 0 10px 10px;
+    padding: 20px;
+  }
+  
+  .notebook-header {
+    margin-bottom: 20px;
+  }
+  
+  .titleCaderno {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .notebook {
+    margin-bottom: 20px;
+  }
+  
+  .notebook-textarea {
+    width: 100%;
+    height: 400px;
+    padding: 20px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    border: none;
+    outline: none;
+    resize: none;
+  }
+  
+  .notebook-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .save-button {
+    background-color: #34c759;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .right-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .new-annotation-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .favorite-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
