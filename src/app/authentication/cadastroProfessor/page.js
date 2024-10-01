@@ -114,7 +114,7 @@ const Signup = () => {
       </div>
 
       <div className={styles['create-account']}>
-        <a href="/login">Já possui uma conta? Faça login</a>
+        <a href="./loginProfessor">Já possui uma conta? Faça login</a>
       </div>
     </div>
   );

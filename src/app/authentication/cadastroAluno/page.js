@@ -115,18 +115,6 @@ const Signup = () => {
             />
           </div>
 
-          {/* <div className={styles['form-group']}>
-            <label htmlFor="icone_id">Icone</label>
-            <input
-              type="number"
-              id="icone_id"
-              name="icone_id"
-              value={formData.icone_id}
-              onChange={handleInputChange}
-              required
-            />
-          </div> */}
-
           {erros.msg && <p className={styles.error}>{erros.msg}</p>}
 
           <div className={styles['button-container']}>
@@ -138,7 +126,7 @@ const Signup = () => {
       </div>
 
       <div className={styles['create-account']}>
-        <a href="/login">Já possui uma conta? Faça login</a>
+        <a href="./loginAluno">Já possui uma conta? Faça login</a>
       </div>
     </div>
   );
