@@ -16,7 +16,7 @@
     border-radius: 10px 10px 0 0;
     padding: 40px;
     text-align: center;
-    font-size: px;
+    font-size: 30px;
   }
   
   .headerText {
@@ -35,6 +35,7 @@
   
   .notebook-header {
     margin-bottom: 20px;
+    align-items: center;
   }
   
   .titleCaderno {
@@ -71,9 +72,9 @@
   }
   
   .save-button {
-    background-color: #C6E6A3;
+    background-color: #E4E2ED;
     color: #201F4B;
-    padding: 10px 20px;
+    padding: 10px 40px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
