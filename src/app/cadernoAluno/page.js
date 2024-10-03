@@ -1,13 +1,35 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import styles from'./page.modules.css';
 
-function cadernoAluno() {
+function CadernoAluno() {
+
+  const [noteTitle, setNoteTitle] = useState(""); 
+  const [note, setNote] = useState(""); 
+
+  const handleNoteTitleChange = (event) => {
+    setNoteTitle(event.target.value); 
+  };
+
+  const handleNoteChange = (event) => {
+    setNote(event.target.value); 
+  };
 
   return (
     <div className="digital-notebook-container">
       <div className="header">
-        <p className={styles.headerText}>Digital Notebook</p>
+        <p className={styles.headerText}>CADERNO DO ALUNO</p>
       </div>
+      <div className="notebook-actions">
+          <button className="save-button">Salvar</button>
+          <div className="right-actions">
+            <button className="new-annotation-button">+</button>
+            <button className="favorite-button">
+              <i className="fa fa-star" aria-hidden="true"></i> Favorite
+            </button>
+          </div>
+        </div>
       <div className="notebook-container">
         <div className="notebook-header">
           <input
@@ -15,7 +37,7 @@ function cadernoAluno() {
             className="titleCaderno"
             value={noteTitle}
             onChange={handleNoteTitleChange}
-            placeholder="Note Title"
+            placeholder="Insira o título"
           />
         </div>
         <div className="notebook">
@@ -23,21 +45,12 @@ function cadernoAluno() {
             className="notebook-textarea"
             value={note}
             onChange={handleNoteChange}
-            placeholder="Write your notes here..."
+            placeholder="Digite aqui suas anotações"
           />
-        </div>
-        <div className="notebook-actions">
-          <button className="save-button">Save</button>
-          <div className="right-actions">
-            <button className="new-annotation-button">New Annotation</button>
-            <button className="favorite-button">
-              <i className="fa fa-star" aria-hidden="true"></i> Favorite
-            </button>
-          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default cadernoAluno;
+export default CadernoAluno;

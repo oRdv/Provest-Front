@@ -2,18 +2,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100vh;
+    color: #DEFEA0;
     background-color: #f0f0f0;
   }
   
   .header {
-    width: 500px;
-    height: 50px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    width: 1920px;
+    height: 90px;
+    background-color: #201F4B;
+    border: 1px solid #C6E6A3;
     border-radius: 10px 10px 0 0;
-    padding: 10px;
+    padding: 40px;
     text-align: center;
+    font-size: px;
   }
   
   .headerText {
@@ -22,12 +25,12 @@
   }
   
   .notebook-container {
-    width: 500px;
-    height: 600px;
+    width: 1000px;
+    height: 700px;
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 0 0 10px 10px;
-    padding: 20px;
+    border: 2px solid #D4A4E2;
+    border-radius: 10px;
+    padding: 40px;
   }
   
   .notebook-header {
@@ -36,7 +39,7 @@
   
   .titleCaderno {
     width: 100%;
-    padding: 10px;
+    padding: 30px;
     font-size: 18px;
     font-family: Arial, sans-serif;
     border: none;
@@ -63,11 +66,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px;
+    width: 53%;
   }
   
   .save-button {
-    background-color: #34c759;
-    color: #fff;
+    background-color: #C6E6A3;
+    color: #201F4B;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -81,8 +86,8 @@
   }
   
   .new-annotation-button {
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: #E4E2ED;
+    color: #000000;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -91,8 +96,8 @@
   }
   
   .favorite-button {
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: #E4E2ED;
+    color: #000000;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
