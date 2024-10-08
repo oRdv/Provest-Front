@@ -1,29 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 .container {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: #FFFFF1;
-  font-family: 'Poppins', sans-serif;
+  background-color: var(--background);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .content {
   width: 80vw;
-  padding: 45px;
+  padding: 45px; 
+
 }
 
 .title {
-  background-color: #201F4B;
+  background-color: var(--roxo-escuro);
   width: 100vw;
-  color: #DEFEA0;
+  color: var(--verde-claro);
   font-size: 2em;
   text-align: center;
   font-weight: 300; 
   padding: 45px; 
   border-radius: 0 0 32px 32px;
-  font-family: 'Poppins', sans-serif;
 }
 
 .button {
@@ -32,26 +32,30 @@
   align-items: center;
   width: 100%;
   padding: 15px;
-  border: 2px solid #e1bee7;
+  border: 2px solid var(--lilas);
   border-radius: 5px;
   font-size: 1.2em;
   cursor: pointer;
   background-color: transparent;
-  font-family: 'Poppins', sans-serif;
 }
+
+.selectContainer {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
 
 .arrow {
   font-size: 1.5em;
-  font-family: 'Poppins', sans-serif;
 }
 
 .infoBox {
-  background-color: #E4E2ED;
+  background-color: var(--background);
   padding: 20px;
   border-radius: 12px;
   margin-top: 30px;
   font-size: 22px;
-  font-family: 'Poppins', sans-serif;
 }
 
 .infoBox h2, .footer{
@@ -61,7 +65,6 @@
 .subtitle {
   font-size: 1.8em;
   margin-bottom: 15px;
-  font-family: 'Poppins', sans-serif;
 }
 
 .competencias {
@@ -75,56 +78,46 @@
   text-align: justify;
 }
 
-.navButton {
-  background-color: transparent;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-}
-
 .select {
-  width: fit-content;
+  padding: 10px 15px;
+  background-color: var(--background);
+  border: 5px solid var(--lilas);
+  border-radius: 10px;
   cursor: pointer;
-  position: relative;
-  transition: 300ms;
-  color: white;
-  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--roxo-escuro); 
+  width: 100%;
+  border-radius: 12px;
 }
 
 .selected {
-  background-color: var(--roxo-claro);
-  padding: 5px;
-  margin-bottom: 3px;
-  border-radius: 5px;
-  position: relative;
-  z-index: 100000;
-  font-size: 15px;
+  padding: 10px;
+  background-color: var(--background);
+  border: 3px solid var(--lilas);
+  cursor: pointer;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
 }
-
 .arrow {
-  position: relative;
-  right: 0px;
-  height: 10px;
-  transform: rotate(-90deg);
-  width: 25px;
-  fill: white;
-  z-index: 100000;
-  transition: 300ms;
+  margin-left: 10px;
+  fill: var(--lilas);
+  transform: rotate(90deg);
 }
 
 .options {
-  display: flex;
-  flex-direction: column;
-  border-radius: 5px;
-  padding: 5px;
-  background-color: var(--roxo-escuro);
-  position: relative;
-  top: -100px;
-  opacity: 0;
-  transition: 300ms;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  z-index: 1000;
+  width: 100%;
+  gap: 4px;
 }
 
 .select:hover > .options {
@@ -137,12 +130,9 @@
 }
 
 .option {
-  border-radius: 5px;
-  padding: 5px;
-  transition: 300ms;
-  background-color: var(--roxo-claro);
-  width: 150px;
-  font-size: 15px;
+  padding: 10px;
+  cursor: pointer;
+  color: var(--roxo-escuro);
 }
 .option:hover {
   background-color: var(--roxo-claro);
@@ -178,4 +168,26 @@
 }
 .select:has(.options input[type="radio"]#option-3:checked) .selected::before {
   content: attr(data-three);
+}
+
+.buttonWrite {
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s;
+  padding: 8px 16px; 
+  border-radius: 100px;
+  background: var(--verde-claro);
+  border: 1px solid transparent;
+  font-size: 18px;  
+  margin-top: 20px;
+  width: fit-content;  
+  margin-left: auto;
+}
+
+.buttonWrite:hover {
+  background: var(--roxo-claro);
+}
+
+.buttonWrite:active {
+  transform: scale(0.95);
 }

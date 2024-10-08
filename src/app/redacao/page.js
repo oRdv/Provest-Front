@@ -1,53 +1,77 @@
 "use client";
 import styles from './page.module.css';
-import React, { useState } from 'react';
+import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 
 function Redacao() {
-  const items = [1, 2, 3, 4, 5, 6, 7, 8];
+  const [selectedOption, setSelectedOption] = useState("");
+  const [temas, setTemas] = useState([]); 
+  const [isDropdownOpen, setDropdownOpen] = useState(false); 
+
+  useEffect(() => {
+    const fetchTemas = async () => {
+      try {
+        const response = await fetch("https://jengt-provest-backend.onrender.com/v1/jengt_provest/temas"); 
+        const data = await response.json();
+        console.log(data);
+        setTemas(data); // Definir os temas vindos da API
+      } catch (error) {
+        console.error("Erro ao buscar temas:", error);
+      }
+    };
+
+    fetchTemas();
+  }, []);
+
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+    setDropdownOpen(false);
+  };
+
+  const getDropdownTitle = () => {
+    return selectedOption === "" ? "Escolha seu tema" : selectedOption;
+  };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>REDAÇÕES</h1>
+
       <div className={styles.content}>
-        <div className="content">
-          <div className={styles.select}>
-            <div
-              className={styles.selected}
-              data-default="All"
-              data-one="option-1"
-              data-two="option-2"
-              data-three="option-3"
+        <div className={styles.selectContainer}>
+          <div 
+            className={styles.selected} 
+            onClick={() => setDropdownOpen(!isDropdownOpen)}  
+          >
+            {getDropdownTitle()}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="1em"
+              viewBox="0 0 512 512"
+              className={styles.arrow}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="1em"
-                viewBox="0 0 512 512"
-                class="arrow"
-              >
-                <path
-                  d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
-                ></path>
-              </svg>
-            </div>
-            <div className={styles.options}>
-              <div title="all">
-                <input id="all" name="option" type="radio" checked="" />
-                <label className="option" for="all" data-txt="All"></label>
-              </div>
-              <div title="option-1">
-                <input id="option-1" name="option" type="radio" />
-                <label className="option" for="option-1" data-txt="option-1"></label>
-              </div>
-              <div title="option-2">
-                <input id="option-2" name="option" type="radio" />
-                <label className="option" for="option-2" data-txt="option-2"></label>
-              </div>
-              <div title="option-3">
-                <input id="option-3" name="option" type="radio" />
-                <label className="option" for="option-3" data-txt="option-3"></label>
-              </div>
-            </div>
+              <path
+                d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+              ></path>
+            </svg>
           </div>
+
+          {isDropdownOpen && (
+            <div className={styles.options}>
+              {temas.tema.map((tema) => (
+                <div key={tema.nome} className={styles.option}>
+                  <input
+                    id={tema.nome}
+                    name="option"
+                    type="radio"
+                    value={tema.nome}
+                    checked={selectedOption === tema.nome}
+                    onChange={handleOptionChange}
+                  />
+                  <label htmlFor={tema.nome}>{tema.nome}</label>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className={styles.infoBox}>
@@ -83,40 +107,9 @@ function Redacao() {
             </li>
           </ul>
           <p className={styles.footer}>Boa Redação!</p>
+
+          <Link href="../escreverRedacao" className={styles.buttonWrite}>Escrever redação!</Link>
         </div>
-      </div>
-
-      <div className={styles.navbar}>
-        <button className={styles.navButton}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-
-          </svg>
-        </button>
-        <button className={styles.navButton}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-
-          </svg>
-        </button>
-        <button className={styles.navButton}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-
-          </svg>
-        </button>
       </div>
     </div>
   );
