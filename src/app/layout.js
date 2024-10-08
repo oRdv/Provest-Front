@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
     <html lang="pt-br">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
-        <div id="modal-root" className="tamara"></div>
+        <div id="modal-root" className=""></div>
       </body>
     </html>
   );
