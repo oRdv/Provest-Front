@@ -12,7 +12,7 @@ const EventPage = () => {
                         <div className={styles.eventTitle}>
                             <span className={styles.day}>20</span>
                             <span className={styles.month}>out</span>
-                            UniCamp - 1ª fase
+                            <span className={styles.eventName}>UniCamp - 1ª fase</span>
                         </div>
                     </div>
                 </div>
