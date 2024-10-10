@@ -4,24 +4,41 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 
 function Redacao() {
-  const [selectedOption, setSelectedOption] = useState("");
-  const [temas, setTemas] = useState([]); 
-  const [isDropdownOpen, setDropdownOpen] = useState(false); 
+    const [selectedOption, setSelectedOption] = useState(""); 
+    const [temas, setTemas] = useState([]); 
+    const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const [selectedTheme, setSelectedTheme] = useState('');
+  
+    useEffect(() => {
+      const fetchTemas = async () => {
+        try {
+          const response = await fetch("https://jengt-provest-backend.onrender.com/v1/jengt_provest/temas"); 
+          const data = await response.json();
+          console.log(data);
+          setTemas(data.tema);
+        } catch (error) {
+          console.error("Erro ao buscar temas:", error);
+        }
+      };
+  
+      fetchTemas();
+    }, []);
 
   useEffect(() => {
-    const fetchTemas = async () => {
-      try {
-        const response = await fetch("https://jengt-provest-backend.onrender.com/v1/jengt_provest/temas"); 
-        const data = await response.json();
-        console.log(data);
-        setTemas(data); // Definir os temas vindos da API
-      } catch (error) {
-        console.error("Erro ao buscar temas:", error);
-      }
-    };
-
-    fetchTemas();
+    const theme = localStorage.getItem('selectedTheme');
+    if (theme) {
+      setSelectedTheme(theme);
+      setSelectedOption(theme);
+    }
   }, []);
+
+  const handleOptionChangeTheme = (event) => {
+    const selectedTheme = event.target.value;
+    setSelectedOption(selectedTheme);
+
+    localStorage.setItem('selectedTheme', selectedTheme);
+    selectedTheme(selectedTheme);
+  };
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
@@ -38,9 +55,9 @@ function Redacao() {
 
       <div className={styles.content}>
         <div className={styles.selectContainer}>
-          <div 
-            className={styles.selected} 
-            onClick={() => setDropdownOpen(!isDropdownOpen)}  
+          <div
+            className={styles.selected}
+            onClick={() => setDropdownOpen(!isDropdownOpen)}
           >
             {getDropdownTitle()}
             <svg
@@ -57,7 +74,7 @@ function Redacao() {
 
           {isDropdownOpen && (
             <div className={styles.options}>
-              {temas.tema.map((tema) => (
+              {temas.map((tema) => (
                 <div key={tema.nome} className={styles.option}>
                   <input
                     id={tema.nome}
@@ -65,7 +82,7 @@ function Redacao() {
                     type="radio"
                     value={tema.nome}
                     checked={selectedOption === tema.nome}
-                    onChange={handleOptionChange}
+                    onChange={handleOptionChangeTheme}
                   />
                   <label htmlFor={tema.nome}>{tema.nome}</label>
                 </div>
