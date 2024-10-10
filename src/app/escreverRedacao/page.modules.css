@@ -1,6 +1,7 @@
 .container {
   background-color: var(--background);
   height: 100vh;
+  overflow: auto;
 }
 
 .header {
@@ -25,7 +26,7 @@
 .theme-text {
   margin-top: 5rem;
   display: flex;
-  padding-left: 50rem;
+  padding-left: 30rem;
 }
 
 .text {
@@ -104,8 +105,9 @@
   margin-top: 20px;
   width: fit-content;
   margin-left: auto;
-  margin-right: 45rem;
+  margin-right: 25rem;
   display: flex;
+  margin-bottom: 1%;
   
 }
 

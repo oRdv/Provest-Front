@@ -1,3 +1,4 @@
+
 "use client";
 import styles from './page.module.css';
 import Link from 'next/link';
@@ -16,6 +17,8 @@ function Redacao() {
           const data = await response.json();
           console.log(data);
           setTemas(data.tema);
+          console.log(setTemas);
+          
         } catch (error) {
           console.error("Erro ao buscar temas:", error);
         }
