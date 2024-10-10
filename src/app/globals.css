@@ -6,6 +6,7 @@
   --lilas: #BCB3DF;
   --cinza: #000000b6;
   --verde-escuro: #0A8365;
+  --roxinho: #E4E2ED;
 }
 
 @media (prefers-color-scheme: light) {
@@ -15,6 +16,9 @@
     --roxo-claro: #D4A4E2;
     --roxo-escuro: #201F4B;
     --lilas: #BCB3DF;
+    --roxinho: #E4E2ED;
+    --verde-escuro: #0A8365;
+    --cinza: #000000b6;
   
   }
 }
