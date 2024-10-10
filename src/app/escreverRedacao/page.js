@@ -9,7 +9,7 @@ function EscreverRedacao() {
   const [score, setScore] = useState(null);
   const maxLines = 30;
   const maxCharsPerLine = 65;
-  const apiKey = "AIzaSyClEM2tNivB9FoeJUYI_Cbg331CyqR-LZQ";  
+  const apiKey = ""  
 
   const handleChange = (e) => {
     let inputText = e.target.value;
