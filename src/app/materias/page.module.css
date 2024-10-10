@@ -1,0 +1,90 @@
+.body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin: 100px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: relative; */
+}
+
+/* SETA */
+.backArrow {
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+    font-size: 40px;
+    padding: 40px;
+}
+
+/* NOME DA PROVA */
+.event {
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+}
+
+/* MES DA PROVA */
+/* .eventDate {
+    font-weight: 100;
+    display: flex;
+    flex-direction: column;
+    margin-right: 80px; 
+    font-size: 26px;
+    text-align: center;
+    align-items: center;
+} */
+
+/* COISAS DENTRO DA BORDA ROXA */
+.eventTitle {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 2px solid #D4A4E2;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* DIA DA PROVA  - 20*/
+.day {
+    font-size: 26px;
+    font-weight: 100;
+}
+
+/* MES DA PROVA - OUT */
+.month {
+    font-weight: 100;
+    font-size: 16px; 
+}
+
+.eventTitle {
+    font-size: 23px;
+}
+
+.subjects {
+    padding: 150px;
+    align-items: center;
+}
+
+.subjectList {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 48%;
+}
+
+.subject {
+    padding: 10px;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+    margin: 0 1px;
+}
