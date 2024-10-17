@@ -9,12 +9,13 @@
   }
   
   .header {
-    width: 1920px;
-    height: 90px;
+    width: 1000vh;
+    height: 170px;
     background-color: #201F4B;
     border: 1px solid #C6E6A3;
-    border-radius: 10px 10px 0 0;
-    padding: 40px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
     text-align: center;
     font-size: 30px;
   }
@@ -72,7 +73,7 @@
   }
   
   .save-button {
-    background-color: #E4E2ED;
+    background-color: #C6E6A3;
     color: #201F4B;
     padding: 10px 40px;
     border: none;
