@@ -1,0 +1,118 @@
+/* Estilos para o Header e Avatar */
+.profile-page {
+  background-color: #fffdf7;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+/* Header ajustado */
+.top-banner {
+  background-color: var(--roxo-escuro);
+  width: 100%;
+  height: 30vh; /* Ajustado para 30vh */
+  color: var(--verde-claro);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px; /* Ajustado para ficar igual */
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+/* Container do avatar */
+.avatar-container {
+  background-color: #f3f3f3; /* Cor do fundo ajustada */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px; /* Ajustado para 10px */
+  position: relative;
+  cursor: pointer; /* Cursor pointer adicionado */
+}
+
+.avatar-img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Texto no lugar do avatar (placeholder) */
+.placeholder-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+}
+
+/* Botão do avatar para alterar */
+.avatar-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Estilos do formulário */
+.profile-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fffdf7; /* Fundo ajustado */
+}
+
+.form-group {
+  margin-bottom: 40px; /* Ajustado para 40px */
+  color: var(--lilas);
+  font-style: italic;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  outline: none;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--lilas); /* Alterado para 2px */
+  padding: 10px 0; /* Ajustado para 10px */
+  font-size: 18px; /* Tamanho da fonte ajustado */
+}
+
+/* Botão de salvar ajustado */
+.button {
+  background-color: var(--lilas);
+  width: 50vh; /* Largura ajustada */
+  height: 60px; /* Altura ajustada */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 18px; /* Tamanho da fonte ajustado */
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 20px; /* Ajustado para 20px */
+}
+
+.button:hover {
+  background-color: var(--roxo-claro);
+}
