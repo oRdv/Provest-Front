@@ -14,7 +14,7 @@ function Chat() {
         {/* CHAT NYCOLLE LIMA 1 */}
         <div className={styles.item}>
           <Image
-            src="/img/perfil.png" // Caminho da imagem
+            src="/img/perfil.png" 
             width={70} 
             height={70} 
             alt="Prof Nycolle Lima" 
