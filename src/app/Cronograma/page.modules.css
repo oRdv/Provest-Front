@@ -1,0 +1,130 @@
+
+.container {
+    font-family: 'Arial', sans-serif;
+    background-color: #F8F8E9;
+    padding: 20px;
+}
+
+.header {
+    background-color: #2E2A5A;
+    color: #A8D08D;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.header img {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+  
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.disciplinas {
+    margin-top: 20px;
+}
+
+.disciplinas h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.disciplinas ul {
+    list-style: none;
+    padding: 0;
+}
+
+.toggleSwitch {
+    position: relative;
+    width: 50px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.toggleSwitch input {
+    display: none;
+}
+
+.toggleSwitch .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.toggleSwitch input:checked + .slider {
+    left: 25px;
+    background-color: #4CAF50;
+}
+
+.studyDays, .dailyHours {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.studyDays h3, .dailyHours h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.studyDays .days {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.studyDays .days button {
+    background-color: #D3C4F3;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dailyHours .hours div input {
+    width: 50px;
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+.generateButton {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.generateButton button {
+    background-color: #2E2A5A;
+    color: #A8D08D;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
