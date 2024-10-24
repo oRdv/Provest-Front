@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #FFFFF1;
+    font-family: sans-serif;
+  }
+  
+  .header {
+    background-color: #201F4B;
+    padding: 3rem;
+    text-align: center;
+    border-radius: 0px 0px 25px 25px ;
+    margin-bottom: 3rem;
+    color: #C6E6A3;
+  }
+  
+  /* TODAS AS REDAÇÕES */
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 0.5rem 20rem 10rem;
+  }
+  
+/* TITULO DAS REDAÇÕES */
+  .label {
+    font-size: 27px;
+    font-weight: bold;
+  }
+  
+/* CONTEUDO DA CAIXA ROXA */
+  .box {
+    background-color: #BCB3DF;
+    padding: 20px;
+    border-radius: 5px; 
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #333;
+  }
