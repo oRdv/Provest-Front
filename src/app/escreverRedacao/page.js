@@ -1,15 +1,15 @@
 "use client";
 import styles from './page.modules.css';
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 
 function EscreverRedacao() {
   const [text, setText] = useState('');
+  const [titulo, setTitulo] = useState(''); 
   const [lineCount, setLineCount] = useState(0);
-  const [score, setScore] = useState(null);
+  const [selectedTheme, setSelectedTheme] = useState('');
+  const [temaId, setTemaId] = useState(''); // Mova esta linha para aqui
   const maxLines = 30;
   const maxCharsPerLine = 65;
-  const apiKey = ""  
 
   const handleChange = (e) => {
     let inputText = e.target.value;
@@ -26,50 +26,49 @@ function EscreverRedacao() {
     }
   };
 
-  const [selectedTheme, setSelectedTheme] = useState('');
-
   useEffect(() => {
-    const theme = localStorage.getItem('selectedTheme');
-    if (theme) {
-      setSelectedTheme(theme);
+    const themeIdFromStorage = localStorage.getItem('selectedThemeId');
+    const themeName = localStorage.getItem('selectedThemeName');
+    
+    if (themeIdFromStorage) {
+      setSelectedTheme(themeName); 
+      setTemaId(themeIdFromStorage); // Utilize a variável correta
     }
   }, []);
 
-  const handleSubmit = async () => {
+
+  const handleSaveRedacao = async () => {
+    const dadosRedacao = {
+      titulo: titulo,
+      texto: text,
+      tema_id: temaId  
+    };
+  
     try {
-      const response = await fetch('https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText', {
+      const response = await fetch('https://jengt-provest-backend.onrender.com/v1/jengt_provest/redacao', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          prompt: {
-            text: text,
-          }
-        }),
+        body: JSON.stringify(dadosRedacao),
       });
   
       if (!response.ok) {
-        throw new Error(`Erro ao corrigir: ${response.status}`);
+        console.error(`Erro: ${response.status} - ${response.statusText}`);
+        const errorData = await response.text(); 
+        console.error(`Resposta do servidor: ${errorData}`);
+        throw new Error(`Erro ao salvar a redação: ${response.statusText}`);
       }
   
       const data = await response.json();
-      
-      const resultado = {
-        ortografia: data.ortografia || 50,
-        pontuacao: data.pontuacao || 70,
-        coerencia: data.coerencia || 60,
-        paragrafo: data.paragrafo || 100,
-        notaFinal: data.notaFinal || 680,
-      };
-  
-      setScore(resultado);
+      console.log('Redação salva com sucesso:', data);
+      alert('Redação salva com sucesso!');
     } catch (error) {
-      console.error('Erro ao corrigir a redação:', error);
-    }
+      console.error('Erro ao salvar a redação:', error.message);
+      alert(`Erro ao salvar a redação: ${error.message}`);
+    }  
   };
-  
+
   return (
     <div className="container">
       <div className="header">
@@ -86,7 +85,13 @@ function EscreverRedacao() {
       </div>
 
       <div className="redacao_container">
-        <input type="text" className="titulo_redacao" placeholder="Título da Redação" />
+        <input
+          type="text"
+          className="titulo_redacao"
+          placeholder="Título da Redação"
+          value={titulo}
+          onChange={(e) => setTitulo(e.target.value)} 
+        />
 
         <textarea
           className="textarea_redacao"
@@ -100,19 +105,7 @@ function EscreverRedacao() {
         <p className="line-counter">Linhas: {lineCount}/{maxLines}</p>
       </div>
 
-      <button onClick={handleSubmit} className="buttonWrite">Enviar para correção</button>
-
-      {/* Exibição dos resultados da correção */}
-      {score && (
-        <div className="resultado-correcao">
-          <h2>Resultado da Correção:</h2>
-          <p>Ortografia: {score.ortografia}%</p>
-          <p>Pontuação: {score.pontuacao}%</p>
-          <p>Coerência: {score.coerencia}%</p>
-          <p>Parágrafo: {score.paragrafo}%</p>
-          <p>Nota Final: {score.notaFinal}</p>
-        </div>
-      )}
+      <button onClick={handleSaveRedacao} className="buttonWrite">Salvar Redação</button>
     </div>
   );
 }

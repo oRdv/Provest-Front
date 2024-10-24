@@ -5,27 +5,27 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 
 function Redacao() {
-    const [selectedOption, setSelectedOption] = useState(""); 
-    const [temas, setTemas] = useState([]); 
-    const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const [selectedTheme, setSelectedTheme] = useState('');
-  
-    useEffect(() => {
-      const fetchTemas = async () => {
-        try {
-          const response = await fetch("https://jengt-provest-backend.onrender.com/v1/jengt_provest/temas"); 
-          const data = await response.json();
-          console.log(data);
-          setTemas(data.tema);
-          console.log(setTemas);
-          
-        } catch (error) {
-          console.error("Erro ao buscar temas:", error);
-        }
-      };
-  
-      fetchTemas();
-    }, []);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [temas, setTemas] = useState([]);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedTheme, setSelectedTheme] = useState('');
+
+  useEffect(() => {
+    const fetchTemas = async () => {
+      try {
+        const response = await fetch("https://jengt-provest-backend.onrender.com/v1/jengt_provest/temas");
+        const data = await response.json();
+        console.log(data);
+        setTemas(data.tema);
+        console.log(setTemas);
+
+      } catch (error) {
+        console.error("Erro ao buscar temas:", error);
+      }
+    };
+
+    fetchTemas();
+  }, []);
 
   useEffect(() => {
     const theme = localStorage.getItem('selectedTheme');
@@ -36,11 +36,12 @@ function Redacao() {
   }, []);
 
   const handleOptionChangeTheme = (event) => {
-    const selectedTheme = event.target.value;
-    setSelectedOption(selectedTheme);
+    const selectedThemeId = event.target.getAttribute('data-id'); // Obtém o ID do tema
+    const selectedThemeName = event.target.value; // Obtém o nome do tema
 
-    localStorage.setItem('selectedTheme', selectedTheme);
-    selectedTheme(selectedTheme);
+    setSelectedOption(selectedThemeName);
+    localStorage.setItem('selectedThemeId', selectedThemeId);
+    localStorage.setItem('selectedThemeName', selectedThemeName);
   };
 
   const handleOptionChange = (e) => {
@@ -78,12 +79,13 @@ function Redacao() {
           {isDropdownOpen && (
             <div className={styles.options}>
               {temas.map((tema) => (
-                <div key={tema.nome} className={styles.option}>
+                <div key={tema.id} className={styles.option}>
                   <input
                     id={tema.nome}
                     name="option"
                     type="radio"
                     value={tema.nome}
+                    data-id={tema.id}  // Armazenando o ID como um atributo
                     checked={selectedOption === tema.nome}
                     onChange={handleOptionChangeTheme}
                   />

@@ -1,9 +1,25 @@
+'use client'
 import styles from './page.module.css'; 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 function TodasRedacoes() {
+  const [redacoes, setRedacoes] = useState([]);
+
+  useEffect(() => {
+    const fetchRedacoes = async () => {
+      try {
+        const response = await fetch('https://jengt-provest-backend.onrender.com/v1/jengt_provest/redacoes');
+        const data = await response.json();
+        setRedacoes(data.redacoes);  // Certifique-se de acessar o array "redacoes"
+      } catch (error) {
+        console.error("Erro ao buscar redações:", error);
+      }
+    };
+
+    fetchRedacoes();
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -11,38 +27,19 @@ function TodasRedacoes() {
       </div>
       
       <div className={styles.menu}>
-        <div className={styles.item}>
-          <span className={styles.label}>Mudanças climáticas</span>
-          <div className={styles.box}>
-            Desafios para a valorização do trabalho e a geração de emprego no Brasil.
-          </div>
-          <div className={styles.box}>
-            Desafios para a valorização do trabalho e a geração de emprego no Brasil.
-          </div>
-        </div>
-
-        <div className={styles.item}>
-          <span className={styles.label}>Valorização do trabalho</span>
-          <div className={styles.box}>
-          impacto das mudanças climáticas na vida das populações urbanas e rurais.
-          </div>
-          <div className={styles.box}>
-            Desafios para a valorização do trabalho e a geração de emprego no Brasil.
-          </div>
-          <div className={styles.box}>
-            Desafios para a valorização do trabalho e a geração de emprego no Brasil.
-          </div>
-        </div>
-
-        <div className={styles.item}>
-          <span className={styles.label}>Formação educacional</span>
-          <div className={styles.box}>
-            Desafios para a valorização do trabalho e a geração de emprego no Brasil.
-          </div>
-          <div className={styles.box}>
-            Desafios para a valorização do trabalho e a geração de emprego no Brasil.
-          </div>
-        </div>
+        {redacoes.length > 0 ? (
+          redacoes.map((redacao) => (
+            <div key={redacao.id} className={styles.item}>
+              <span className={styles.label}>{redacao.tema}</span> {/* Exibir o tema */}
+              <div className={styles.box}>
+                <strong>{redacao.titulo}</strong> {/* Exibir o título */}
+                <p>{redacao.texto}</p> {/* Exibir o texto */}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>Nenhuma redação encontrada.</p>
+        )}
       </div>
     </div>
   );
