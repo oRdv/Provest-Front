@@ -1,76 +1,52 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #fdfcf5;
-    margin: 0;
-    padding: 0;
 }
 
 .container {
-    padding: 30px;
-    min-height: 100vh;
+    padding: 300px;
+    margin-top: -275px;
 }
 
 .header {
-    display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 50px 40px;
-    background-color: #fdfcf5;
-}
-
-.header .menu-icon {
-    font-size: 24px;
+    padding: 30px;
 }
 
 .header .search-bar {
-    flex-grow: 1;
-    margin: 0 200px;
-    position: relative;
+    margin: 0 400px;
 }
 
+/* BARRA DE PESQUISA */
 .header .search-bar input {
     width: 100%;
-    padding: 15px;
-    border-radius: 20px;
-    border: 2px solid #b5add6;
+    padding: 23px;
+    border-radius: 40px;
+    background-color: #BCB3DF;
+    opacity: 50%; 
+    border: none;
     padding-left: 40px;
 }
 
-.header .search-bar .fa-search {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    color: #BCB3DF;
-}
-
-.header .icons {
-    display: flex;
-    gap: 20px;
-}
-
-.header .icons .fa {
-    font-size: 20px;
-    cursor: pointer;
-}
-
+/* DASHBORAD */
 .dashboard-title {
-    font-size: 50px;
+    font-size: 43px;
+    font-weight: bolder;
     color: #d4a5e6;
-    margin: 20px ;
+    margin: 10px;
 }
 
 .cards {
     display: flex;
-    gap: 80px;
+    gap:40px;
 }
 
 .card {
     background-color: #fdfcf5;
     border: 2px solid #e0e0e0;
     border-radius: 10px;
-    height: 300px;
-    width: 650px;
+    height: 380px;
+    width: 400px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: relative;
     text-align: left;
@@ -80,21 +56,8 @@ body {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
-    padding: 40px 12px;
-    gap: 12px;
-    color: inherit;
-}
-
-.card .fa-ellipsis-v {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #d4a5e6;
-}
-
-.card .icon {
-    margin-left: 10px;
-    margin-bottom: 4px;
+    padding: 50px 25px;
+    gap: 10px;
 }
 
 .card .title1 {
@@ -120,13 +83,13 @@ body {
 }
 
 .calendar {
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 .calendar-title {
-    font-size: 50px;
+    font-size: 43px;
     color: #2c2c54;
-    margin-bottom: 45px;
+    margin-bottom: 10px;
 }
 
 .calendar-item {
