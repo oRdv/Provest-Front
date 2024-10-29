@@ -146,7 +146,7 @@ body {
 
 /* CONFIGURAÇÃO DAS COISAS DE DENTRO DA BARRA */
 .barrinha {
-    font-size: 20px;
+    font-size: 15px; /* BEM-VINDO CELSO */
     color: #000000;
     height: 100vh;
     margin-top: 50px;
@@ -158,7 +158,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 460px;
+    width: 510px;
     height: 100%;
     background-color: #FFFFF1; 
     color: white;
@@ -175,6 +175,7 @@ body {
     cursor: pointer;
 }
 
+/* SOMBRA DE FUNDO */
 .overlay {
     position: fixed;
     top: 0;
@@ -200,10 +201,10 @@ body {
     transition: background-color 0.3s ease;
 }
 
+/* TEXTO DENTRO DAS CAIXAS ROXAS */
 .menu-item a {
-    text-decoration: none;
     color: #2c2c54;
-    font-size: 18px;
+    font-size: 23px;
     margin-left: 40px;
 }
 
@@ -214,6 +215,120 @@ body {
 .profile-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 60px;
+    margin-top: -40px;
+    gap: 30px; /* espaçamento entre o perfil e o bem vindo*/
+    margin-bottom: 30px; /* espaçamento entre o celso e as ci=aixas roxas*/
+}
+
+/* TODOS OS ICONES DAAIXAS ROXAS */
+.menu-icon {
+    width: 30px; 
+    height: auto;
+    margin-right: 8px; 
+    margin-left: -30px;
+    vertical-align: middle; 
+}
+
+/* ICONE DAS MATERIAS */
+.menu-item:nth-child(7) .menu-icon {
+    width: 20px;
+}
+
+/* ICONE DAS REDAÇOES */
+.menu-item:nth-child(8) .menu-icon {
+    width: 40px;
+    margin-left: -40px;
+}
+
+.button-container {
+    display: flex;
+    margin-top: 40px;
+}
+
+.back-button {
+    background-color: transparent;
+    border: none;
+    color: red; 
+    display: flex;
+    margin-top: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    gap: 30px; /* espaçamento da seta com o logout */
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+
+ /* >>>>>>>>>>>>>> notificações <<<<<<<<<<<<< */
+
+/* TIRA AS BOLINHAS DA LISTA */
+.menu-notificacoes {
+    list-style-type: none;
+}
+
+/* CONFIGURAÇÃO DAS COISAS DE DENTRO DA BARRA */
+.barra-azul {
+    font-size: 15px; 
+    height: 100vh;
+    margin-top: 50px;
+    padding: 40px;
+  }
+
+  /* CONFIGURAÇÕES DA BARRA */
+  .side-notif {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 510px;
+    height: 100%;
+    background-color: #1C274C; 
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.side-menu.active {
+    transform: translateX(0);
+}
+
+.notification-icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.notifications {
+    position: absolute;
+    top: 50px; 
+    right: 20px; 
+    width: 300px;
+    background-color: #1C274C;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.barra-branca {
+    background-color: #FFFFF1;
+    padding: 10px;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+
+.notif-item {
+    padding: 10px;
+    color: white;
+    border-bottom: 1px solid #eee;
+}
+
+.notif-item a:hover {
+    color: #C6E6A3;
 }

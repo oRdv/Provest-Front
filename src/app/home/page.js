@@ -28,43 +28,112 @@ export default function Home() {
                     <i className="fas fa-search"></i>
                     <input type="text" placeholder="Pesquisar..." />
                 </div>
+                </div>
 
+                    {/* ABA DE NOTIFICAÇÕES */}
                 <i className="notification-icon" onClick={toggleNotifications}>
                     &#128276;
                 </i>
+
                 {notificationsOpen && (
+                    <>
+                    <div className={styles.overlay} onClick={toggleNotifications}></div>
                     <div className="notifications">
+                        <div className="barra-branca">
+                            <h1>Notificações</h1>
+                        </div>
                         <ul>
-                            <li>Você tem uma nova mensagem no chat</li>
-                            <li>Nova redação corrigida</li>
-                            <li>Tarefa de Matemática disponível</li>
+                        <ul className="menu-notificacoes">
+                        <li className="notif-item">
+                            <Link href="#">Notificação 1: Detalhes da notificação</Link>
+                        </li>
+                        <li className="notif-item">
+                            <Link href="#">Notificação 2: Detalhes da notificação</Link>
+                        </li>
+                        <li className="notif-item">
+                            <Link href="#">Notificação 3: Detalhes da notificação</Link>
+                        </li>
+                            </ul>
                         </ul>
                     </div>
+                    </>
                 )}
-            </div>
+            
 
+
+            {/* ABA DO MENU */}
             {menuOpen && <div className="overlay" onClick={toggleMenu}></div>}
 
             <div className={`side-menu ${menuOpen ? 'active' : ''}`}>
                 <div className="barrinha">
                     <div className="profile-header">
-                        <Image src="/img/profile.png" width={40} height={40} alt="Ícone de perfil" className="profile-icon" />
+                        <Image src="/img/profile.png" width={60} height={60} alt="Ícone de perfil" className="profile-icon" />
                         <div>
-                            <h1>Bem-vindo,</h1>
-                            <h2>Celso!</h2>
+                            <h1>Bem-vindo, Celso!</h1>
                         </div>
                     </div>
-                    <ul className="menu-list">
-                        <li className="menu-item"><Link href="#">Tarefas</Link></li>
-                        <li className="menu-item"><Link href="#">Chats</Link></li>
-                        <li className="menu-item"><Link href="#">Configurações</Link></li>
-                        <li className="menu-item"><Link href="#">Escolha o curso</Link></li>
-                        <li className="menu-item"><Link href="#">Calendário</Link></li>
-                        <li className="menu-item"><Link href="#">Vídeo-Aulas</Link></li>
-                        <li className="menu-item"><Link href="#">Matérias</Link></li>
-                        <li className="menu-item"><Link href="#">Redações</Link></li>
-                        <li className="menu-item"><Link href="#">Perfil</Link></li>
-                    </ul>
+                    
+
+        <ul className="menu-list">
+            <li className="menu-item">
+                <Link href="#">
+                    <img src="/img/icon-tarefas.png" alt="Tarefas" className="menu-icon" /> Tarefas
+                </Link>
+            </li>
+            <li className="menu-item">
+                <Link href="#">
+                    <img src="/img/icon-chats.png" alt="Chats" className="menu-icon" /> Chats
+                </Link>
+            </li>
+            <li className="menu-item">
+                <Link href="#">
+                    <img src="/img/icon-config.png" alt="" className="menu-icon" /> Configurações
+                </Link>
+            </li>
+            <li className="menu-item">
+                <Link href="#">
+                    <img src="/img/ico-calendario.png" alt="" className="menu-icon" /> Calendário
+                </Link>
+            </li>
+            <li className="menu-item">
+                <Link href="#">
+                    <img src="/img/icon-lupa.png" alt="" className="menu-icon" /> Escolha o curso
+                </Link>
+            </li>
+            <li className="menu-item">
+                <Link href="#">
+                    <img src="/img/icon-video.png" alt="Vídeo-Aulas" className="menu-icon" /> Vídeo-Aulas
+                </Link>
+            </li>
+            <li className="menu-item">
+                <Link href="#">
+                    <img src="/img/icon-materias.png" alt="Matérias" className="menu-icon" /> Matérias
+                </Link>
+            </li>
+            <li className="menu-item">
+                <Link href="#">
+                    <img src="/img/icon-redações.png" alt="" className="menu-icon" /> Redações
+                </Link>
+            </li>
+            <li className="menu-item">
+                <Link href="#">
+                    <img src="/img/icon-perfil2.png" alt="" className="menu-icon" /> Perfil
+                </Link>
+            </li>
+        </ul>
+                    <div className="button-container">
+                        <button className="back-button">
+                        <span className="arrow">←</span> Logout
+                        </button>
+                        <Image
+                            src="/img/Ppreto.png"
+                            width={60}
+                            height={60}
+                            alt="logo na cor preta"
+                            className="logo-image"
+                        />
+                    </div>
+                   
                 </div>
             </div>
 
