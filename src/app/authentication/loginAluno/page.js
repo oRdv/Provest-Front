@@ -34,11 +34,12 @@ const Login = () => {
         const usuarios = await getUsers();
         let userStatus = false;
 
-        if (usuarios) {
+        if (usuarios && usuarios.alunos) {
             usuarios.alunos.forEach(user => {
                 if (user.email === email && user.senha === senha) {
                     userStatus = true;
                     localStorage.setItem('userId', user.id);
+                
                     router.push('/home');
                 }
             });
@@ -50,7 +51,6 @@ const Login = () => {
     };
 
     return (
-
         <div className={styles['right-side']}>
             <div className={styles.welcome}>
                 <h1>BEM VINDO ALUNO!</h1>

@@ -1,56 +1,86 @@
 "use client";
 
 import React, { useState } from 'react';
-import styles from'./page.modules.css';
+import styles from './page.modules.css';
 
-function CadernoAluno() {
+const Notebook = () => {
+  const [noteTitle, setNoteTitle] = useState('');
+  const [note, setNote] = useState('');
+  const [error, setError] = useState(null);
 
-  const [noteTitle, setNoteTitle] = useState(""); 
-  const [note, setNote] = useState(""); 
+  const handleNoteTitleChange = (e) => setNoteTitle(e.target.value);
+  const handleNoteChange = (e) => setNote(e.target.value);
 
-  const handleNoteTitleChange = (event) => {
-    setNoteTitle(event.target.value); 
-  };
+  const handleSaveNote = async () => {
+      const aluno_id = localStorage.getItem("userId");
 
-  const handleNoteChange = (event) => {
-    setNote(event.target.value); 
+      console.log(aluno_id);
+      
+      if (!aluno_id) {
+          setError('Erro ao obter o ID do usuário.');
+          return;
+      }
+
+      const dadosAnot = {
+          titulo: noteTitle,
+          texto: note,
+          aluno_id: aluno_id
+      };
+
+      try {
+          const response = await fetch('https://jengt-provest-backend.onrender.com/v1/jengt_provest/caderno', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(dadosAnot)
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+              console.log("Anotação salva com sucesso:", data);
+              setNoteTitle(''); 
+              setNote('');      
+              setError(null);    
+          } else {
+              setError(data.message || 'Erro ao salvar anotação.');
+              console.error("Erro ao salvar anotação:", data);
+          }
+      } catch (error) {
+          setError('Erro ao salvar anotação.');
+          console.error("Erro ao salvar anotação:", error);
+      }
   };
 
   return (
-    <div className="digital-notebook-container">
-      <div className="header">
-        <p className={styles.headerText}>CADERNO DO ALUNO</p>
-      </div>
-      <div className="notebook-actions">
-          <button className="save-button">Salvar</button>
-          <div className="right-actions">
-            <button className="new-annotation-button">+</button>
-            <button className="favorite-button">
-              <i className="fa fa-star" aria-hidden="true"></i> Favorite
-            </button>
+      <div className="digital-notebook-container">
+          <div className="header">
+              <p className="headerText">CADERNO DO ALUNO</p>
           </div>
-        </div>
-      <div className="notebook-container">
-        <div className="notebook-header">
-          <input
-            type="text"
-            className="titleCaderno"
-            value={noteTitle}
-            onChange={handleNoteTitleChange}
-            placeholder="Insira o título"
-          />
-        </div>
-        <div className="notebook">
-          <textarea
-            className="notebook-textarea"
-            value={note}
-            onChange={handleNoteChange}
-            placeholder="Digite aqui suas anotações"
-          />
-        </div>
+          <div className="notebook-actions">
+              <button className="save-button" onClick={handleSaveNote}>Salvar</button>
+          </div>
+          <div className="notebook-container">
+              <div className="notebook-header">
+                  <input
+                      type="text"
+                      className="titleCaderno"
+                      value={noteTitle}
+                      onChange={handleNoteTitleChange}
+                      placeholder="Insira o título"
+                  />
+              </div>
+              <div className="notebook">
+                  <textarea
+                      className="notebook-textarea"
+                      value={note}
+                      onChange={handleNoteChange}
+                      placeholder="Digite aqui suas anotações"
+                  />
+              </div>
+          </div>
+          {error && <p className="error-message">{error}</p>}
       </div>
-    </div>
   );
-}
+};
 
-export default CadernoAluno;
+export default Notebook;
