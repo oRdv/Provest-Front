@@ -1,8 +1,8 @@
-"use client"; 
-
+'use client'
 import styles from './page.module.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const Signup = () => {
   const router = useRouter();
@@ -13,48 +13,63 @@ const Signup = () => {
     curso_id: '',
     icone_id: 1
   });
+  const [cursos, setCursos] = useState([]);
   const [erros, setErros] = useState({ msg: '' });
+
+  useEffect(() => {
+    const fetchCursos = async () => {
+      try {
+        const response = await fetch('https://jengt-provest-backend.onrender.com/v1/jengt_provest/cursos');
+        if (!response.ok) {
+          throw new Error('Erro ao buscar cursos');
+        }
+        const data = await response.json();
+        console.log("Cursos carregados:", data);
+        setCursos(data.curso || []);
+      } catch (error) {
+        console.error('Erro ao buscar cursos:', error);
+        setErros({ msg: 'Erro ao carregar cursos. Tente novamente mais tarde.' });
+      }
+    };
+
+    fetchCursos();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  
-  const signupUser = async (e) => {
-      e.preventDefault();
 
+  const handleCursoChange = (e) => {
+    const selectedCursoId = cursos.find(curso => curso.nome === e.target.value)?.id || '';
+    setFormData({ ...formData, curso_id: selectedCursoId });
+  };
+
+  const signupUser = async (e) => {
+    e.preventDefault();
     try {
-        console.log({
-            nome: formData.nome,
-            email: formData.email,
-            senha: formData.senha,
-            curso_id: Number(formData.curso_id),
-            icone_id: Number(formData.icone_id)
-        });
       const response = await fetch('https://jengt-provest-backend.onrender.com/v1/jengt_provest/aluno', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        
         body: JSON.stringify({
-            nome: formData.nome,
-            email: formData.email,
-            senha: formData.senha,
-            curso_id: Number(formData.curso_id),
-            icone_id: Number(formData.icone_id),
+          nome: formData.nome,
+          email: formData.email,
+          senha: formData.senha,
+          curso_id: Number(formData.curso_id),
+          icone_id: Number(formData.icone_id)
         })
       });
 
-
       if (response.ok) {
-        router.push('/login');
+        
       } else {
         const errorData = await response.json();
-        setErros({ msg: errorData.message || 'Erro ao realizar o cadastro.' });
+        console.log(errorData.message || 'Erro ao realizar o cadastro.');
       }
     } catch (error) {
-      setErros({ msg: 'Ocorreu um erro na solicitação. Tente novamente mais tarde.', error });
+      // console.log('Ocorreu um erro na solicitação. Tente novamente mais tarde.', error );
     }
   };
 
@@ -94,7 +109,7 @@ const Signup = () => {
           <div className={styles['form-group']}>
             <label htmlFor="senha">Senha</label>
             <input
-              type='number'
+              type='password'
               id="senha"
               name="senha"
               value={formData.senha}
@@ -105,22 +120,28 @@ const Signup = () => {
 
           <div className={styles['form-group']}>
             <label htmlFor="curso_id">Curso</label>
-            <input
-              type="number"
+            <select
               id="curso_id"
               name="curso_id"
-              value={formData.curso_id}
-              onChange={handleInputChange}
+              value={cursos.find(curso => curso.id === formData.curso_id)?.nome || ''}
+              onChange={handleCursoChange}
               required
-            />
+            >
+              <option value="">Selecione um curso</option>
+              {cursos.map(curso => (
+                <option key={curso.id} value={curso.nome}>{curso.nome}</option>
+              ))}
+            </select>
           </div>
 
           {erros.msg && <p className={styles.error}>{erros.msg}</p>}
 
           <div className={styles['button-container']}>
-            <button type="submit" className={styles['btn-login']}>
-              SIGN UP
-            </button>
+            <Link href="/loginAluno">
+              <button type="button" className={styles['btn-login']}>
+                Sign Up
+              </button>
+            </Link>
           </div>
         </form>
       </div>

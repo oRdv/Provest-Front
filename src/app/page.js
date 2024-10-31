@@ -26,7 +26,7 @@ function Login() {
         </p>
 
         <div className={styles.buttonsContainer}>
-          <Link href="./authenication/loginAluno" className={styles.button}>SOU ALUNO</Link>
+          <Link href="./authentication/loginAluno" className={styles.button}>SOU ALUNO</Link>
           <Link href="./authentication/loginProfessor" className={styles.button}>SOU PROFESSOR</Link>
         </div>
       </div>
