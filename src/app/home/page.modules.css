@@ -200,15 +200,14 @@ body {
     padding: 15px 20px;
     margin-bottom: 10px;
     border-radius: 8px;
-    text-align: left;
     transition: background-color 0.3s ease;
 }
 
 /* TEXTO DENTRO DAS CAIXAS ROXAS */
 .menu-item a {
     color: #2c2c54;
-    font-size: 23px;
-    margin-left: 40px;
+    font-size: 22px;
+    margin-left: -60px;
 }
 
 .menu-item:hover {
@@ -220,32 +219,24 @@ body {
     align-items: center;
     margin-top: -40px;
     gap: 30px; /* espaçamento entre o perfil e o bem vindo*/
-    margin-bottom: 30px; /* espaçamento entre o celso e as ci=aixas roxas*/
-}
-
-/* TODOS OS ICONES DAAIXAS ROXAS */
-.menu-icon {
-    width: 30px; 
-    height: auto;
-    margin-right: 8px; 
-    margin-left: -30px;
-    vertical-align: middle; 
+    margin-bottom: 30px; /* espaçamento entre o celso e as caixas roxas*/
 }
 
 /* ICONE DAS MATERIAS */
 .menu-item:nth-child(7) .menu-icon {
-    width: 20px;
+    width: 23px;
+    margin-left: 85px;
 }
 
 /* ICONE DAS REDAÇOES */
 .menu-item:nth-child(8) .menu-icon {
-    width: 40px;
-    margin-left: -40px;
+    width: 45px;
+    margin-left: 75px;
 }
 
 .button-container {
     display: flex;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 .back-button {
@@ -261,11 +252,9 @@ body {
 
 .button-container {
     display: flex;
-    align-items: center;
 }
 
 .logo-image {
-    margin-left: auto;
     margin-top: 20px;
 }
 
