@@ -20,7 +20,7 @@ const Login = () => {
         const { email, senha } = formData;
 
         const getUsers = async () => {
-            const url = 'https://jengt-provest-backend.onrender.com/v1/jengt_provest/profs';
+            const url = 'https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/profs';
             try {
                 const response = await fetch(url);
                 const data = await response.json();

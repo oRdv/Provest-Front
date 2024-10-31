@@ -1,4 +1,3 @@
-
 "use client";
 import styles from './page.module.css';
 import Link from 'next/link';
@@ -13,7 +12,7 @@ function Redacao() {
   useEffect(() => {
     const fetchTemas = async () => {
       try {
-        const response = await fetch("https://jengt-provest-backend.onrender.com/v1/jengt_provest/temas");
+        const response = await fetch("https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/temas");
         const data = await response.json();
         console.log(data);
         setTemas(data.tema);

@@ -17,7 +17,7 @@ function TodasAnotacoes() {
       }
 
       try {
-        const response = await fetch(`https://jengt-provest-backend.onrender.com/v1/jengt_provest/caderno?aluno_id=${aluno_id}`);
+        const response = await fetch(`https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/caderno?aluno_id=${aluno_id}`);
         const data = await response.json();
 
         console.log(data);

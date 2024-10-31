@@ -12,7 +12,7 @@ const DetalhesAnotacao = ({ params }) => {
     const fetchAnotacao = async () => {
       if (id) {
         try {
-          const response = await fetch(`https://jengt-provest-backend.onrender.com/v1/jengt_provest/caderno/${id}`);
+          const response = await fetch(`https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/caderno/${id}`);
           const data = await response.json();
 
           console.log("Estrutura completa da resposta da API:", data);

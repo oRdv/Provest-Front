@@ -1,0 +1,81 @@
+/* FeedbackCorrecao.module.css */
+.feedbackContainer {
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #333;
+}
+
+.subtitle {
+    color: #6a1b9a;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.theme {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.themeText {
+    display: inline-block;
+    background-color: #e0e7ff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #6a1b9a;
+}
+
+.scoreBox {
+    padding: 20px;
+    background-color: #e0f7fa;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.comment {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 15px;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.competenciasTitle {
+    font-size: 1.4rem;
+    color: #00796b;
+    margin-bottom: 10px;
+}
+
+.competenciasList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.competenciasItem {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: #e0e7ff;
+    border-radius: 4px;
+}
+
+.finalScore {
+    font-size: 1.5rem;
+    color: #388e3c;
+    margin-top: 20px;
+    text-align: right;
+}
+
+.scoreValue {
+    font-weight: bold;
+    color: #2e7d32;
+}

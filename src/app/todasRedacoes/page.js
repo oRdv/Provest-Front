@@ -9,7 +9,7 @@ function TodasRedacoes() {
   useEffect(() => {
     const fetchRedacoes = async () => {
       try {
-        const response = await fetch('https://jengt-provest-backend.onrender.com/v1/jengt_provest/redacoes');
+        const response = await fetch('https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/redacoes');
         const data = await response.json();
         setRedacoes(data.redacoes);  // Certifique-se de acessar o array "redacoes"
       } catch (error) {
