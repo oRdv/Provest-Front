@@ -1,0 +1,122 @@
+
+.header {
+    background-color: #2e2a5a;
+    color: #a8d08d;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 102%;
+    border-radius: 10px;
+}
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sectionTitle {
+    font-size: 24px;
+    margin-bottom: 25px;
+    margin-top: 30px;
+}
+.formGroup {
+    margin-bottom: 20px;
+    width: 100%;
+}
+.formGroup label {
+    display: block;
+    margin-bottom: 5px;
+}
+.formGroup input {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color: transparent;
+}
+.disciplines {
+    margin-top: 30px;
+    width: 100%;
+}
+.disciplines h3 {
+    margin-bottom: 15px;
+}
+.disciplines ul {
+    list-style: none;
+    padding: 0;
+}
+.switch {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+}
+.switch span {
+    margin-right: 30px;
+}
+.mainContent {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+}
+.leftContent, .rightContent {
+    padding: 20px;
+    width: 35%;    
+}
+.studyDays, .dailyHours {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    width: 65%; /* largura dias de estudo  */
+   display: flex;
+
+    
+}
+.studyDays h3, .dailyHours h3 {
+    margin-top: 0;
+}
+.days {
+    display: flex;
+    justify-content: center;
+    
+}
+.day {
+    background-color: #d1c4e9;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 20px;
+}
+/* .hours {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+} */
+.time {
+    cursor: pointer;
+    background-color: #d1c4e9;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+.timeValue {
+    margin-left: 5px;
+}
+.generateButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #2e2a5a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
