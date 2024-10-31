@@ -9,12 +9,14 @@ body {
 }
 
 .header {
-    justify-content: space-between;
+    display: flex;
     padding: 30px;
+    align-items: center;
 }
 
 .header .search-bar {
-    margin: 0 400px;
+    margin: 0 150px;
+    flex-grow: 1;
 }
 
 /* BARRA DE PESQUISA */
@@ -182,7 +184,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: black;
+    opacity: 40%; 
     z-index: 900; 
 }
 
@@ -282,53 +285,100 @@ body {
     padding: 40px;
   }
 
-  /* CONFIGURAÇÕES DA BARRA */
-  .side-notif {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 510px;
-    height: 100%;
-    background-color: #1C274C; 
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 1000;
-}
-
-.side-menu.active {
-    transform: translateX(0);
-}
-
+/* SININHO */
 .notification-icon {
     cursor: pointer;
     font-size: 1.5rem;
 }
 
+/* CONFIGURAÇÕES DA BARRA AZUL */
 .notifications {
-    position: absolute;
-    top: 50px; 
-    right: 20px; 
-    width: 300px;
+    position: fixed;
+    top: 0px; 
+    right: 0px; 
+    width: 520px;
+    height: 100%;
     background-color: #1C274C;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+    z-index: 100;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
 }
 
+.notifications.active {
+    transform: translateX(0);
+}
+
+/* sombra de fundo das notificações */
+.overlay2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 40%;
+    backdrop-filter: blur(2px);
+    z-index: 50;
+}
+
+/* barra branca das notificações */
 .barra-branca {
+    display: flex;
+    height: 80px;
+    align-items: center;
+    position: relative;
     background-color: #FFFFF1;
-    padding: 10px;
     color: black;
-    text-align: center;
+}
+
+.barra-branca h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     font-weight: bold;
 }
 
-.notif-item {
-    padding: 10px;
-    color: white;
-    border-bottom: 1px solid #eee;
+.logo-image {
+    margin-top: -5px;
+    margin-left: 20px;
 }
 
-.notif-item a:hover {
+/* conteúdo da barra azul */
+.notif-item {
+    padding: 20px;
+    color: white;
+    border-bottom: 0.2px solid #eee; 
+    margin: 30px; 
+}
+
+.notif-title, .notif-details {
+    display: block;
+}
+
+.notif-title {
+    font-weight: bold; 
     color: #C6E6A3;
+    font-size: 20px;
+    margin-bottom: 10px; 
+}
+
+.notif-details {
+    font-size: 18px; 
+    color: #ddd; 
+}
+
+.notification-icon {
+    cursor: pointer;
+    font-size: 3rem;
+    margin-left: 90px;
+}
+
+.menu-icon {
+    width: 40px;
+    height: auto;
+    margin-right: 90px;
+    margin-left: 80px;
+    vertical-align: middle;
+    cursor: pointer;
 }

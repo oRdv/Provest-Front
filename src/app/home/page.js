@@ -21,44 +21,70 @@ export default function Home() {
         <>
             <title>Dashboard</title>
             <div className="header">
-                <i className="menu-icon" onClick={toggleMenu}>
-                    &#9776;
-                </i>
+            <Image 
+                    src="/img/icone-menu.png" 
+                    width={50} 
+                    height={50} 
+                    alt="Ícone do Menu"
+                    onClick={toggleMenu}
+                    className="menu-icon"
+                    style={{ cursor: 'pointer' }} 
+                />
                 <div className="search-bar">
                     <i className="fas fa-search"></i>
                     <input type="text" placeholder="Pesquisar..." />
                 </div>
+                <Image 
+                    src="/img/icone-sino.png" 
+                    width={50} 
+                    height={50} 
+                    alt="Ícone das Notificações"
+                    onClick={toggleNotifications}
+                    className="menu-icon"
+                    style={{ cursor: 'pointer' }} 
+                />
                 </div>
 
-                    {/* ABA DE NOTIFICAÇÕES */}
-                <i className="notification-icon" onClick={toggleNotifications}>
-                    &#128276;
-                </i>
+                {(menuOpen || notificationsOpen) && (
+                <div className="overlay2" onClick={() => {
+                    setMenuOpen(false);
+                    setNotificationsOpen(false);
+                }}></div>
+            )}
 
-                {notificationsOpen && (
-                    <>
-                    <div className={styles.overlay} onClick={toggleNotifications}></div>
-                    <div className="notifications">
-                        <div className="barra-branca">
-                            <h1>Notificações</h1>
-                        </div>
-                        <ul>
-                        <ul className="menu-notificacoes">
-                        <li className="notif-item">
-                            <Link href="#">Notificação 1: Detalhes da notificação</Link>
-                        </li>
-                        <li className="notif-item">
-                            <Link href="#">Notificação 2: Detalhes da notificação</Link>
-                        </li>
-                        <li className="notif-item">
-                            <Link href="#">Notificação 3: Detalhes da notificação</Link>
-                        </li>
-                            </ul>
-                        </ul>
-                    </div>
-                    </>
-                )}
-            
+                    {/* ABA DE NOTIFICAÇÕES */}
+            <div className={`notifications ${notificationsOpen ? 'active' : ''}`}>
+                <div className="barra-branca">
+                        <Image
+                            src="/img/Ppreto.png"
+                            width={60}
+                            height={60}
+                            alt="logo na cor preta"
+                            className="logo-image"
+                        />
+                        <h1>Notificações</h1>
+                </div>
+                <ul className="menu-notificacoes">
+                    <li className="notif-item">
+                    <Link href="#">
+                        <span className="notif-title">Notificação 1: </span>
+                        <span className="notif-details">Detalhes da notificação</span>
+                    </Link>
+                    </li>
+                    <li className="notif-item">
+                    <Link href="#">
+                        <span className="notif-title">Notificação 2: </span>
+                        <span className="notif-details">Detalhes da notificação</span>
+                    </Link>
+                    </li>
+                    <li className="notif-item">
+                    <Link href="#">
+                        <span className="notif-title">Notificação 3: </span>
+                        <span className="notif-details">Detalhes da notificação</span>
+                    </Link>
+                    </li>
+                </ul>
+            </div>
 
 
             {/* ABA DO MENU */}
@@ -73,7 +99,6 @@ export default function Home() {
                         </div>
                     </div>
                     
-
         <ul className="menu-list">
             <li className="menu-item">
                 <Link href="#">
