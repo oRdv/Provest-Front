@@ -1,40 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './AvatarSelector.module.css';
 
 const AvatarSelector = ({ onSelect }) => {
-  const avatars = [
-    "https://i.pinimg.com/564x/8c/f1/9b/8cf19b09a82c525df6d8fbc5e2ac1491.jpg",
-    "https://i.pinimg.com/736x/79/1d/eb/791deb1653f8bacd9d2f969754a4b047.jpg",
-    "https://i.pinimg.com/236x/2e/55/77/2e5577460624b67a519a916171faf5ec.jpg",
-    "https://i.pinimg.com/236x/a5/de/9d/a5de9db4445e577ffb4aa09c3d73dc09.jpg",
-    "https://i.pinimg.com/736x/79/1d/eb/791deb1653f8bacd9d2f969754a4b047.jpg",
-    "https://i.pinimg.com/236x/2e/55/77/2e5577460624b67a519a916171faf5ec.jpg",
-    "https://i.pinimg.com/236x/a5/de/9d/a5de9db4445e577ffb4aa09c3d73dc09.jpg",
-    "https://i.pinimg.com/736x/79/1d/eb/791deb1653f8bacd9d2f969754a4b047.jpg",
-    "https://i.pinimg.com/236x/2e/55/77/2e5577460624b67a519a916171faf5ec.jpg",
-    "https://i.pinimg.com/236x/a5/de/9d/a5de9db4445e577ffb4aa09c3d73dc09.jpg",
-    "https://i.pinimg.com/236x/8e/9e/bc/8e9ebc0f3ce1edb1f126f33a2c360c70.jpg"
-  ];
+  const [avatars, setAvatars] = useState([]);
+
+  useEffect(() => {
+    const fetchAvatars = async () => {
+      try {
+        const response = await fetch('https://jengt-provest-backend.onrender.com/v1/jengt_provest/icones');
+        const data = await response.json();
+
+        if (response.ok && Array.isArray(data.icones)) {
+          setAvatars(data.icones);
+        } else {
+          console.error('Erro ao buscar os ícones.');
+        }
+      } catch (error) {
+        console.error('Erro ao buscar os ícones:', error);
+      }
+    };
+
+    fetchAvatars();
+  }, []);
 
   return (
     <div className={styles.avatarModal}>
-    <div className={styles.modalHeader}>
-      <h2 className={styles.modalTitle}>Escolha seu avatar!</h2>
-      <button className={styles.modalClose} onClick={onSelect}>X</button>
+      <div className={styles.modalHeader}>
+        <h2 className={styles.modalTitle}>Escolha seu avatar!</h2>
+        <button className={styles.modalClose} onClick={() => onSelect(null)}>X</button>
+      </div>
+      <div className={styles.avatarGrid}>
+        {avatars.map((avatar, index) => (
+          <div
+            key={index}
+            className={styles.avatarItem}
+            onClick={() => onSelect(avatar.url)}
+          >
+            <img src={avatar.url} alt={`Avatar ${index}`} />
+          </div>
+        ))}
+      </div>
     </div>
-    <div className={styles.avatarGrid}>
-      {avatars.map((avatar, index) => (
-        <div
-          key={index}
-          className={styles.avatarItem}
-          onClick={() => onSelect(avatar)}
-        >
-          <img src={avatar} alt={`Avatar ${index}`} />
-        </div>
-      ))}
-    </div>
-  </div>
-);
+  );
 };
 
 const ProfileIcon = ({ avatar }) => (

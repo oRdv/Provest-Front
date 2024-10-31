@@ -1,107 +1,106 @@
 .digital-notebook-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    color: #DEFEA0;
-    background-color: #f0f0f0;
-  }
-  
-  .header {
-    width: 1000vh;
-    height: 170px;
-    background-color: #201F4B;
-    border: 1px solid #C6E6A3;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-size: 30px;
-  }
-  
-  .headerText {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .notebook-container {
-    width: 1000px;
-    height: 700px;
-    background-color: #fff;
-    border: 2px solid #D4A4E2;
-    border-radius: 10px;
-    padding: 40px;
-  }
-  
-  .notebook-header {
-    margin-bottom: 20px;
-    align-items: center;
-  }
-  
-  .titleCaderno {
-    width: 100%;
-    padding: 30px;
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .notebook {
-    margin-bottom: 20px;
-  }
-  
-  .notebook-textarea {
-    width: 100%;
-    height: 400px;
-    padding: 20px;
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-    border: none;
-    outline: none;
-    resize: none;
-  }
-  
-  .notebook-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    width: 53%;
-  }
-  
-  .save-button {
-    background-color: #C6E6A3;
-    color: #201F4B;
-    padding: 10px 40px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .right-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .new-annotation-button {
-    background-color: #E4E2ED;
-    color: #000000;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .favorite-button {
-    background-color: #E4E2ED;
-    color: #000000;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  padding-top: 20px;
+  color: #DEFEA0;
+  background-color: #f0f0f0;
+}
+
+.header {
+  width: 1000%;
+  height: 180px;
+  background-color: #201F4B;
+  border: 1px solid #C6E6A3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.headerText {
+  font-size: 28px;
+  font-weight: bold;
+  color: #DEFEA0;
+}
+
+.notebook-container {
+  width: 100%;
+  max-width: 1000px;
+  height: 750px;
+  background-color: #fff;
+  border: 2px solid #D4A4E2;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.notebook-header {
+  margin-bottom: 25px;
+}
+
+.titleCaderno {
+  width: 100%;
+  padding: 20px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #ddd;
+}
+
+.notebook {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.notebook-textarea {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  border: none;
+  outline: none;
+  resize: none;
+}
+
+.notebook-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.save-button {
+  background-color: #C6E6A3;
+  color: #201F4B;
+  padding: 15px 50px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.right-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.new-annotation-button,
+.favorite-button {
+  background-color: #E4E2ED;
+  color: #000000;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
