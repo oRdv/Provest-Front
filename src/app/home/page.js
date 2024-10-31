@@ -107,12 +107,14 @@ export default function Home() {
             </li>
             <li className="menu-item">
                 <Link href="#">
-                    <img src="/img/icon-chats.png" alt="Chats" className="menu-icon" /> Chats
+                    <img src="/img/icon-chats.png" alt="Chats" className="menu-icon" /> 
+                    <Link href="./chatGeral">Chats</Link>
                 </Link>
             </li>
             <li className="menu-item">
                 <Link href="#">
-                    <img src="/img/icon-config.png" alt="" className="menu-icon" /> Configurações
+                    <img src="/img/icon-config.png" alt="" className="menu-icon" /> 
+                    <Link href="./configuracoes">Configurações</Link>
                 </Link>
             </li>
             <li className="menu-item">
@@ -127,22 +129,26 @@ export default function Home() {
             </li>
             <li className="menu-item">
                 <Link href="#">
-                    <img src="/img/icon-video.png" alt="Vídeo-Aulas" className="menu-icon" /> Vídeo-Aulas
+                    <img src="/img/icon-video.png" alt="Vídeo-Aulas" className="menu-icon" />
+                    <Link href="./videoaula">Vídeo-Aulas</Link>
                 </Link>
             </li>
             <li className="menu-item">
                 <Link href="#">
-                    <img src="/img/icon-materias.png" alt="Matérias" className="menu-icon" /> Matérias
+                    <img src="/img/icon-materias.png" alt="Matérias" className="menu-icon" /> 
+                    <Link href="./materias">Matérias</Link>
                 </Link>
             </li>
             <li className="menu-item">
                 <Link href="#">
-                    <img src="/img/icon-redações.png" alt="" className="menu-icon" /> Redações
+                    <img src="/img/icon-redações.png" alt="" className="menu-icon" /> 
+                    <Link href="./todasRedacoes">Redações</Link>
                 </Link>
             </li>
             <li className="menu-item">
                 <Link href="#">
-                    <img src="/img/icon-perfil2.png" alt="" className="menu-icon" /> Perfil
+                    <img src="/img/icon-perfil2.png" alt="" className="menu-icon" />
+                    <Link href="./perfilAluno">Perfil</Link>
                 </Link>
             </li>
         </ul>

@@ -3,9 +3,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
+    padding: 20px;
   }
+
+  /* font-family: Poppins, sans-serif; */
 
   .title h1 {
     background-color: #201F4B;
@@ -40,29 +43,24 @@
     
   .conteudo h2{
     color: #201F4B;
-    margin-top: 40px;
+    margin-top: 5px;
+    font-size: 27px;
   }
-
-.invi h2{
-    color: #FFFFF1;
-}
 
   .textBlock {
+    max-width: 550px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    font-size: 26px;
-    margin-top: 26px;
-  }
-  
-  .h2 {
-    color: #282c34;
+    line-height: 1.3;
+    opacity: 70%;
+    gap: 15px;
+    font-size: 25px;
   }
 
   .containerConteudo{
     width: 100vw;
     display: flex;
     flex-direction: row;
-    padding: 32px;
+    padding: 40px;
     gap: 24px;
   }
