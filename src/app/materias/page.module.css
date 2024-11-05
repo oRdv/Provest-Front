@@ -1,10 +1,3 @@
-.body {
-    font-family: Arial, sans-serif;
-}
-
-/* .container {
-    padding: auto;
-} */
 
 .header {
     display: flex;
@@ -14,19 +7,9 @@
     position: relative;
 }
 
-/* SETA */
-.backArrow {
-    position: absolute;
-    left: 0;
-    cursor: pointer;
-    font-size: 40px;
-    padding: 40px;
-}
-
 /* NOME DA PROVA */
 .event {
     font-weight: bold;
-
     display: flex;
     align-items: center;
 }
@@ -42,26 +25,27 @@
 .eventTitle {
     display: flex;
     align-items: center;
-    gap: 15px;
+    width: 450px;
+    gap: 25px;
     border: 2px solid #D4A4E2;
-    padding: 10px;
+    padding: 20px;
     border-radius: 10px;
 }
 
 /* DIA DA PROVA  - 20*/
 .day {
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 100;
 }
 
 /* MES DA PROVA - OUT */
 .month {
     font-weight: 100;
-    font-size: 16px; 
+    font-size: 23px; 
 }
 
 .eventTitle {
-    font-size: 23px;
+    font-size: 30px;
 }
 
 .subjects {
@@ -73,25 +57,31 @@
 
 .subjectList {
     display: flex;
-    margin: 0;
     justify-content: space-between;
+    border-radius: 0px 0px 0px 0px;
     flex-direction: column;
     width: 48%;
+    gap: 6px;
+}
+
+.subjectList:first-child .subject {
+    border-radius: 0px 35px 35px 0px; 
 }
 
 .subject {
-    padding: 30px;
-    border-radius: 30px;
+    padding: 35px;
+    border-radius: 35px 0px 0px 35px;
     color: black;
     font-weight: bold;
+    font-size: 20px;
     text-align: left;
-    margin: 3px;
+    margin: 0px;
 }
 
 .buttonColumn {
     display: flex;
     flex-direction: column; 
-    width: 48%;
+    width: 30%;
 }
 
 .subject:hover {

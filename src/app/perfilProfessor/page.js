@@ -1,15 +1,15 @@
-'use client';
+'use client'
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import AvatarSelector from '@/components/ui/AvatarSelector';
 import styles from './page.module.css';
+import AvatarSelector from '@/components/ui/AvatarSelector';
 
-const TeacherProfilePage = () => {
+const ProfileProfPage = () => {
   const [profile, setProfile] = useState({
     name: '',
-    subject: '',
-    availableHours: '',
-    availableDays: '',
+    phone: '',
+    email: '',
+    password: '',
   });
 
   const [avatar, setAvatar] = useState(null);
@@ -35,18 +35,16 @@ const TeacherProfilePage = () => {
   };
 
   return (
-    <div className={styles['profile-page']}>
-      <div className={styles['top-banner']}>
-        <div className={styles['avatar-container']}>
+    <div className={styles["profile-page"]}>
+      <div className={styles["header"]}>
+        <div className={styles["avatar-preview"]} onClick={() => setIsModalOpen(true)}>
           {avatar ? (
-            <img src={avatar} alt="Avatar" className={styles['avatar-img']} />
+            <img src={avatar} alt="Avatar" />
           ) : (
-            <div className={styles['placeholder-avatar']}>Insira um nome ou uma foto de perfil</div>
+            <div></div>
           )}
-          <button className={styles['avatar-button']} onClick={() => setIsModalOpen(true)}>
-            <img src="/camera-icon.png" alt="Select Avatar" />
-          </button>
         </div>
+        <h1 className={styles["profile-name"]}>TAMARA SILVA</h1>
       </div>
 
       <Modal
@@ -58,51 +56,51 @@ const TeacherProfilePage = () => {
         <AvatarSelector onSelect={handleAvatarSelect} />
       </Modal>
 
-      <form className={styles['profile-form']} onSubmit={handleSubmit}>
-        <div className={styles['form-group']}>
-          <label htmlFor="name">Nome</label>
+      <form className={styles["profile-form"]} onSubmit={handleSubmit}>
+        <div className={styles["form-group"]}>
           <input
             type="text"
             id="name"
             name="name"
+            placeholder="Nome"
             value={profile.name}
             onChange={handleChange}
           />
         </div>
-        <div className={styles['form-group']}>
-          <label htmlFor="subject">Matéria que atua</label>
+        <div className={styles["form-group"]}>
           <input
-            type="text"
-            id="subject"
-            name="subject"
-            value={profile.subject}
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Telefone"
+            value={profile.phone}
             onChange={handleChange}
           />
         </div>
-        <div className={styles['form-group']}>
-          <label htmlFor="availableHours">Horários disponíveis</label>
+        <div className={styles["form-group"]}>
           <input
-            type="text"
-            id="availableHours"
-            name="availableHours"
-            value={profile.availableHours}
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            value={profile.email}
             onChange={handleChange}
           />
         </div>
-        <div className={styles['form-group']}>
-          <label htmlFor="availableDays">Dias disponíveis</label>
+        <div className={styles["form-group"]}>
           <input
-            type="text"
-            id="availableDays"
-            name="availableDays"
-            value={profile.availableDays}
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Mudar senha"
+            value={profile.password}
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className={styles.button}>SALVAR</button>
+        <button type="submit" className={styles["save-button"]}>SALVAR</button>
       </form>
     </div>
   );
 };
 
-export default TeacherProfilePage;
+export default ProfileProfPage;

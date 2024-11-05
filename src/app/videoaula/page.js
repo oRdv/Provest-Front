@@ -12,24 +12,22 @@ const VideoPage = () => {
       <div className={styles.videoContainer}>
         <video className={styles.video} controls>
           <source src="/videos/aula-geopolitica.mp4" type="video/mp4" />
-          Seu navegador não suporta a reprodução de vídeos.
         </video>
       </div>
-        {/* <div className={styles.videoControls}>
-          <FaChevronLeft />
-          <FaPause />
-          <FaChevronRight />
-        </div> */}
       </div>
       <div className={styles.content}>
         <p>Olá, estudante!</p>
         <p>Para iniciar os seus estudos sobre esse tema, selecionamos esse conteúdo para você.</p>
       </div>
       <div className={styles.buttons}>
+    <a href="/chatAluno">
         <button>Entrar em contato com um professor</button>
+    </a>
+    <a href="/questoes-respostas">
         <button>Questões e Respostas</button>
-        <button>Deixar uma dúvida</button>
-      </div>
+    </a>
+</div>
+
     </div>
   );
 };
