@@ -2,6 +2,7 @@
 
 import Head from 'next/head';
 import { useState } from 'react';
+import Image from 'next/image'; // Importar o componente de imagem
 import { FaArrowLeft, FaUserCircle, FaPaperPlane, FaTrash } from 'react-icons/fa';
 import styles from './page.module.css';
 
@@ -31,21 +32,25 @@ const ChatInterface = () => {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
       </Head>
       <div className={styles.body}>
-        <div className={styles.header}>
-          <FaArrowLeft className={styles.backIcon} />
-          <div className={styles.title}>Tamires Fernandes</div>
-          <FaUserCircle className={styles.userIcon} />
-        </div>
+      <div className={styles.header}>
+  <FaArrowLeft className={styles.backIcon} />
+  <div className={styles.title}>Tamires Fernandes</div>
+  <div className={styles.rightContainer}>
+    <span className={styles.subject}>Biologia</span>
+    <Image
+      src="/img/icon-chatAluno.png"
+      alt="Imagem na barra azul"
+      width={40} 
+      height={40}
+      className={styles.headerImage}
+    />
+  </div>
+</div>
         <div className={styles.chatContainer}>
           {chat.map((msg, index) => (
             <div key={index} className={`${styles.message} ${msg.type === 'sent' ? styles.sent : styles.received}`}>
               {msg.text}
               <div className={styles.time}>{msg.time}</div>
-              <FaTrash 
-                className={styles.deleteIcon} 
-                onClick={() => handleDeleteMessage(index)} 
-                title="Excluir mensagem"
-              />
             </div>
           ))}
         </div>

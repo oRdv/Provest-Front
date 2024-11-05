@@ -5,6 +5,7 @@
     align-items: flex-start;
     width: 100%;
     margin: 0 auto;
+    overflow-y: auto;
     padding: 20px;
   }
 
@@ -23,7 +24,6 @@
     font-style: normal; 
     letter-spacing: 0.10em; 
   }
-  
   
   .header {
     background-color: #282c34;

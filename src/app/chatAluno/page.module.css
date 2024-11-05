@@ -9,11 +9,36 @@
   
   .header {
     background-color: #1A1A4B;
+    position: relative;
     color: #BCB3DF;
     padding: 40px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+  }
+
+  .headerImage {
+    margin-left: auto ; 
+  }
+
+  .rightContainer {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-left: 93%;
+  }
+  
+  .subject {
+    color: #C6E6A3;
+    font-size: 1em;
+  }
+
+  .title {
+    font-size: 1.2em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff; 
   }
   
   .backIcon {
