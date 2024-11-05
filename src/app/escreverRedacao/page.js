@@ -16,6 +16,28 @@ function EscreverRedacao() {
   const maxLines = 30;
   const maxCharsPerLine = 65;
 
+  const extrairCompetencias = (texto) => {
+    const competencias = [];
+    let notaFinal = null;
+  
+    const regexCompetencia = /\*Competência \d.*?Nota:\*.*?(\d+).*?Explicação:.*?([^\n]+)/gs;
+    let matchCompetencia;
+    
+    while ((matchCompetencia = regexCompetencia.exec(texto)) !== null) {
+      const competencia = matchCompetencia[0].trim();
+      competencias.push(competencia);
+    }
+  
+    const regexNotaFinal = /\*Nota Total:\*\s*(\d+)/;
+    const matchNotaFinal = texto.match(regexNotaFinal);
+    if (matchNotaFinal) {
+      notaFinal = parseInt(matchNotaFinal[1], 10);
+    }
+  
+    return { competencias, notaFinal };
+  };
+  
+
   const handleChange = (e) => {
     let inputText = e.target.value;
     let lines = inputText.split('\n');
@@ -87,14 +109,26 @@ function EscreverRedacao() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ tema: selectedTheme, redacao: text }),
       });
-
+  
       const data = await response.json();
-      setFeedback(data); 
+      const texto = data.response.candidates[0].content.parts[0].text;
+      console.log(texto);
+
+      const { competencias, notaFinal } = extrairCompetencias(texto);
+  
+      setFeedback({
+        tema: selectedTheme,
+        comentario: "Análise da correção",
+        competencias: competencias,
+        notaFinal: notaFinal,
+      });
     } catch (error) {
       console.error("Erro ao enviar redação para correção:", error);
       alert("Erro ao enviar redação para correção.");
     }
   };
+  
+  
 
   const toggleFeedbackVisibility = () => {
     setFeedbackVisible(!feedbackVisible);

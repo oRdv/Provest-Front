@@ -22,7 +22,7 @@ const FeedbackCorrecao = ({ feedback }) => {
           <p>Nenhuma competência avaliada encontrada.</p>
         )}
         
-        <h3 className={styles.finalScore}>Nota Final: <span className={styles.scoreValue}>{feedback?.notaFinal}</span></h3>
+        <h3 className={styles.finalScore}>Nota Final: <span className={styles.scoreValue}>{feedback?.notaFinal ?? "Nota não encontrada"}</span></h3>
       </div>
     </div>
   );
