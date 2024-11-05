@@ -22,7 +22,7 @@ function TodasAnotacoes() {
 
         console.log(data);
 
-        if (response.ok) {
+        if (response.ok && Array.isArray(data.anotacoes)) {
           setAnotacoes(data.anotacoes);
         } else {
           setError(data.message || 'Erro ao buscar anotações.');
@@ -48,16 +48,20 @@ function TodasAnotacoes() {
           {Array.isArray(anotacoes) && anotacoes.length > 0 ? (
             anotacoes.map((anotacao) => (
               <Link key={anotacao.id} href={`/anotacao/${anotacao.id}`}>
-              <div className={styles.box}>
-                <h2>{anotacao.titulo}</h2>
-              </div>
-            </Link>
-            
-            
+                <div className={styles.box}>
+                  <h2>{anotacao.titulo}</h2>
+                </div>
+              </Link>
             ))
           ) : (
             <p>Nenhuma anotação encontrada.</p>
           )}
+        </div>
+
+        <div className={styles.boxstyle}>
+          <Link href="/home">
+            <button className={styles.button}>Voltar para tela principal</button>
+          </Link>
         </div>
       </div>
     </div>

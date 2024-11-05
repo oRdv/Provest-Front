@@ -35,8 +35,8 @@ function Redacao() {
   }, []);
 
   const handleOptionChangeTheme = (event) => {
-    const selectedThemeId = event.target.getAttribute('data-id'); // Obtém o ID do tema
-    const selectedThemeName = event.target.value; // Obtém o nome do tema
+    const selectedThemeId = event.target.getAttribute('data-id'); 
+    const selectedThemeName = event.target.value;
 
     setSelectedOption(selectedThemeName);
     localStorage.setItem('selectedThemeId', selectedThemeId);
@@ -84,7 +84,7 @@ function Redacao() {
                     name="option"
                     type="radio"
                     value={tema.nome}
-                    data-id={tema.id}  // Armazenando o ID como um atributo
+                    data-id={tema.id}
                     checked={selectedOption === tema.nome}
                     onChange={handleOptionChangeTheme}
                   />

@@ -14,29 +14,40 @@ function EscreverRedacao() {
   const [submissionMessage, setSubmissionMessage] = useState('');
 
   const maxLines = 30;
-  const maxCharsPerLine = 65;
+  const maxCharsPerLine = 75;
 
   const extrairCompetencias = (texto) => {
     const competencias = [];
     let notaFinal = null;
-  
-    const regexCompetencia = /\*Competência \d.*?Nota:\*.*?(\d+).*?Explicação:.*?([^\n]+)/gs;
-    let matchCompetencia;
-    
-    while ((matchCompetencia = regexCompetencia.exec(texto)) !== null) {
-      const competencia = matchCompetencia[0].trim();
-      competencias.push(competencia);
-    }
-  
-    const regexNotaFinal = /\*Nota Total:\*\s*(\d+)/;
+
+    console.log("Texto recebido para extração:", texto); // Log do texto recebido
+
+    const regexCompetencia = /\*\s*\*\*\s*Competência\s*(\d+)\s*\((.*?)\):\s*\*\*\s*Nota:\s*(\d+)\s*\*\*\s*Explicação:\s*(.*?)(?=\*\s*\*\*\s*Competência\s*\d+|$)/g;
+    const matches = [...texto.matchAll(regexCompetencia)];
+
+    console.log("Matches encontrados:", matches);
+
+    matches.forEach(match => {
+      const [ , numeroCompetencia, descricao, nota, explicacao ] = match;
+      competencias.push({
+        numero: numeroCompetencia,
+        descricao: descricao.trim(),
+        nota: parseInt(nota, 10),
+        explicacao: explicacao.trim(),
+      });
+    });
+
+    const regexNotaFinal = /(?:Nota Total):?\s*(\d+)/i;
     const matchNotaFinal = texto.match(regexNotaFinal);
+
     if (matchNotaFinal) {
       notaFinal = parseInt(matchNotaFinal[1], 10);
+    } else {
+      console.log("Nota final não encontrada no texto:", texto);
     }
-  
+
     return { competencias, notaFinal };
   };
-  
 
   const handleChange = (e) => {
     let inputText = e.target.value;
@@ -51,13 +62,11 @@ function EscreverRedacao() {
       setText(inputText);
       setLineCount(currentLineCount);
     } else {
-    
       setText(inputText.slice(0, maxLines * maxCharsPerLine));
       setLineCount(maxLines);
     }
   };
   
-
   useEffect(() => {
     const themeIdFromStorage = localStorage.getItem('selectedThemeId');
     const themeName = localStorage.getItem('selectedThemeName');
@@ -85,9 +94,8 @@ function EscreverRedacao() {
       });
   
       if (!response.ok) {
-        console.error(`Erro: ${response.status} - ${response.statusText}`);
-        const errorData = await response.text();
-        console.error(`Resposta do servidor: ${errorData}`);
+        const errorData = await response.json();
+        console.error(`Erro ao salvar a redação: ${errorData}`);
         throw new Error(`Erro ao salvar a redação: ${response.statusText}`);
       }
   
@@ -104,17 +112,30 @@ function EscreverRedacao() {
 
   const handleSubmitRedacao = async () => {
     try {
+      const payload = { tema: selectedTheme, redacao: text };
+      console.log("Dados enviados para correção:", payload);
+  
       const response = await fetch("https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/correcao/redacao", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tema: selectedTheme, redacao: text }),
+        body: JSON.stringify(payload),
       });
   
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error(`Erro ao enviar redação para correção: ${errorData}`);
+        throw new Error(`Erro ao enviar redação: ${response.statusText}`);
+      }
+  
       const data = await response.json();
-      const texto = data.response.candidates[0].content.parts[0].text;
-      console.log(texto);
-
+      console.log("Dados recebidos da correção:", data);
+  
+      // Extraindo o texto da correção
+      const texto = data.response.candidates[0].content.parts[0].text; // Aqui está a extração do texto
+  
       const { competencias, notaFinal } = extrairCompetencias(texto);
+      console.log("Competências extraídas:", competencias);
+      console.log("Nota final extraída:", notaFinal);
   
       setFeedback({
         tema: selectedTheme,
@@ -127,7 +148,6 @@ function EscreverRedacao() {
       alert("Erro ao enviar redação para correção.");
     }
   };
-  
   
 
   const toggleFeedbackVisibility = () => {
@@ -171,7 +191,6 @@ function EscreverRedacao() {
           <button onClick={handleSaveRedacao} className={styles.buttonWrite}>Salvar Redação</button>
           {submissionMessage && <p className={styles.submissionMessage}>{submissionMessage}</p>} 
         </div>
-
     
         <div className={styles.feedbackToggle} onClick={toggleFeedbackVisibility}>
           {feedbackVisible ? '✖️' : '☰'} 

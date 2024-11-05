@@ -11,7 +11,7 @@ function TodasRedacoes() {
       try {
         const response = await fetch('https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/redacoes');
         const data = await response.json();
-        setRedacoes(data.redacoes);  // Certifique-se de acessar o array "redacoes"
+        setRedacoes(data.redacoes); 
       } catch (error) {
         console.error("Erro ao buscar redações:", error);
       }
@@ -30,16 +30,19 @@ function TodasRedacoes() {
         {redacoes.length > 0 ? (
           redacoes.map((redacao) => (
             <div key={redacao.id} className={styles.item}>
-              <span className={styles.label}>{redacao.tema}</span> {/* Exibir o tema */}
+              <span className={styles.label}>{redacao.tema}</span>
               <div className={styles.box}>
-                <strong>{redacao.titulo}</strong> {/* Exibir o título */}
-                <p>{redacao.texto}</p> {/* Exibir o texto */}
+                <strong>{redacao.titulo}</strong>
+                <p>{redacao.texto}</p> 
               </div>
             </div>
           ))
+  
+          
         ) : (
           <p>Nenhuma redação encontrada.</p>
         )}
+
       </div>
     </div>
   );
