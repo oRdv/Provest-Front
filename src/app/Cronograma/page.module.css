@@ -32,7 +32,7 @@
 .leftSection,
 .rightSection {
   width: 45%;
-  margin: 0 10px;
+  margin: 0 10+-px;
 }
 
 .rightSection{
