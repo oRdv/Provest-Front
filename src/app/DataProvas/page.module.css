@@ -1,0 +1,99 @@
+
+.container {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FDFBEA;
+  }
+  
+  .header {
+    background-color: #2E265E;
+    color: #FDFBEA;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .date {
+    font-size: 30px;
+  }
+  
+  .year {
+    font-size: 30px;
+    color: #A3D9A5;
+  }
+  
+  .line {
+    width: 50px;
+    height: 2px;
+    background-color: #FDFBEA;
+    margin: 0 20px;
+  }
+  
+  .topIcons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 10px 20px;
+  }
+  
+  .topIcons .button {
+    color: #2E265E;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: none; 
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .h2 {
+    font-size: 24px;
+    color: #2E265E;
+    
+}
+  
+  .notes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 30px;
+  }
+  
+  .note {
+    border: 2px solid #2E265E;
+    border-radius: 10px;
+    padding: 30px;
+    width: calc(33.333% - 20px);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none; 
+  }
+  
+  .dateBox {
+    border: 2px solid #D3BCE3;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    width: 70px;
+  }
+  
+  .day {
+    font-size: 24px;
+    color: #2E265E;
+  }
+  
+  .month {
+    font-size: 18px;
+    color: #2E265E;
+  }
+  
+  .description {
+    font-size: 24px;
+    color: #2E265E;
+    margin-left: 20px;
+  }
+  
