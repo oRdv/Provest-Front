@@ -5,7 +5,6 @@ import Image from 'next/image';
 
 
 function Config() {
-
   return (
     <div className="container">
       <div className="header">
@@ -80,8 +79,8 @@ function Config() {
             />
 
           </div>
-          <Link href="../notificacoes">
-          <span className="label">Notificações</span>
+          <Link href="../todasAnotacoes">
+          <span className="label">Anotações</span>
           </Link>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +106,7 @@ function Config() {
             />
 
           </div>
-          <Link href="../notificacoes">
+          <Link href="../chatGeral">
           <span className="label">Chat</span>
           </Link>
           <svg
