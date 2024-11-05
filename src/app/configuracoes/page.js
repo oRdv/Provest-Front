@@ -50,7 +50,7 @@ function Config() {
             />
 
           </div>
-          <Link href="../politicaPrivacidade">
+          <Link href="../politicaPriv">
           <span className="label">Política e privacidade</span>
           </Link>
           <svg
