@@ -70,29 +70,29 @@ const ProfileProfPage = () => {
         <div className={styles["form-group"]}>
           <input
             type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Telefone"
+            id="Horários disponíveis"
+            name="Horários disponíveis"
+            placeholder="Horários disponíveis"
             value={profile.phone}
             onChange={handleChange}
           />
         </div>
         <div className={styles["form-group"]}>
           <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
+            type="text"
+            id="Matéria que atua"
+            name="Matéria que atua"
+            placeholder="Matéria que atua"
             value={profile.email}
             onChange={handleChange}
           />
         </div>
         <div className={styles["form-group"]}>
           <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Mudar senha"
+            type="text"
+            id="Dias disponíveis"
+            name="Dias disponíveis"
+            placeholder="Dias disponíveis"
             value={profile.password}
             onChange={handleChange}
           />
