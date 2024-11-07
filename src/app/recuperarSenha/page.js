@@ -23,7 +23,7 @@ function Recuperar() {
 
 
     try {
-      const userResponse = await fetch('https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/alunos');
+      const userResponse = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/alunos');
       const usersData = await userResponse.json();
 
       const user = usersData.alunos.find((aluno) => aluno.email === formData.email);
@@ -33,7 +33,7 @@ function Recuperar() {
         return;
       }
 
-      const updateResponse = await fetch(`https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/aluno/senha/${user.id}`, {
+      const updateResponse = await fetch(`https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/aluno/senha/${user.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

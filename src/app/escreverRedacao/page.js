@@ -56,7 +56,7 @@ function EscreverRedacao() {
     };
   
     try {
-      const response = await fetch('https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/redacao', {
+      const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/redacao', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ function EscreverRedacao() {
       const payload = { tema: selectedTheme, redacao: text };
       console.log("Dados enviados para correção:", payload);
   
-      const response = await fetch("https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/correcao/redacao", {
+      const response = await fetch("https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/correcao/redacao", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

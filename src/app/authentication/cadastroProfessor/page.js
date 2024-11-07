@@ -31,7 +31,7 @@ const Signup = () => {
             icone_id: formData.icone_id
            
         });
-      const response = await fetch('https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/prof', {
+      const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/prof', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

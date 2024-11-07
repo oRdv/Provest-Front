@@ -7,7 +7,7 @@ const AvatarSelector = ({ onSelect }) => {
   useEffect(() => {
     const fetchAvatars = async () => {
       try {
-        const response = await fetch('https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/icones');
+        const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/icones');
         const data = await response.json();
 
         if (response.ok && Array.isArray(data.icones)) {

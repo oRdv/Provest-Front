@@ -1,4 +1,3 @@
-
 import Image from 'next/image';
 import styles from './page.module.css';
 import imagem from '../../public/img/female.png';

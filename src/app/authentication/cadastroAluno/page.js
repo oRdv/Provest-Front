@@ -19,7 +19,7 @@ const Signup = () => {
   useEffect(() => {
     const fetchCursos = async () => {
       try {
-        const response = await fetch('https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/cursos');
+        const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/cursos');
         if (!response.ok) {
           throw new Error('Erro ao buscar cursos');
         }
@@ -48,7 +48,7 @@ const Signup = () => {
   const signupUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/aluno', {
+      const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/aluno', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

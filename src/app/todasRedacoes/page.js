@@ -9,7 +9,7 @@ function TodasRedacoes() {
   useEffect(() => {
     const fetchRedacoes = async () => {
       try {
-        const response = await fetch('https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/redacoes');
+        const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/redacoes');
         const data = await response.json();
         setRedacoes(data.redacoes); 
       } catch (error) {

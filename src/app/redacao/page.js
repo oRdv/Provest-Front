@@ -12,7 +12,7 @@ function Redacao() {
   useEffect(() => {
     const fetchTemas = async () => {
       try {
-        const response = await fetch("https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/temas");
+        const response = await fetch("https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/temas");
         const data = await response.json();
         console.log(data);
         setTemas(data.tema);

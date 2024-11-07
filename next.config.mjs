@@ -4,7 +4,7 @@ const nextConfig = {
       return [
         {
           source: '/api/:path*',
-          destination: 'https://jengt-provest-backend-1.onrender.com/v1/jengt_provest/:path*'
+          destination: 'https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/:path*'
         }
       ];
     },
