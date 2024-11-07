@@ -6,50 +6,179 @@ import styles from './page.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const Navbar = ({ toggleTab }) => {
-    return (
-        <div className={styles.navbar}>
-            <div className={styles.icon1} onClick={() => toggleTab('infoTab')}>
-                <i className="fas fa-bars">
-                <Image
-                        src="/img/Vector.png"
-                        width={30}
-                        height={30}
-                        alt="Desenho de uma mulher pensando"
-                    />
-                </i>
-            </div>
-            <div style={{ display: 'flex', gap: '10px' }}>
-                <div className={styles.icon1} onClick={() => toggleTab('notificationTab')}>
-                    <i className="fas fa-bell"></i>
-                </div>
-            </div>
-        </div>
-    );
-};    
-
 const Dashboard = () => {
-    const [activeTab, setActiveTab] = useState('');
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [notificationsOpen, setNotificationsOpen] = useState(false);
 
-    const toggleTab = (tabId) => {
-        setActiveTab(activeTab === tabId ? '' : tabId);
+    const toggleMenu = () => {
+        setMenuOpen(prevState => !prevState); 
+    };
+
+    const toggleNotifications = () => {
+        setNotificationsOpen(prevState => !prevState); 
     };
 
     return (
         <>
             <Head>
                 <title>Dashboard</title>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
             </Head>
-            <Navbar toggleTab={toggleTab} />
-
-            <div className={`${styles.tabContent} ${activeTab === 'infoTab' ? styles.active : ''}`}>
-                <p>More information goes here...</p>
+            <div className="header">
+                {/* Ícone do Menu */}
+                <Image 
+                    src="/img/icone-menu.png" 
+                    width={50} 
+                    height={50} 
+                    alt="Ícone do Menu"
+                    onClick={toggleMenu}  
+                    className="menu-icon"
+                    style={{ cursor: 'pointer' }} 
+                />
+                <div className="search-bar">
+                    <i className="fas fa-search"></i>
+                    <input type="text" placeholder="Pesquisar..." />
+                </div>
+                {/* Ícone de Notificações */}
+                <Image 
+                    src="/img/icone-sino.png" 
+                    width={50} 
+                    height={50} 
+                    alt="Ícone das Notificações"
+                    onClick={toggleNotifications}  
+                    className="menu-icon"
+                    style={{ cursor: 'pointer' }} 
+                />
             </div>
-            <div className={`${styles.tabContent} ${activeTab === 'notificationTab' ? styles.active : ''}`}>
-                <p>Notifications will be displayed here...</p>
+
+       
+            {(menuOpen || notificationsOpen) && (
+                <div className="overlay2" onClick={() => {
+                    setMenuOpen(false);
+                    setNotificationsOpen(false);
+                }}></div>
+            )}
+
+            {/* Aba de Notificações */}
+            <div className={`notifications ${notificationsOpen ? 'active' : ''}`}>
+                <div className="barra-branca">
+                    <Image
+                        src="/img/Ppreto.png"
+                        width={60}
+                        height={60}
+                        alt="logo na cor preta"
+                        className="logo-image"
+                    />
+                    <h1>Notificações</h1>
+                </div>
+                <ul className="menu-notificacoes">
+                    <li className="notif-item">
+                        <Link href="#">
+                            <span className="notif-title">Notificação 1: </span>
+                            <span className="notif-details">Detalhes da notificação</span>
+                        </Link>
+                    </li>
+                    <li className="notif-item">
+                        <Link href="#">
+                            <span className="notif-title">Notificação 2: </span>
+                            <span className="notif-details">Detalhes da notificação</span>
+                        </Link>
+                    </li>
+                    <li className="notif-item">
+                        <Link href="#">
+                            <span className="notif-title">Notificação 3: </span>
+                            <span className="notif-details">Detalhes da notificação</span>
+                        </Link>
+                    </li>
+                </ul>
             </div>
 
+            {/* Aba do Menu */}
+            {menuOpen && <div className="overlay" onClick={toggleMenu}></div>}
+
+            <div className={`side-menu ${menuOpen ? 'active' : ''}`}>
+                <div className="barrinha">
+                    <div className="profile-header">
+                        <Image src="/img/profile.png" width={60} height={60} alt="Ícone de perfil" className="profile-icon" />
+                        <div>
+                            <h1>Bem-vindo, Celso!</h1>
+                        </div>
+                    </div>
+
+                    <ul className="menu-list">
+                        <li className="menu-item">
+                            <Link href="#">
+                                <img src="/img/icon-tarefas.png" alt="Tarefas" className="menu-icon" /> Tarefas
+                            </Link>
+                        </li>
+                        <li className="menu-item">
+                            <Link href="#">
+                                <img src="/img/icon-chats.png" alt="Chats" className="menu-icon" /> 
+                                <Link href="./chatGeral">Chats</Link>
+                            </Link>
+                        </li>
+                        <li className="menu-item">
+                            <Link href="#">
+                                <img src="/img/icon-config.png" alt="" className="menu-icon" /> 
+                                <Link href="./configuracoes">Configurações</Link>
+                            </Link>
+                        </li>
+                        <li className="menu-item">
+                            <Link href="#">
+                                <img src="/img/ico-calendario.png" alt="" className="menu-icon" /> Calendário
+                            </Link>
+                        </li>
+                        <li className="menu-item">
+                            <Link href="#">
+                                <img src="/img/icon-lupa.png" alt="" className="menu-icon" /> Escolha o curso
+                            </Link>
+                        </li>
+                        <li className="menu-item">
+                            <Link href="#">
+                                <img src="/img/icon-video.png" alt="Vídeo-Aulas" className="menu-icon" />
+                                <Link href="./videoaula">Vídeo-Aulas</Link>
+                            </Link>
+                        </li>
+                        <li className="menu-item">
+                            <Link href="#">
+                                <img src="/img/icon-materias.png" alt="Matérias" className="menu-icon" /> 
+                                <Link href="./materias">Matérias</Link>
+                            </Link>
+                        </li>
+                        <li className="menu-item">
+                            <Link href="#">
+                                <img src="/img/icon-redações.png" alt="" className="menu-icon" /> 
+                                <Link href="./todasRedacoes">Redações</Link>
+                            </Link>
+                        </li>
+                        <li className="menu-item">
+                            <Link href="#">
+                                <img src="/img/icon-perfil2.png" alt="" className="menu-icon" />
+                                <Link href="./perfilAluno">Perfil</Link>
+                            </Link>
+                        </li>
+                    </ul>
+
+                    <div className="button-container">
+                        <button className="back-button">
+                            <span className="arrow">←</span> Logout
+                        </button>
+                        <Image
+                            src="/img/Ppreto.png"
+                            width={60}
+                            height={60}
+                            alt="logo na cor preta"
+                            className="logo-image"
+                        />
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            
+
+            {/* Conteúdo Principal */}
             <div className={styles.header}>
                 <i className="fas fa-bars menu-icon"></i>
                 <input type="text" placeholder="Pesquisar..." />
@@ -87,31 +216,6 @@ const Dashboard = () => {
                             <div className={styles.title}>VídeoAulas</div>
                         </Link>
                     </label>
-                </div>
-                <div className={styles.sectionTitle}>Calendário</div>
-                <div className={styles.calendar}>
-                    <div className={styles.calendarCard}>
-                        <div className={styles.date}>
-                            <span className={styles.day}>10</span>
-                            <span className={styles.month}>Mar</span>
-                        </div>
-                        <div className={styles.content}>
-                            <div className={styles.title}>Calendário</div>
-                            <div className={styles.event}>Aula hoje às 16hrs</div>
-                            <div className={styles.event}>Postar vídeo aula hoje às 10:10hrs</div>
-                        </div>
-                    </div>
-                    <div className={styles.calendarCard}>
-                        <div className={styles.date}>
-                            <span className={styles.day}>3</span>
-                            <span className={styles.month}>Fev</span>
-                        </div>
-                        <div className={styles.content}>
-                            <div className={styles.title}>Calendário</div>
-                            <div className={styles.event}>Aula hoje às 13hrs</div>
-                            <div className={styles.event}>Postar vídeo aula hoje às 17hrs</div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </>
