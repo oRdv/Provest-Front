@@ -187,9 +187,9 @@ export default function Home() {
                     </a>
                     <a href="#" className="card">
                         <div className="icon">
-                            <Image src="/img/Vector.png" width={100} height={100} alt="Atividades" />
+                            <Image src="/img/icon-anotHome.png" width={100} height={100} alt="Anotações" />
                         </div>
-                        <div className="title1">Atividades</div>
+                        <div className="title1">Anotações</div>
                         <div className="underline"></div>
                     </a>
                 </div>
