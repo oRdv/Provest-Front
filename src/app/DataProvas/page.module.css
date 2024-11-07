@@ -1,31 +1,31 @@
-
 .container {
-    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #FDFBEA;
   }
   
+  /* BARRA AZUL */
   .header {
     background-color: #2E265E;
-    color: #FDFBEA;
-    padding: 40px;
+    color: #BCB3DF;
+    font-weight: bold;
+    padding: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .date {
-    font-size: 30px;
+    font-size: 35px;
   }
   
   .year {
-    font-size: 30px;
+    font-size: 35px;
     color: #A3D9A5;
   }
   
   .line {
-    width: 50px;
+    width: 160px;
     height: 2px;
     background-color: #FDFBEA;
     margin: 0 20px;
@@ -45,15 +45,26 @@
     text-decoration: none; 
   }
   
-  .content {
-    padding: 20px;
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    cursor: pointer;
+    transition: background-color 0.3s;
   }
   
-  .h2 {
-    font-size: 24px;
+  .iconImage {
+    width: 30px; 
+    height: 30px;
+  }
+
+  /* ANOTAÇÕES */
+  .content {
+    font-size: 25px;
+    padding: 40px;
     color: #2E265E;
-    
-}
+  }
   
   .notes {
     display: flex;
