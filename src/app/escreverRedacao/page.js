@@ -17,36 +17,7 @@ function EscreverRedacao() {
   const maxCharsPerLine = 75;
 
   const extrairCompetencias = (texto) => {
-    const competencias = [];
-    let notaFinal = null;
-
-    console.log("Texto recebido para extração:", texto); // Log do texto recebido
-
-    const regexCompetencia = /\*\s*\*\*\s*Competência\s*(\d+)\s*\((.*?)\):\s*\*\*\s*Nota:\s*(\d+)\s*\*\*\s*Explicação:\s*(.*?)(?=\*\s*\*\*\s*Competência\s*\d+|$)/g;
-    const matches = [...texto.matchAll(regexCompetencia)];
-
-    console.log("Matches encontrados:", matches);
-
-    matches.forEach(match => {
-      const [ , numeroCompetencia, descricao, nota, explicacao ] = match;
-      competencias.push({
-        numero: numeroCompetencia,
-        descricao: descricao.trim(),
-        nota: parseInt(nota, 10),
-        explicacao: explicacao.trim(),
-      });
-    });
-
-    const regexNotaFinal = /(?:Nota Total):?\s*(\d+)/i;
-    const matchNotaFinal = texto.match(regexNotaFinal);
-
-    if (matchNotaFinal) {
-      notaFinal = parseInt(matchNotaFinal[1], 10);
-    } else {
-      console.log("Nota final não encontrada no texto:", texto);
-    }
-
-    return { competencias, notaFinal };
+   return texto.split(/[*][*]Nota Total:|[*][*]Competência|[*][*]Nota|[*][*]Explicação:[*][*]/).slice(1, 11);
   };
 
   const handleChange = (e) => {
@@ -130,19 +101,41 @@ function EscreverRedacao() {
       const data = await response.json();
       console.log("Dados recebidos da correção:", data);
   
-      // Extraindo o texto da correção
-      const texto = data.response.candidates[0].content.parts[0].text; // Aqui está a extração do texto
-  
-      const { competencias, notaFinal } = extrairCompetencias(texto);
-      console.log("Competências extraídas:", competencias);
-      console.log("Nota final extraída:", notaFinal);
-  
+      const texto = data.response.candidates[0].content.parts[0].text;
+
+  const teste = extrairCompetencias(texto)
+
       setFeedback({
         tema: selectedTheme,
         comentario: "Análise da correção",
-        competencias: competencias,
-        notaFinal: notaFinal,
+        competencias: [
+          {
+            competencias: teste[0],
+            explicacao: teste[1],
+          },
+          {
+            competencias: teste[2],
+            explicacao: teste[3],
+          },
+          {
+            competencias: teste[4],
+            explicacao: teste[5],
+          },
+          {
+            competencias: teste[6],
+            explicacao: teste[7],
+          },
+          {
+            competencias: teste[8],
+            explicacao: teste[9],
+          }
+        ]
       });
+
+      console.log(feedback);
+      console.log('oii');
+      
+      
     } catch (error) {
       console.error("Erro ao enviar redação para correção:", error);
       alert("Erro ao enviar redação para correção.");
