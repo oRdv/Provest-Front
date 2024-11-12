@@ -7,218 +7,96 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const Dashboard = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [notificationsOpen, setNotificationsOpen] = useState(false);
+    const [menuVisible, setMenuVisible] = useState(false);
 
     const toggleMenu = () => {
-        setMenuOpen(prevState => !prevState); 
+      setMenuVisible(!menuVisible);
     };
-
-    const toggleNotifications = () => {
-        setNotificationsOpen(prevState => !prevState); 
-    };
-
+  
     return (
-        <>
-            <Head>
-                <title>Dashboard</title>
-            </Head>
-            <div className="header">
-                {/* Ícone do Menu */}
-                <Image 
-                    src="/img/icone-menu.png" 
-                    width={50} 
-                    height={50} 
-                    alt="Ícone do Menu"
-                    onClick={toggleMenu}  
-                    className="menu-icon"
-                    style={{ cursor: 'pointer' }} 
-                />
-                <div className="search-bar">
-                    <i className="fas fa-search"></i>
-                    <input type="text" placeholder="Pesquisar..." />
-                </div>
-                {/* Ícone de Notificações */}
-                <Image 
-                    src="/img/icone-sino.png" 
-                    width={50} 
-                    height={50} 
-                    alt="Ícone das Notificações"
-                    onClick={toggleNotifications}  
-                    className="menu-icon"
-                    style={{ cursor: 'pointer' }} 
-                />
-            </div>
-
-       
-            {(menuOpen || notificationsOpen) && (
-                <div className="overlay2" onClick={() => {
-                    setMenuOpen(false);
-                    setNotificationsOpen(false);
-                }}></div>
-            )}
-
-            {/* Aba de Notificações */}
-            <div className={`notifications ${notificationsOpen ? 'active' : ''}`}>
-                <div className="barra-branca">
-                    <Image
-                        src="/img/Ppreto.png"
-                        width={60}
-                        height={60}
-                        alt="logo na cor preta"
-                        className="logo-image"
-                    />
-                    <h1>Notificações</h1>
-                </div>
-                <ul className="menu-notificacoes">
-                    <li className="notif-item">
-                        <Link href="#">
-                            <span className="notif-title">Notificação 1: </span>
-                            <span className="notif-details">Detalhes da notificação</span>
-                        </Link>
-                    </li>
-                    <li className="notif-item">
-                        <Link href="#">
-                            <span className="notif-title">Notificação 2: </span>
-                            <span className="notif-details">Detalhes da notificação</span>
-                        </Link>
-                    </li>
-                    <li className="notif-item">
-                        <Link href="#">
-                            <span className="notif-title">Notificação 3: </span>
-                            <span className="notif-details">Detalhes da notificação</span>
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-
-            {/* Aba do Menu */}
-            {menuOpen && <div className="overlay" onClick={toggleMenu}></div>}
-
-            <div className={`side-menu ${menuOpen ? 'active' : ''}`}>
-                <div className="barrinha">
-                    <div className="profile-header">
-                        <Image src="/img/profile.png" width={60} height={60} alt="Ícone de perfil" className="profile-icon" />
-                        <div>
-                            <h1>Bem-vindo, Celso!</h1>
-                        </div>
-                    </div>
-
-                    <ul className="menu-list">
-                        <li className="menu-item">
-                            <Link href="#">
-                                <img src="/img/icon-tarefas.png" alt="Tarefas" className="menu-icon" /> Tarefas
-                            </Link>
-                        </li>
-                        <li className="menu-item">
-                            <Link href="#">
-                                <img src="/img/icon-chats.png" alt="Chats" className="menu-icon" /> 
-                                <Link href="./chatGeral">Chats</Link>
-                            </Link>
-                        </li>
-                        <li className="menu-item">
-                            <Link href="#">
-                                <img src="/img/icon-config.png" alt="" className="menu-icon" /> 
-                                <Link href="./configuracoes">Configurações</Link>
-                            </Link>
-                        </li>
-                        <li className="menu-item">
-                            <Link href="#">
-                                <img src="/img/ico-calendario.png" alt="" className="menu-icon" /> Calendário
-                            </Link>
-                        </li>
-                        <li className="menu-item">
-                            <Link href="#">
-                                <img src="/img/icon-lupa.png" alt="" className="menu-icon" /> Escolha o curso
-                            </Link>
-                        </li>
-                        <li className="menu-item">
-                            <Link href="#">
-                                <img src="/img/icon-video.png" alt="Vídeo-Aulas" className="menu-icon" />
-                                <Link href="./videoaula">Vídeo-Aulas</Link>
-                            </Link>
-                        </li>
-                        <li className="menu-item">
-                            <Link href="#">
-                                <img src="/img/icon-materias.png" alt="Matérias" className="menu-icon" /> 
-                                <Link href="./materias">Matérias</Link>
-                            </Link>
-                        </li>
-                        <li className="menu-item">
-                            <Link href="#">
-                                <img src="/img/icon-redações.png" alt="" className="menu-icon" /> 
-                                <Link href="./todasRedacoes">Redações</Link>
-                            </Link>
-                        </li>
-                        <li className="menu-item">
-                            <Link href="#">
-                                <img src="/img/icon-perfil2.png" alt="" className="menu-icon" />
-                                <Link href="./perfilAluno">Perfil</Link>
-                            </Link>
-                        </li>
-                    </ul>
-
-                    <div className="button-container">
-                        <button className="back-button">
-                            <span className="arrow">←</span> Logout
-                        </button>
-                        <Image
-                            src="/img/Ppreto.png"
-                            width={60}
-                            height={60}
-                            alt="logo na cor preta"
-                            className="logo-image"
-                        />
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            
-
-            {/* Conteúdo Principal */}
-            <div className={styles.header}>
-                <i className="fas fa-bars menu-icon"></i>
-                <input type="text" placeholder="Pesquisar..." />
-                <div className={styles.icons}>
-                    <i className="fas fa-search"></i>
-                    <i className="fas fa-bell"></i>
-                </div>
-            </div>
-            <div className={styles.container}>
-                <div className={styles.sectionTitle}>DashBoard</div>
-                <div className={styles.dashboard}>
-                    <label className={styles.card}>
-                        <i className="fas fa-book"></i>
-                        <i className="fas fa-plus plus-icon"></i>
-                        <Image
-                            src="/img/Vector.png"
-                            width={90}
-                            height={90}
-                            alt=".."
-                        />
-                        <Link href="../perfilAluno">
-                            <div className={styles.title}>Atividades</div>
-                        </Link>
-                    </label>
-                    <label className={styles.card}>
-                        <i className="fas fa-video"></i>
-                        <i className="fas fa-plus plus-icon"></i>
-                        <Image
-                            src="/img/aula.png"
-                            width={90}
-                            height={90}
-                            alt=".."
-                        />
-                        <Link href="../perfilAluno">
-                            <div className={styles.title}>VídeoAulas</div>
-                        </Link>
-                    </label>
-                </div>
-            </div>
-        </>
+      <div className={styles.container}>
+        {/* Header */}
+        <div className={styles.header}>
+          <div className={styles.menuIcon} onClick={toggleMenu}>
+            <i className="fas fa-bars">
+            <Image
+                src="/img/barra-de-menu.png"
+                width={35}
+                height={35}
+                alt="Desenho de uma mulher pensando"
+            />
+            </i>
+          </div>
+          <div className={styles.searchBar}>
+            <input type="text" placeholder="Pesquisar..." />
+          </div>
+          <div className={styles.notificationIcon}>
+            <i className="fas fa-bell"> <Image
+                src="/img/notification.png"
+                width={20}
+                height={20}
+                alt="Desenho de uma mulher pensando"
+            /></i>
+          </div>
+        </div>
+  
+        {/* Menu */}
+        {menuVisible && (
+          <div className={styles.menu}>
+            <Link href="/tasks">Tasks</Link>
+            <Link href="/chats">Chats</Link>
+            <Link href="/settings">Settings</Link>
+            <Link href="/calendar">Calendar</Link>
+            <Link href="/choose-course">Choose the course</Link>
+            <Link href="/video-lessons">Video-Lessons</Link>
+            <Link href="/subjects">Subjects</Link>
+            <Link href="/essays">Essays</Link>
+            <Link href="/profile">Profile</Link>
+          </div>
+        )}
+  
+        {/* Dashboard */}
+        <div className={styles.sectionTitle}>DashBoard</div>
+        <div className={styles.dashboardCards}>
+          <div className={styles.card} onClick={() => window.location.href = "/atividades"}>
+            <i className="fas fa-book">
+            <Image
+                src="/img/Books.png"
+                width={90}
+                height={87}
+            />
+            </i>
+            <div className={styles.cardTitle}>Atividades</div>
+            <i className="fas fa-plus addIcon"></i>
+          </div>
+          <div className={styles.card} onClick={() => window.location.href = "/videoaulas"}>
+            <i className="fas fa-video">  <Image
+                src="/img/video-camera.png"
+                width={90}
+                height={87}
+            /></i>
+            <div className={styles.cardTitle}>VídeoAulas</div>
+            <i className="fas fa-plus addIcon"></i>
+          </div>
+        </div>
+  
+        {/* Calendar */}
+        <div className={styles.sectionTitle}>Calendário</div>
+        <div className={styles.calendarCards}>
+          <div className={styles.calendarCard} onClick={() => window.location.href = "/calendario"}>
+            <div className={styles.date}>10 Mar</div>
+            <div className={styles.calendarTitle}>Calendário</div>
+            <div className={styles.event}>Aula hoje às 16hrs</div>
+            <div className={styles.event}>Postar vídeoAula hoje às 10:10hrs</div>
+          </div>
+          <div className={styles.calendarCard} onClick={() => window.location.href = "/calendario"}>
+            <div className={styles.date}>3 Fev</div>
+            <div className={styles.calendarTitle}>Calendário</div>
+            <div className={styles.event}>Aula hoje às 13hrs</div>
+            <div className={styles.event}>Postar vídeoAula hoje às 17hrs</div>
+          </div>
+        </div>
+      </div>
     );
 };
 
