@@ -3,44 +3,20 @@
     padding: 0;
     background-color: #FDFBEA;
   }
-  
-  /* BARRA AZUL */
-  .header {
-    background-color: #2E265E;
-    color: #BCB3DF;
-    font-weight: bold;
-    padding: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
 
-  .date {
-    font-size: 35px;
-  }
-  
-  .year {
-    font-size: 35px;
-    color: #A3D9A5;
-  }
-  
-  .line {
-    width: 160px;
-    height: 2px;
-    background-color: #FDFBEA;
-    margin: 0 20px;
-  }
-  
   .topIcons {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
-    padding: 10px 20px;
+    width: 100%;
+    max-width: 1668px;
+    gap: 25px;
+    padding: 30px;
+    margin-bottom: 20px;
   }
   
   .topIcons .button {
     color: #2E265E;
-    font-size: 20px;
+    font-size: 60px;
     cursor: pointer;
     text-decoration: none; 
   }
@@ -62,22 +38,42 @@
   /* ANOTAÇÕES */
   .content {
     font-size: 25px;
-    padding: 40px;
+    padding: 10px;
     color: #2E265E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
   
   .notes {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
-    margin-top: 30px;
+    gap: 45px;
+    margin-top: 20px;
+    justify-content: center;
+    width: 100%;
   }
+
+  .notesContainer {
+    max-width: 1400px; 
+    margin-left: 0; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
   
+.notesContainer h2 {
+  align-self: flex-start;
+  margin-bottom: 20px;
+}
+
   .note {
     border: 2px solid #2E265E;
     border-radius: 10px;
-    padding: 30px;
-    width: calc(33.333% - 20px);
+    padding: 25px;
+    gap: 5px;
+    width: calc(50% - 40px);
     display: flex;
     align-items: center;
     cursor: pointer;
