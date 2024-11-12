@@ -33,6 +33,7 @@ const FeedbackCorrecao = ({ feedback }) => {
             {feedback.competencias[4].competencias}
             {feedback.competencias[4].explicacao}
           </li>
+
         </ul>
 
         <h3 className={styles.finalScore}>Nota Final: <span className={styles.scoreValue}>{feedback?.notaFinal ?? "Nota não encontrada"}</span></h3>
