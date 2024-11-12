@@ -27,7 +27,7 @@
   
   .menuIcon i,
   .notificationIcon i {
-    font-size: 24px;
+    font-size: 0px;
     color: #BFA2DB;
   }
   
@@ -35,22 +35,24 @@
     border-radius: 10px;
     padding: 10px;
     cursor: pointer;
+    border: 2px solid #805aa7;
   }
   
   .searchBar input {
-    padding: 15px;
+    padding: 18px;
     border: none;
     border-radius: 20px;
     background-color: #EDE7F6;
     color: #BFA2DB;
-    width: 660px;
+    width: 690px;
 
   }
   
+  /* icone de notificação */
   .notificationIcon {
-    border: 2px solid #bca8cf;
+    border: 2px solid #8f67b4;
     border-radius: 7px;
-    padding: 5px;
+    padding: 8px;
   }
   
   .sectionTitle {
@@ -148,7 +150,7 @@
     display: block;
     color: #4A4E69;
     text-decoration: none;
-    margin: 10px 0;
+    margin: 12px 0;
     font-size: 18px;
   }
 

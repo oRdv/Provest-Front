@@ -7,6 +7,13 @@ function Chat() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.title}>CHATS</h1>
+        {/* <h2 className={styles.seta}>
+        <Image
+            src="/img/seta.png" 
+            width={20} 
+            height={20} 
+          />
+        </h2> */}
       </div>
       
       <div className={styles.menu}>
@@ -58,7 +65,6 @@ function Chat() {
           <h2>Prof Tamires</h2>   
           <p>mensagens...</p>
         </div>
-
       </div>
     </div>
   );
