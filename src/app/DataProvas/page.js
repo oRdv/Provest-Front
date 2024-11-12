@@ -23,20 +23,22 @@ export default function Home() {
         <div className={styles.year}>2024</div>
       </header>
 
+    <div className={styles.container}>
       <div className={styles.topIcons}>
-        <Link href="/authentication/loginAluno" className={styles.button}>
-          <FaCut />
+        <Link href="#" className={styles.button}>
+          <img src="/img/alfinete 1.png" alt="Cut Icon" className={styles.iconImage} />
         </Link>
-        <Link href="/authentication/loginAluno" className={styles.button}>
-          <FaStickyNote />
+        <Link href="/cadernoAluno" className={styles.button}>
+          <img src="/img/agenda.png" alt="Sticky Note Icon" className={styles.iconImage} />
         </Link>
-        <Link href="/authentication/loginAluno" className={styles.button}>
-          <FaHome />
+        <Link href="/home" className={styles.button}>
+          <img src="/img/icon-home.png" alt="Home Icon" className={styles.iconImage} />
         </Link>
-        <Link href="/authentication/loginAluno" className={styles.button}>
-          <FaCommentDots />
+        <Link href="/chatGeral" className={styles.button}>
+          <img src="/img/icon-chat2.png" alt="Comment Icon" className={styles.iconImage} />
         </Link>
       </div>
+    </div>
 
       <div className={styles.content}>
       <Image
