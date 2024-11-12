@@ -17,8 +17,9 @@ function EscreverRedacao() {
   const maxCharsPerLine = 75;
 
   const extrairCompetencias = (texto) => {
-   return texto.split(/[*][*]Nota Total:|[*][*]Competência|[*][*]Nota|[*][*]Explicação:[*][*]/).slice(1, 11);
+    return texto.split(/[*][*]Nota Total:|[*][*]Competência|[*][*]Nota|[*][*]Explicação:[*][*]/).slice(1, 11);
   };
+
 
   const handleChange = (e) => {
     let inputText = e.target.value;
@@ -37,50 +38,61 @@ function EscreverRedacao() {
       setLineCount(maxLines);
     }
   };
-  
+
   useEffect(() => {
     const themeIdFromStorage = localStorage.getItem('selectedThemeId');
     const themeName = localStorage.getItem('selectedThemeName');
-    
+ 
     if (themeIdFromStorage) {
-      setSelectedTheme(themeName);
-      setTemaId(themeIdFromStorage);
+        setSelectedTheme(themeName);
+        setTemaId(themeIdFromStorage);
+    } else {
+        console.error('Tema não encontrado no localStorage');
+        alert('Por favor, selecione um tema.');
     }
   }, []);
+ 
 
   const handleSaveRedacao = async () => {
+    if (!titulo || !text || !temaId) {
+      alert("Preencha todos os campos antes de enviar!");
+      return;
+    }
+  
     const dadosRedacao = {
       titulo: titulo,
       texto: text,
-      tema_id: temaId  
-    };
+      tema_id: Number(temaId),
+      aluno_id: 2,
+    };    
+
+    console.log('Dados que estão sendo enviados:', dadosRedacao);
   
     try {
       const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/redacao', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dadosRedacao),
       });
   
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error(`Erro ao salvar a redação: ${errorData}`);
+        const errorText = await response.text();
+        console.error(`Erro ao salvar a redação: ${errorText}`);
         throw new Error(`Erro ao salvar a redação: ${response.statusText}`);
       }
   
       const data = await response.json();
       console.log('Redação salva com sucesso:', data);
-      setSubmissionMessage('Redação enviada para correção!'); 
-    
-      await handleSubmitRedacao();
+      setSubmissionMessage('Redação enviada para correção!');
+      
+      // Chama a função de correção após salvar a redação
+      handleSubmitRedacao();
     } catch (error) {
       console.error('Erro ao salvar a redação:', error.message);
       alert(`Erro ao salvar a redação: ${error.message}`);
-    }  
+    }
   };
-
+  
   const handleSubmitRedacao = async () => {
     try {
       const payload = { tema: selectedTheme, redacao: text };
@@ -102,8 +114,7 @@ function EscreverRedacao() {
       console.log("Dados recebidos da correção:", data);
   
       const texto = data.response.candidates[0].content.parts[0].text;
-
-  const teste = extrairCompetencias(texto)
+      const teste = extrairCompetencias(texto);
 
       setFeedback({
         tema: selectedTheme,
@@ -131,20 +142,12 @@ function EscreverRedacao() {
           }
         ]
       });
+      setFeedbackVisible(true);  // Exibe o feedback automaticamente
 
-      console.log(feedback);
-      console.log('oii');
-      
-      
     } catch (error) {
       console.error("Erro ao enviar redação para correção:", error);
       alert("Erro ao enviar redação para correção.");
     }
-  };
-  
-
-  const toggleFeedbackVisibility = () => {
-    setFeedbackVisible(!feedbackVisible);
   };
 
   return (
@@ -185,7 +188,7 @@ function EscreverRedacao() {
           {submissionMessage && <p className={styles.submissionMessage}>{submissionMessage}</p>} 
         </div>
     
-        <div className={styles.feedbackToggle} onClick={toggleFeedbackVisibility}>
+        <div className={styles.feedbackToggle} onClick={() => setFeedbackVisible(!feedbackVisible)}>
           {feedbackVisible ? '✖️' : '☰'} 
         </div>
 
