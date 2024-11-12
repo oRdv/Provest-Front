@@ -39,6 +39,12 @@ export default function Home() {
       </div>
 
       <div className={styles.content}>
+      <Image
+                src="/img/perfil.png"
+                width={50}
+                height={50}
+                alt="Desenho de uma mulher pensando"
+            />
         <h2>Anotações</h2>
         <div className={styles.notes}>
           {notes.map((note) => (
