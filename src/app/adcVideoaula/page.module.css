@@ -55,8 +55,9 @@
     padding: 10px;
     font-size: 16px;
     margin-top: 30px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
+    background-color: transparent;
+    border: 1px solid #BCB3DF;
+    border-radius: 15px;
   }
   
   .textarea {
@@ -66,8 +67,7 @@
   
   .saveButton {
     background-color: #BCB3DF;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
+    color: rgb(255, 255, 255);
     font-size: 22px;
     padding: 15px 90px;
     border: none;
@@ -75,4 +75,3 @@
     margin-top: 15px;
     cursor: pointer;
   }
-  
