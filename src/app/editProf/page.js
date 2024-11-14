@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';  // Importando o componente Image do Next.js
+import Image from 'next/image';  
 import styles from './page.module.css';
 
 const ProfilePage = () => {
@@ -78,21 +78,19 @@ const ProfilePage = () => {
           {/* Links Section */}
           <div className={styles.links}>
             <div className={styles.linkItem}>
-              {/* Imagem de Atividade */}
               <div className={styles.imageWrapper}>
                 <Image
-                  src="/img/book.png"  // Imagem para a atividade
+                  src="/img/Vector.png"  // Imagem para a atividade
                   alt="Image representing activities"
                   width={30}
                   height={27}
                 />
               </div>
               <i className="fas fa-book" onClick={() => navigateTo('https://example.com/atividades')} />
-              <a href="#" className={styles.link}>Atividades</a>
+              <a href="/adcAtividades" className={styles.link}>Atividades</a>
               <a
                 className={styles.add}
-                href="#"
-                onClick={() => handleFileInputClick('file-input-atividades')}
+                href="/adcAtividades"
               >
                 + Adicionar nova atividade
               </a>
@@ -108,18 +106,17 @@ const ProfilePage = () => {
               {/* Imagem de Vídeo Aula */}
               <div className={styles.imageWrapper}>
                 <Image
-                  src="/img/video.png"  // Imagem para vídeo aulas
+                  src="/img/aula.png"  
                   alt="Image representing video classes"
                   width={30}
                   height={27}
                 />
               </div>
               <i className="fas fa-video" onClick={() => navigateTo('https://example.com/videoaulas')} />
-              <a href="#" className={styles.link}>Vídeo Aulas</a>
+              <a href="/adcVideoaula" className={styles.link}>Vídeo Aulas</a>
               <a
                 className={styles.add}
-                href="#"
-                onClick={() => handleFileInputClick('file-input-videoaulas')}
+                href="/adcVideoaula"
               >
                 + Adicionar nova vídeo aula
               </a>
@@ -135,7 +132,7 @@ const ProfilePage = () => {
               {/* Imagem de Calendário */}
               <div className={styles.imageWrapper}>
                 <Image
-                  src="/img/Calendar.png" 
+                  src="/img/calendario.png" 
                   alt="Image representing calendar"
                   width={37}
                   height={29}
