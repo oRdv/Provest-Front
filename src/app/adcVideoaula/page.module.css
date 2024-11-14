@@ -34,9 +34,7 @@
     justify-content: center;
     text-align: center;
     border: none;
-    align-self: center;
     cursor: pointer;
-    align-self: flex-start;
     margin-top: 60px;
   }
   
