@@ -16,10 +16,10 @@ function EscreverRedacao() {
   const maxLines = 30;
   const maxCharsPerLine = 75;
 
-  const extrairCompetencias = (texto) => {
-    return texto.split(/[*][*]Nota Total:|[*][*]Competência|[*][*]Nota|[*][*]Explicação:[*][*]/).slice(1, 11);
-  };
-
+const extrairCompetencias = (texto) => {
+  const partes = texto.split(/\*\*\s|\s\*\*/).slice(1);
+  return partes.length ? partes : [];
+};
 
   const handleChange = (e) => {
     let inputText = e.target.value;
@@ -119,29 +119,11 @@ function EscreverRedacao() {
       setFeedback({
         tema: selectedTheme,
         comentario: "Análise da correção",
-        competencias: [
-          {
-            competencias: teste[0],
-            explicacao: teste[1],
-          },
-          {
-            competencias: teste[2],
-            explicacao: teste[3],
-          },
-          {
-            competencias: teste[4],
-            explicacao: teste[5],
-          },
-          {
-            competencias: teste[6],
-            explicacao: teste[7],
-          },
-          {
-            competencias: teste[8],
-            explicacao: teste[9],
-          }
-        ]
-      });
+        competencias: Array.from({ length: 6 }, (_, index) => ({
+            competencias: teste[index * 2] || "Competência não encontrada",
+            explicacao: teste[index * 2 + 1] || "Explicação não encontrada"
+        })),
+    });
       setFeedbackVisible(true);  // Exibe o feedback automaticamente
 
     } catch (error) {
