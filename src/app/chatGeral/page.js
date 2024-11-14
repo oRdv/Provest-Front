@@ -21,12 +21,11 @@ function Chat() {
   }, []);
 
   const handleChatClick = (professorId) => {
-    localStorage.setItem("professorId", professorId);
-    const alunoId = localStorage.getItem("alunoId"); 
-    if (alunoId) {
-      
-      window.location.href = `/chat/${alunoId}/${professorId}`;
-    }
+    const alunoId = "2"; 
+    localStorage.setItem("alunoId", alunoId); 
+    localStorage.setItem("professorId", professorId); 
+    
+    window.location.href = "/chatAluno"; 
   };
 
   return (

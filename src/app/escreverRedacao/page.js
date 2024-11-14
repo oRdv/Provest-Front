@@ -85,7 +85,6 @@ const extrairCompetencias = (texto) => {
       console.log('Redação salva com sucesso:', data);
       setSubmissionMessage('Redação enviada para correção!');
       
-      // Chama a função de correção após salvar a redação
       handleSubmitRedacao();
     } catch (error) {
       console.error('Erro ao salvar a redação:', error.message);
@@ -115,18 +114,20 @@ const extrairCompetencias = (texto) => {
   
       const texto = data.response.candidates[0].content.parts[0].text;
       const teste = extrairCompetencias(texto);
-
+      
+      
       setFeedback({
         tema: selectedTheme,
         comentario: "Análise da correção",
-        competencias: Array.from({ length: 6 }, (_, index) => ({
-            competencias: teste[index * 2] || "Competência não encontrada",
-            explicacao: teste[index * 2 + 1] || "Explicação não encontrada"
+        competencias: Array.from({ length: 17 }, (_, index) => ({
+          competencias: teste[index * 2] || "Competência não encontrada",
+          explicacao: teste[index * 2 + 1] || "Explicação não encontrada"
         })),
-    });
-      setFeedbackVisible(true);  // Exibe o feedback automaticamente
+      });
+      console.table(setFeedback);
+      setFeedbackVisible(true); 
 
-    } catch (error) {
+    } catch (error) { 
       console.error("Erro ao enviar redação para correção:", error);
       alert("Erro ao enviar redação para correção.");
     }

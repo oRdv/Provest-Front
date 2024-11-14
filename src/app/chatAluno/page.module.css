@@ -95,6 +95,10 @@
     bottom: 5px;
     right: 15px;
   }
+
+  .messageContent {
+    word-wrap: break-word;
+  }
   
   .footer {
     background-color: #1A1A4B;
