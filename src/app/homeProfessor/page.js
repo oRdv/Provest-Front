@@ -20,9 +20,9 @@ const Dashboard = () => {
           <div className={styles.menuIcon} onClick={toggleMenu}>
             <i className="fas fa-bars">
             <Image
-                src="/img/barra-de-menu.png"
-                width={35}
-                height={35}
+                src="/img/menu.png"
+                width={30}
+                height={30}
                 alt="Desenho de uma mulher pensando"
             />
             </i>
@@ -32,9 +32,9 @@ const Dashboard = () => {
           </div>
           <div className={styles.notificationIcon}>
             <i className="fas fa-bell"> <Image
-                src="/img/notification.png"
-                width={20}
-                height={20}
+                src="/img/notificacao.png"
+                width={25}
+                height={25}
                 alt="Desenho de uma mulher pensando"
             /></i>
           </div>
@@ -43,15 +43,15 @@ const Dashboard = () => {
         {/* Menu */}
         {menuVisible && (
           <div className={styles.menu}>
-            <Link href="/tasks">Tasks</Link>
-            <Link href="/chats">Chats</Link>
-            <Link href="/settings">Settings</Link>
-            <Link href="/calendar">Calendar</Link>
-            <Link href="/choose-course">Choose the course</Link>
-            <Link href="/video-lessons">Video-Lessons</Link>
-            <Link href="/subjects">Subjects</Link>
-            <Link href="/essays">Essays</Link>
-            <Link href="/profile">Profile</Link>
+            <Link href="/tasks">Tarefas</Link>
+            <Link href="/chatGeral">Chats</Link>
+            <Link href="/configuracoes">Configurações</Link>
+            <Link href="/calendar">Calendário</Link>
+            <Link href="/Cronograma">Escolha seu curso </Link>
+            <Link href="/videoaula">Video-Aulas</Link>
+            <Link href="/materias">Matérias</Link>
+            <Link href="/redacao">Redações</Link>
+            <Link href="/perfilAluno">Perfil</Link>
           </div>
         )}
   
@@ -61,7 +61,7 @@ const Dashboard = () => {
           <div className={styles.card} onClick={() => window.location.href = "/atividades"}>
             <i className="fas fa-book">
             <Image
-                src="/img/Books.png"
+                src="/img/book.png"
                 width={90}
                 height={87}
             />
@@ -71,7 +71,7 @@ const Dashboard = () => {
           </div>
           <div className={styles.card} onClick={() => window.location.href = "/videoaulas"}>
             <i className="fas fa-video">  <Image
-                src="/img/video-camera.png"
+                src="/img/video.png"
                 width={90}
                 height={87}
             /></i>
@@ -94,6 +94,12 @@ const Dashboard = () => {
             <div className={styles.calendarTitle}>Calendário</div>
             <div className={styles.event}>Aula hoje às 13hrs</div>
             <div className={styles.event}>Postar vídeoAula hoje às 17hrs</div>
+          </div>
+          <div className={styles.calendarCard} onClick={() => window.location.href = "/calendario"}>
+            <div className={styles.date}>7 Fev</div>
+            <div className={styles.calendarTitle}>Calendário</div>
+            <div className={styles.event}>Aula hoje às 10hrs</div>
+            <div className={styles.event}>Postar vídeoAula hoje às 7:30hrs</div>
           </div>
         </div>
       </div>

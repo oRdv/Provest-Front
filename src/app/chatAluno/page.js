@@ -64,6 +64,36 @@ const ChatInterface = () => {
   return (
     <div className={styles.body}>
       <div className={styles.header}>
+  <FaArrowLeft className={styles.backIcon} />
+  <div className={styles.title}> Tamires Fernandes</div>
+  <div className={styles.rightContainer}>
+    <span className={styles.subject}>Biologia</span>
+    <Image
+      src="/img/icon-chatAluno.png"
+      alt="Imagem na barra azul"
+      width={40} 
+      height={40}
+      className={styles.headerImage}
+    />
+  </div>
+</div>
+        <div className={styles.chatContainer}>
+          {chat.map((msg, index) => (
+            <div key={index} className={`${styles.message} ${msg.type === 'sent' ? styles.sent : styles.received}`}>
+              {msg.text}
+              <div className={styles.time}>{msg.time}</div>
+            </div>
+          ))}
+        </div>
+        <div className={styles.footer}>
+          <input
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Estou com uma dúvida em"
+            className={styles.input}
+            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+
         <FaArrowLeft className={styles.backIcon} />
         <div className={styles.title}>Tamires Fernandes</div>
         <div className={styles.rightContainer}>
