@@ -34,7 +34,7 @@ const ChatInterface = () => {
       <div className={styles.body}>
       <div className={styles.header}>
   <FaArrowLeft className={styles.backIcon} />
-  <div className={styles.title}>Profª Tamires Fernandes</div>
+  <div className={styles.title}> Tamires Fernandes</div>
   <div className={styles.rightContainer}>
     <span className={styles.subject}>Biologia</span>
     <Image
