@@ -147,7 +147,9 @@ const extrairCompetencias = (texto) => {
               <b>{selectedTheme || "Nenhum tema selecionado"}</b>
             </div>
           </div>
-  
+
+          <div className={styles.body_redacao}>
+
           <input
             type="text"
             className={styles.titulo_redacao}
@@ -164,6 +166,8 @@ const extrairCompetencias = (texto) => {
             value={text}
             onChange={handleChange}
           ></textarea>
+
+          </div>
   
           <p className={styles.lineCounter}>Linhas: {lineCount}/{maxLines}</p>
   
