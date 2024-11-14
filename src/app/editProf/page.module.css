@@ -30,34 +30,39 @@
   .content {
     text-align: center;
     padding: 70px;
-    width: 70%;
+    width: 100%;
   }
   
   .description {
-    font-size: 20px;
+    font-size: 25px;
+    margin-left: 340px;
+    width: 1100px;
     text-align: center;
     color: #000000;
-    height: 100px;         
+    height: 60px;         
   }
   
   .inputGroup {
     margin: 25px 0;
+    
   }
   
   .inputGroup label {
     display: block;
-    font-weight: bold;
-    margin-bottom: 15px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    margin-right: 290px;
   }
   
   .input {
-    width: 20%;
-    padding: 10px;
-    border: 2px solid #dcdcdc;
-    border-radius: 20px;
+    width: 29%;
+    padding: 15px;
+    border: 2px solid #BCB3DF;
+    border-radius: 25px;
     font-size: 16px;
     text-align: center;
     outline: none;
+    background-color: transparent;
   }
   
   /* Links Section */
@@ -65,7 +70,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   
   .linkItem {
@@ -74,6 +79,7 @@
     align-items: center;
     justify-content: center;
     margin: 5px 0;
+    margin-top: 30px;
   }
   
   .icon {
@@ -88,12 +94,14 @@
     text-decoration: none;
     font-weight: bold;
     margin: 0 10px;
+    font-size: 18px;
   }
   
   .add {
-    color: #C6E6A3;
+    color: #8373C2;
     font-weight: normal;
     cursor: pointer;
+    font-size: 18px;
   }
   
   .file-input {
