@@ -1,8 +1,7 @@
-'use client'
+'use client';
 import styles from './page.module.css';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
 const Signup = () => {
   const router = useRouter();
@@ -11,7 +10,8 @@ const Signup = () => {
     email: '',
     senha: '',
     curso_id: '',
-    icone_id: 1
+    icone_id: 1,
+    status: 1,
   });
   const [cursos, setCursos] = useState([]);
   const [erros, setErros] = useState({ msg: '' });
@@ -20,14 +20,10 @@ const Signup = () => {
     const fetchCursos = async () => {
       try {
         const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/cursos');
-        if (!response.ok) {
-          throw new Error('Erro ao buscar cursos');
-        }
+        if (!response.ok) throw new Error('Erro ao buscar cursos');
         const data = await response.json();
-        console.log("Cursos carregados:", data);
         setCursos(data.curso || []);
       } catch (error) {
-        console.error('Erro ao buscar cursos:', error);
         setErros({ msg: 'Erro ao carregar cursos. Tente novamente mais tarde.' });
       }
     };
@@ -41,8 +37,7 @@ const Signup = () => {
   };
 
   const handleCursoChange = (e) => {
-    const selectedCursoId = cursos.find(curso => curso.nome === e.target.value)?.id || '';
-    setFormData({ ...formData, curso_id: selectedCursoId });
+    setFormData({ ...formData, curso_id: e.target.value });
   };
 
   const signupUser = async (e) => {
@@ -51,25 +46,20 @@ const Signup = () => {
       const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/aluno', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          nome: formData.nome,
-          email: formData.email,
-          senha: formData.senha,
-          curso_id: Number(formData.curso_id),
-          icone_id: Number(formData.icone_id)
-        })
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        
+        alert('Cadastro realizado com sucesso!');
+        router.push('/loginAluno'); // Redireciona para a página de login
       } else {
         const errorData = await response.json();
-        console.log(errorData.message || 'Erro ao realizar o cadastro.');
+        setErros({ msg: errorData.message || 'Erro ao realizar o cadastro.' });
       }
     } catch (error) {
-      // console.log('Ocorreu um erro na solicitação. Tente novamente mais tarde.', error );
+      setErros({ msg: 'Ocorreu um erro na solicitação. Tente novamente mais tarde.' });
     }
   };
 
@@ -109,7 +99,7 @@ const Signup = () => {
           <div className={styles['form-group']}>
             <label htmlFor="senha">Senha</label>
             <input
-              type='password'
+              type="password"
               id="senha"
               name="senha"
               value={formData.senha}
@@ -123,13 +113,15 @@ const Signup = () => {
             <select
               id="curso_id"
               name="curso_id"
-              value={cursos.find(curso => curso.id === formData.curso_id)?.nome || ''}
+              value={formData.curso_id}
               onChange={handleCursoChange}
               required
             >
               <option value="">Selecione um curso</option>
-              {cursos.map(curso => (
-                <option key={curso.id} value={curso.nome}>{curso.nome}</option>
+              {cursos.map((curso) => (
+                <option key={curso.id} value={curso.id}>
+                  {curso.nome}
+                </option>
               ))}
             </select>
           </div>
@@ -137,11 +129,9 @@ const Signup = () => {
           {erros.msg && <p className={styles.error}>{erros.msg}</p>}
 
           <div className={styles['button-container']}>
-            <Link href="/loginAluno">
-              <button type="button" className={styles['btn-login']}>
-                Sign Up
-              </button>
-            </Link>
+            <button type="submit" className={styles['btn-login']}>
+              Sign Up
+            </button>
           </div>
         </form>
       </div>

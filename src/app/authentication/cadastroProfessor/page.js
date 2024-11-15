@@ -1,62 +1,75 @@
-"use client"; 
-
+'use client';
 import styles from './page.module.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-const Signup = () => {
+const SignupProfessor = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
     senha: '',
-    icone_id: 1
-
+    curso_id: '',
   });
+  const [cursos, setCursos] = useState([]);
   const [erros, setErros] = useState({ msg: '' });
+
+  useEffect(() => {
+    const fetchCursos = async () => {
+      try {
+        const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/cursos/disciplinas');
+        if (!response.ok) {
+          throw new Error('Erro ao buscar cursos');
+        }
+        const data = await response.json();
+        console.log('Cursos carregados:', data.curso_disciplina);
+        setCursos(data.curso_disciplina || []);
+      } catch (error) {
+        console.error('Erro ao buscar cursos:', error);
+        setErros({ msg: 'Erro ao carregar cursos. Tente novamente mais tarde.' });
+      }
+    };
+
+    fetchCursos();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  
-  const signupUser = async (e) => {
-      e.preventDefault();
 
+  const handleCursoChange = (e) => {
+    setFormData({ ...formData, curso_id: e.target.value });
+  };
+
+  const signupProfessor = async (e) => {
+    e.preventDefault();
     try {
-        console.log({
-            nome: formData.nome,
-            email: formData.email,
-            senha: formData.senha,
-            icone_id: formData.icone_id
-           
-        });
-      const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/prof', {
+      const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/profs', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        
         body: JSON.stringify({
-            nome: formData.nome,
-            email: formData.email,
-            senha: formData.senha,
-            icone_id: formData.icone_id
-           
-        })
+          nome: formData.nome,
+          email: formData.email,
+          senha: formData.senha,
+          disciplinas: [],
+        }),
       });
-
-
+  
       if (response.ok) {
-        router.push('/login');
+        alert('Cadastro de professor realizado com sucesso!');
+        router.push('/loginProfessor');
       } else {
         const errorData = await response.json();
         setErros({ msg: errorData.message || 'Erro ao realizar o cadastro.' });
       }
     } catch (error) {
-      setErros({ msg: 'Ocorreu um erro na solicitação. Tente novamente mais tarde.', error });
+      setErros({ msg: 'Ocorreu um erro na solicitação. Tente novamente mais tarde.' });
     }
   };
+  
 
   return (
     <div className={styles['right-side']}>
@@ -66,7 +79,7 @@ const Signup = () => {
 
       <div className={styles['login-form']}>
         <h1>Sign Up</h1>
-        <form onSubmit={signupUser}>
+        <form onSubmit={signupProfessor}>
           <div className={styles['form-group']}>
             <label htmlFor="nome">Nome completo</label>
             <input
@@ -94,7 +107,7 @@ const Signup = () => {
           <div className={styles['form-group']}>
             <label htmlFor="senha">Senha</label>
             <input
-              type='number'
+              type="password"
               id="senha"
               name="senha"
               value={formData.senha}
@@ -103,11 +116,29 @@ const Signup = () => {
             />
           </div>
 
+          <div className={styles['form-group']}>
+            <label htmlFor="curso_id">Curso</label>
+            <select
+              id="curso_id"
+              name="curso_id"
+              value={formData.curso_id}
+              onChange={handleCursoChange}
+              required
+            >
+              <option value="">Selecione um curso</option>
+              {cursos.map((curso) => (
+                <option key={curso.id} value={curso.id}>
+                  {curso.curso}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {erros.msg && <p className={styles.error}>{erros.msg}</p>}
 
           <div className={styles['button-container']}>
             <button type="submit" className={styles['btn-login']}>
-              SIGN UP
+              Sign Up
             </button>
           </div>
         </form>
@@ -120,4 +151,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupProfessor;
