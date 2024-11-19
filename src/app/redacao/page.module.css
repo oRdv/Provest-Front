@@ -57,18 +57,24 @@
   font-size: 22px;
 }
 
+.text {
+  margin-top: 10px;
+  font-weight: normal;
+}
+
 .infoBox h2, .footer{
   text-align: center;
 }
 
 .subtitle {
   font-size: 1.8em;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .competencias {
   list-style-type: none;
   padding: 0;
+  margin-top: 5%;
 }
 
 .competencias li {
@@ -173,12 +179,12 @@
   cursor: pointer;
   font-weight: 700;
   transition: all 0.2s;
-  padding: 8px 16px; 
+  padding: 14px 25px; 
   border-radius: 100px;
   background: var(--verde-claro);
   border: 1px solid transparent;
   font-size: 18px;  
-  margin-top: 20px;
+  margin-top: 200px;
   width: fit-content;  
   margin-left: auto;
 }

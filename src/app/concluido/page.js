@@ -6,18 +6,18 @@ export default function Success() {
   return (
     <div className={styles.container}>
       <Image
-        src="/path/to/your/image.jpg" 
+        src="/img/image 9.png" 
         width={300} 
         height={300} 
         className={styles.image}
       />
-      <p className={styles.text}>Cadastro Concluído com Sucesso!</p>
+      <p className={styles.text}>CADASTRO CONCLUÍDO COM SUCESSO!</p>
       <div className={styles.buttons}>
         <Link href="/" legacyBehavior>
-          <span className={styles.button}>Home</span>
+          <span className={styles.button}>HOME</span>
         </Link>
         <Link href="/profile" legacyBehavior>
-          <span className={styles.button}>Acessar Meu Perfil</span>
+          <span className={styles.button}>ACESSAR MEU PERFIL</span>
         </Link>
       </div>
     </div>
