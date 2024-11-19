@@ -1,6 +1,5 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #fdfcf5;
+    background-color: #FFFFF1;
 }
 
 .container {
@@ -207,7 +206,7 @@ body {
 .menu-item a {
     color: #2c2c54;
     font-size: 22px;
-    margin-left: -60px;
+    margin-left: left;
 }
 
 .menu-item:hover {

@@ -176,23 +176,23 @@ export default function Home() {
                 <div className="cards">
                     <a href="#" className="card">
                         <div className="icon">
-                            <Image src="/img/Vector.png" width={100} height={100} alt="Atividades" />
+                            <Image src="/img/Vector.png" width={100} height={100} alt="" />
                         </div>
-                        <div className="title1">Atividades</div>
+                        <Link href="./chatGeral">Atividades</Link>
                         <div className="underline"></div>
                     </a>
                     <a href="#" className="card">
                         <div className="icon">
-                            <Image src="/img/agenda.png" width={100} height={100} alt="Redações" />
+                            <Image src="/img/agenda.png" width={100} height={100} alt="" />
                         </div>
-                        <div className="title1">Redações</div>
+                        <Link href="./todasRedacoes">Redação</Link>
                         <div className="underline"></div>
                     </a>
                     <a href="#" className="card">
                         <div className="icon">
-                            <Image src="/img/icon-anotHome.png" width={100} height={100} alt="Anotações" />
+                            <Image src="/img/icon-anotHome.png" width={100} height={100} alt="" />
                         </div>
-                        <div className="title1">Anotações</div>
+                        <Link href="./anotacao">Anotações</Link>
                         <div className="underline"></div>
                     </a>
                 </div>
