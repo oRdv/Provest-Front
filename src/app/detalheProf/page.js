@@ -1,4 +1,6 @@
 import styles from './page.module.css';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function detalheProf() {
   return (
@@ -31,16 +33,18 @@ export default function detalheProf() {
       
         <div className={styles.buttonContainer}>
   <button className={styles.button}>
-    <img src="/img/constate.png" alt="1" className={styles.icon} /> Contatar
+    <img src="/img/constate.png" alt="1" className={styles.icon} /> 
+    <Link href="./chatGeral">Contatar</Link>
   </button>
   <button className={styles.button}>
-    <img src="/img/aula.png" alt="2" className={styles.icon} /> Videoaulas
+    <img src="/img/aula.png" alt="2" className={styles.icon} /> 
+    <Link href="./videoaula">Videoaulas</Link>
   </button>
   <button className={styles.button}>
-    <img src="/img/Vector.png" alt="3" className={styles.icon} /> Atividades
+    <img src="/img/Vector.png" alt="3" className={styles.icon} /> 
+    <Link href="./chatGeral">Atividades</Link>
   </button>
 </div>
-
 
       </div>
     </div>
