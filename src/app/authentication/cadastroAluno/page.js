@@ -53,7 +53,7 @@ const Signup = () => {
 
       if (response.ok) {
         alert('Cadastro realizado com sucesso!');
-        router.push('/loginAluno'); // Redireciona para a página de login
+        router.push('/authentication/loginAluno'); 
       } else {
         const errorData = await response.json();
         setErros({ msg: errorData.message || 'Erro ao realizar o cadastro.' });
