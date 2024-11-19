@@ -4,11 +4,10 @@ import styles from './FeedbackCorrecao.module.css';
 const FeedbackCorrecao = ({ feedback }) => {
   return (
     <div className={styles.feedbackContainer}>
-      <h2 className={styles.subtitle}>Vamos corrigir!</h2>
-      <p className={styles.theme}>Tema escolhido: <span className={styles.themeText}>{feedback?.tema ?? "Tema não encontrado"}</span></p>
+      <p className={styles.theme}><span className={styles.themeText}>{feedback?.tema ?? "Tema não encontrado"}</span></p>
 
       <div className={styles.scoreBox}>
-        <h3 className={styles.competenciasTitle}>Competências</h3>
+        
         <ul>
 
           {feedback?.competencias && feedback.competencias.length > 0 ? (
