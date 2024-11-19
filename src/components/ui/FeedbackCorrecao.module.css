@@ -1,80 +1,38 @@
 .feedbackContainer {
-    padding: 20px;
-    background-color: #f7f7f7;
+    padding: 15px;
+    width: 185%;
+    background-color: #201F4B;
     border-radius: 8px;
-    max-width: 600px;
-    margin: 0 auto;
-    color: #333;
-}
-
-.subtitle {
-    color: #6a1b9a;
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    text-align: center;
 }
 
 .theme {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #555;
+    text-align: center;
+    font-size: 1.5rem;
     margin-bottom: 20px;
 }
-
 .themeText {
     display: inline-block;
-    background-color: #e0e7ff;
-    padding: 4px 8px;
+    padding: 4px 12px;
     border-radius: 4px;
-    font-weight: bold;
-    color: #6a1b9a;
+    font-weight: 100;
+    color: #DEFEA0;
 }
 
 .scoreBox {
     padding: 20px;
-    background-color: #e0f7fa;
+    color: white;
     border-radius: 8px;
-    margin-top: 10px;
-}
-
-.comment {
-    font-size: 1rem;
-    color: #444;
-    margin-bottom: 15px;
-    background-color: #f7f7f7;
-    padding: 10px;
-    border-radius: 4px;
-}
-
-.competenciasTitle {
-    font-size: 1.4rem;
-    color: #00796b;
-    margin-bottom: 10px;
-}
-
-.competenciasList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.competenciasItem {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #e0e7ff;
-    border-radius: 4px;
+    margin-top: 20px;
 }
 
 .finalScore {
     font-size: 1.5rem;
-    color: #388e3c;
+    color: #DEFEA0;
     margin-top: 20px;
-    text-align: right;
+    text-align: center;
 }
 
 .scoreValue {
-    font-weight: bold;
-    color: #2e7d32;
+    font-weight: 100;
+    color: #DEFEA0;
 }
