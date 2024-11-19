@@ -54,6 +54,7 @@ function Recuperar() {
       setError('Erro na solicitação.');
     }
   };
+  
 
   return (
     <div className={styles.container}>

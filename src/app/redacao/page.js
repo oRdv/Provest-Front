@@ -97,13 +97,12 @@ function Redacao() {
 
         <div className={styles.infoBox}>
           <h2 className={styles.subtitle}>O que fazer na sua redação?</h2>
-          <p>
-            Tenha sua redação avaliada segundo os critérios de correção
+          <h3 className={styles.text}>  Tenha sua redação avaliada segundo os critérios de correção
             do Enem (Exame Nacional do Ensino Médio), o maior exame
             vestibular do Brasil. A nota da redação, variando entre 0 (zero)
             e 1000 (mil) pontos, é atribuída com base em 5 competências
             (200 pontos por competência):
-          </p>
+            </h3>
           <ul className={styles.competencias}>
             <li>
               <strong>C1</strong> Domínio da escrita formal da língua

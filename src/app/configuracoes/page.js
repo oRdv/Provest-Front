@@ -72,10 +72,9 @@ function Config() {
         >
           <div className="icon">
           <Image
-                src="/img/notification.png"
+                src="/img/anotacao.png"
                 width={50}
                 height={50}
-                alt="Desenho de uma mulher pensando"
             />
 
           </div>

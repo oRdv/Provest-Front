@@ -21,11 +21,11 @@
   .buttons {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
   }
   
   .button {
-    padding: 10px 20px;
+    padding: 10px 26px;
     font-size: 20px;
     color: black;
     background-color: #BCB3DF;

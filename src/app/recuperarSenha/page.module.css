@@ -3,7 +3,7 @@
     width: 100vw;
     height: 100vh;
   }
-  
+
   .left-side {
     width: 30%;
     background-color: var(--roxo-escuro); 
@@ -136,6 +136,7 @@
     position: relative; 
     cursor: pointer; 
     transition: background-color 0.2s ease;
+    
   }
   
   .custom-checkbox input[type="checkbox"]:checked + .checkmark {
@@ -181,6 +182,4 @@
     width: 545px; 
     margin: 20px auto; 
   }
-  
-  
   
