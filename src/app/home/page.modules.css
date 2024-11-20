@@ -39,7 +39,7 @@ body {
 
 .cards {
     display: flex;
-    gap:40px;
+    gap: 40px;
 }
 
 .card {
@@ -66,7 +66,7 @@ body {
     color: #2c2c54;
     margin-bottom: 10px;
     text-align: left;
-    width: 10%
+    width: 10%;
 }
 
 .card .underline {
@@ -152,10 +152,10 @@ body {
     height: 100vh;
     margin-top: 50px;
     padding: 40px;
-  }
+}
 
-  /* CONFIGURAÇÕES DA BARRA */
-  .side-menu {
+/* CONFIGURAÇÕES DA BARRA */
+.side-menu {
     position: fixed;
     top: 0;
     left: 0;
@@ -217,8 +217,8 @@ body {
     display: flex;
     align-items: center;
     margin-top: -40px;
-    gap: 30px; /* espaçamento entre o perfil e o bem vindo*/
-    margin-bottom: 30px; /* espaçamento entre o celso e as caixas roxas*/
+    gap: 30px; /* espaçamento entre o perfil e o bem vindo */
+    margin-bottom: 30px; /* espaçamento entre o celso e as caixas roxas */
 }
 
 /* ICONE DAS MATERIAS */
@@ -227,7 +227,7 @@ body {
     margin-left: 85px;
 }
 
-/* ICONE DAS REDAÇOES */
+/* ICONE DAS REDAÇÕES */
 .menu-item:nth-child(8) .menu-icon {
     width: 45px;
     margin-left: 75px;
@@ -257,8 +257,7 @@ body {
     margin-top: 20px;
 }
 
-
- /* >>>>>>>>>>>>>> notificações <<<<<<<<<<<<< */
+/* >>>>>>>>>>>>>> notificações <<<<<<<<<<<<< */
 
 /* TIRA AS BOLINHAS DA LISTA */
 .menu-notificacoes {
@@ -271,7 +270,7 @@ body {
     height: 100vh;
     margin-top: 50px;
     padding: 40px;
-  }
+}
 
 /* SININHO */
 .notification-icon {
@@ -370,3 +369,4 @@ body {
     vertical-align: middle;
     cursor: pointer;
 }
+ 

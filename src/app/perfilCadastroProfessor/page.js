@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import styles from './page.module.css';
@@ -7,7 +8,8 @@ import AvatarSelector from '@/components/ui/AvatarSelector';
 const ProfileProfPage = () => {
   const [profile, setProfile] = useState({
     name: '',
-    phone: '',
+    materia: '',
+    horarios: '',
     email: '',
     password: '',
   });
@@ -17,6 +19,19 @@ const ProfileProfPage = () => {
 
   useEffect(() => {
     Modal.setAppElement('#modal-root');
+
+    // Carregar os dados do professor do localStorage
+    const userProfile = JSON.parse(localStorage.getItem('userProfile'));
+    if (userProfile) {
+      setProfile({
+        name: userProfile.name,
+        materia: userProfile.materia,
+        horarios: userProfile.horarios,
+        email: userProfile.email,
+        password: '', // Senha deixada em branco para ser editada
+      });
+      setAvatar(userProfile.avatar || '/default-avatar.png'); // Avatar padrão
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -24,9 +39,38 @@ const ProfileProfPage = () => {
     setProfile({ ...profile, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Perfil salvo:', profile);
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      alert('Usuário não identificado.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`/v1/jengt_provest/prof/senha/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ senha: profile.password }),
+      });
+
+      if (response.ok) {
+        alert('Senha atualizada com sucesso!');
+        setProfile({ ...profile, password: '' });
+      } else {
+        const errorData = await response.json();
+        alert(`Erro ao atualizar senha: ${errorData.message || 'Tente novamente mais tarde.'}`);
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar senha:', error);
+      alert('Erro inesperado. Verifique sua conexão e tente novamente.');
+    }
+
+    // Atualiza o perfil no localStorage
+    const updatedProfile = { ...profile, avatar };
+    localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
   };
 
   const handleAvatarSelect = (selectedAvatar) => {
@@ -44,7 +88,7 @@ const ProfileProfPage = () => {
             <div></div>
           )}
         </div>
-        <h1 className={styles["profile-name"]}>TAMARA SILVA</h1>
+        <h1 className={styles["profile-name"]}>{profile.name || 'Nome do Professor'}</h1>
       </div>
 
       <Modal
@@ -64,40 +108,55 @@ const ProfileProfPage = () => {
             name="name"
             placeholder="Nome"
             value={profile.name}
-            onChange={handleChange}
-          />
-        </div>
-        <div className={styles["form-group"]}>
-          <input
-            type="tel"
-            id="Horários disponíveis"
-            name="Horários disponíveis"
-            placeholder="Horários disponíveis"
-            value={profile.phone}
-            onChange={handleChange}
+            readOnly
           />
         </div>
         <div className={styles["form-group"]}>
           <input
             type="text"
-            id="Matéria que atua"
-            name="Matéria que atua"
-            placeholder="Matéria que atua"
+            id="materia"
+            name="materia"
+            placeholder="Matéria"
+            value={profile.materia}
+            readOnly
+          />
+        </div>
+        <div className={styles["form-group"]}>
+          <input
+            type="text"
+            id="horarios"
+            name="horarios"
+            placeholder="Horários"
+            value={profile.horarios}
+            readOnly
+          />
+        </div>
+        <div className={styles["form-group"]}>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
             value={profile.email}
-            onChange={handleChange}
+            readOnly
           />
         </div>
         <div className={styles["form-group"]}>
           <input
-            type="text"
-            id="Dias disponíveis"
-            name="Dias disponíveis"
-            placeholder="Dias disponíveis"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Mudar senha"
             value={profile.password}
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className={styles["save-button"]}>SALVAR</button>
+
+        <div className={styles["form-group"]}>
+          <button type="submit" className={styles["btn-save"]}>
+            Salvar alterações
+          </button>
+        </div>
       </form>
     </div>
   );

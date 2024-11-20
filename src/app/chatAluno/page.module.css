@@ -133,3 +133,11 @@
     bottom: 17px; 
   }
   
+  .loaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Garante que o contêiner ocupe toda a altura da viewport */
+    background-color: var(--background); /* Opcional: cor de fundo */
+  }
+  

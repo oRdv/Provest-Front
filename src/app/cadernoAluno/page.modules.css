@@ -91,6 +91,17 @@
   cursor: pointer;
 }
 
+.view-button {
+  background-color: #C6E6A3;
+  color: #201F4B;
+  padding: 15px 50px;
+  border: none;
+  border-radius: 5px;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .right-actions {
   display: flex;
   gap: 15px;
@@ -106,3 +117,4 @@
   font-size: 16px;
   cursor: pointer;
 }
+

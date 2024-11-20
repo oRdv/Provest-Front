@@ -169,4 +169,14 @@
     width: 545px; 
     margin: 20px auto; 
   }
+
+  .curso-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--lilas);
+    border-radius: 25px;
+    font-size: 16px;
+    background-color: var(--background);
+    color: #333;
+  }
   

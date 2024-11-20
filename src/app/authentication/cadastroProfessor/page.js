@@ -13,6 +13,7 @@ const SignupProfessor = () => {
   });
   const [cursos, setCursos] = useState([]);
   const [erros, setErros] = useState({ msg: '' });
+  const [showModal, setShowModal] = useState(false); // Controle do modal
 
   useEffect(() => {
     const fetchCursos = async () => {
@@ -22,11 +23,10 @@ const SignupProfessor = () => {
           throw new Error('Erro ao buscar cursos');
         }
         const data = await response.json();
-        console.log('Cursos carregados:', data.curso_disciplina);
         setCursos(data.curso_disciplina || []);
       } catch (error) {
-        console.error('Erro ao buscar cursos:', error);
         setErros({ msg: 'Erro ao carregar cursos. Tente novamente mais tarde.' });
+        setShowModal(true);
       }
     };
 
@@ -57,19 +57,20 @@ const SignupProfessor = () => {
           disciplinas: [],
         }),
       });
-  
+
       if (response.ok) {
         alert('Cadastro de professor realizado com sucesso!');
         router.push('/loginProfessor');
       } else {
         const errorData = await response.json();
         setErros({ msg: errorData.message || 'Erro ao realizar o cadastro.' });
+        setShowModal(true);
       }
     } catch (error) {
       setErros({ msg: 'Ocorreu um erro na solicitação. Tente novamente mais tarde.' });
+      setShowModal(true);
     }
   };
-  
 
   return (
     <div className={styles['right-side']}>
@@ -123,6 +124,7 @@ const SignupProfessor = () => {
               name="curso_id"
               value={formData.curso_id}
               onChange={handleCursoChange}
+              className={styles['curso-select']} // Novo estilo para o input de curso
               required
             >
               <option value="">Selecione um curso</option>
@@ -133,8 +135,6 @@ const SignupProfessor = () => {
               ))}
             </select>
           </div>
-
-          {erros.msg && <p className={styles.error}>{erros.msg}</p>}
 
           <div className={styles['button-container']}>
             <button type="submit" className={styles['btn-login']}>
@@ -147,6 +147,15 @@ const SignupProfessor = () => {
       <div className={styles['create-account']}>
         <a href="./loginProfessor">Já possui uma conta? Faça login</a>
       </div>
+
+      {showModal && (
+        <div className={styles.modal}>
+          <div className={styles['modal-content']}>
+            <p>{erros.msg}</p>
+            <button onClick={() => setShowModal(false)}>Fechar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

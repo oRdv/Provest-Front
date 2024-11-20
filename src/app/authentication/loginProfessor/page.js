@@ -4,8 +4,9 @@ import styles from './page.module.css';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import CryptoJS from 'crypto-js';
 
-const Login = () => {
+const LoginProfessor = () => {
     const router = useRouter();
     const [formData, setFormData] = useState({ email: '', senha: '' });
     const [erros, setErros] = useState({ msg: '' });
@@ -18,6 +19,9 @@ const Login = () => {
     const loginValidation = async (e) => {
         e.preventDefault();
         const { email, senha } = formData;
+
+        // Gera o hash da senha usando MD5
+        const hashedPassword = CryptoJS.MD5(senha).toString();
 
         const getUsers = async () => {
             const url = 'https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/profs';
@@ -34,12 +38,19 @@ const Login = () => {
         const usuarios = await getUsers();
         let userStatus = false;
 
-        if (usuarios) {
+        if (usuarios && usuarios.professores) {
             usuarios.professores.forEach(user => {
-                if (user.email === email && user.senha === senha) {
+                if (user.email === email && user.senha === hashedPassword) {
                     userStatus = true;
                     localStorage.setItem('userId', user.id);
-                    router.push('/home');
+                    localStorage.setItem('userProfile', JSON.stringify({
+                        name: user.name,
+                        email: user.email,
+                        materia: user.materia, // Adaptação para a matéria que o professor leciona
+                        horarios: user.horarios, // Exemplo de campo adicional
+                        avatar: 2 // Id do avatar ou URL padrão
+                    }));
+                    router.push('/home'); // Direciona para a página inicial após o login
                 }
             });
         }
@@ -50,7 +61,6 @@ const Login = () => {
     };
 
     return (
-
         <div className={styles['right-side']}>
             <div className={styles.welcome}>
                 <h1>BEM VINDO PROFESSOR!</h1>
@@ -83,31 +93,18 @@ const Login = () => {
                         />
                     </div>
     
-                    {erros.msg && <p className={styles.error}>{erros.msg}</p>}
-    
                     <div className={styles['button-container']}>
-                        <button type="submit" className={styles['btn-login']}>
-                            LOGIN
-                        </button>
+                        <button type="submit" className={styles['btn-login']}>LOGIN</button>
                     </div>
                 </form>
-            </div>
-    
-            <div className={styles['forgot-password']}>
-                <a href="#">Esqueceu a senha?</a>
-                <label className={styles['custom-checkbox']}>
-                    <input type="checkbox" id="remember-me" />
-                    <span className={styles['checkmark']}></span>
-                    <span className={styles['label-text']}>Lembrar de mim</span>
-                </label>
+                {erros.msg && <div className={styles['error-msg']}>{erros.msg}</div>}
             </div>
     
             <div className={styles['create-account']}>
-                <a href="#">Não possui cadastro?</a>
-                <Link href="./cadastroProfessor">Criar conta</Link>
+                <Link href="./cadastroProfessor">Não possui cadastro? Criar conta</Link>
             </div>
         </div>
     );
 };
 
-export default Login;
+export default LoginProfessor;

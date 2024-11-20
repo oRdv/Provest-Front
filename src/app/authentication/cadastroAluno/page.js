@@ -2,6 +2,8 @@
 import styles from './page.module.css';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 const Signup = () => {
   const router = useRouter();
@@ -14,7 +16,7 @@ const Signup = () => {
     status: 1,
   });
   const [cursos, setCursos] = useState([]);
-  const [erros, setErros] = useState({ msg: '' });
+  const [alert, setAlert] = useState({ open: false, msg: '', severity: '' });
 
   useEffect(() => {
     const fetchCursos = async () => {
@@ -24,7 +26,7 @@ const Signup = () => {
         const data = await response.json();
         setCursos(data.curso || []);
       } catch (error) {
-        setErros({ msg: 'Erro ao carregar cursos. Tente novamente mais tarde.' });
+        showAlert('Erro ao carregar cursos. Tente novamente mais tarde.', 'error');
       }
     };
 
@@ -40,9 +42,26 @@ const Signup = () => {
     setFormData({ ...formData, curso_id: e.target.value });
   };
 
+  const checkEmailExists = async (email) => {
+    try {
+      const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/alunos');
+      if (!response.ok) throw new Error('Erro ao verificar emails existentes');
+      const data = await response.json();
+      return data.alunos.some((aluno) => aluno.email === email);
+    } catch (error) {
+      throw new Error('Erro ao verificar emails. Tente novamente mais tarde.');
+    }
+  };
+
   const signupUser = async (e) => {
     e.preventDefault();
     try {
+      const emailExists = await checkEmailExists(formData.email);
+      if (emailExists) {
+        showAlert('O email já está cadastrado. Use outro email.', 'error');
+        return;
+      }
+
       const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/aluno', {
         method: 'POST',
         headers: {
@@ -52,15 +71,25 @@ const Signup = () => {
       });
 
       if (response.ok) {
-        alert('Cadastro realizado com sucesso!');
-        router.push('/authentication/loginAluno'); 
+        showAlert('Cadastro realizado com sucesso!', 'success');
+        setTimeout(() => {
+          router.push('/authentication/loginAluno');
+        }, 2000);
       } else {
         const errorData = await response.json();
-        setErros({ msg: errorData.message || 'Erro ao realizar o cadastro.' });
+        showAlert(errorData.message || 'Erro ao realizar o cadastro.', 'error');
       }
     } catch (error) {
-      setErros({ msg: 'Ocorreu um erro na solicitação. Tente novamente mais tarde.' });
+      showAlert('Ocorreu um erro na solicitação. Tente novamente mais tarde.', 'error');
     }
+  };
+
+  const showAlert = (msg, severity) => {
+    setAlert({ open: true, msg, severity });
+  };
+
+  const handleClose = () => {
+    setAlert({ ...alert, open: false });
   };
 
   return (
@@ -68,6 +97,17 @@ const Signup = () => {
       <div className={styles.welcome}>
         <h1>CADASTRO DE ALUNO</h1>
       </div>
+
+      <Snackbar
+        open={alert.open}
+        onClose={handleClose}
+        autoHideDuration={4000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert onClose={handleClose} severity={alert.severity} sx={{ width: '100%' }}>
+          {alert.msg}
+        </Alert>
+      </Snackbar>
 
       <div className={styles['login-form']}>
         <h1>Sign Up</h1>
@@ -125,8 +165,6 @@ const Signup = () => {
               ))}
             </select>
           </div>
-
-          {erros.msg && <p className={styles.error}>{erros.msg}</p>}
 
           <div className={styles['button-container']}>
             <button type="submit" className={styles['btn-login']}>

@@ -41,6 +41,8 @@ function Redacao() {
     setSelectedOption(selectedThemeName);
     localStorage.setItem('selectedThemeId', selectedThemeId);
     localStorage.setItem('selectedThemeName', selectedThemeName);
+    
+    setDropdownOpen(false);
   };
 
   const handleOptionChange = (e) => {

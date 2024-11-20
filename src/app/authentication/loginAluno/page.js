@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
 import styles from './page.module.css';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import CryptoJS from 'crypto-js';
 
 const Login = () => {
     const router = useRouter();
@@ -18,7 +19,10 @@ const Login = () => {
     const loginValidation = async (e) => {
         e.preventDefault();
         const { email, senha } = formData;
-
+    
+        // Gera o hash da senha usando MD5 (substitua pelo algoritmo correto, se diferente)
+        const hashedPassword = CryptoJS.MD5(senha).toString();
+    
         const getUsers = async () => {
             const url = 'https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/alunos';
             try {
@@ -30,25 +34,35 @@ const Login = () => {
                 return [];
             }
         };
-
+    
         const usuarios = await getUsers();
         let userStatus = false;
-
+    
         if (usuarios && usuarios.alunos) {
             usuarios.alunos.forEach(user => {
-                if (user.email === email && user.senha === senha) {
+                if (user.email === email && user.senha === hashedPassword) {
                     userStatus = true;
+             
+
                     localStorage.setItem('userId', user.id);
-                
-                    router.push('/home');
+                    localStorage.setItem('userProfile', JSON.stringify({
+                        name: user.name,
+                        email: user.email,
+                        curso: user.curso, 
+                        avatar: 2
+                    }));
+                    
+    
+                    router.push('/concluido');
                 }
             });
         }
-
+    
         if (!userStatus) {
             setErros({ msg: 'Credenciais inválidas. Tente novamente.' });
         }
     };
+    
 
     return (
         <div className={styles['right-side']}>
@@ -83,31 +97,17 @@ const Login = () => {
                         />
                     </div>
     
-                    {erros.msg && <p className={styles.error}>{erros.msg}</p>}
-    
                     <div className={styles['button-container']}>
-                        <button type="submit" className={styles['btn-login']}>
-                            LOGIN
-                        </button>
+                        <button type="submit" className={styles['btn-login']}>Login</button>
                     </div>
                 </form>
-            </div>
-    
-            <div className={styles['forgot-password']}>
-                <a href="#">Esqueceu a senha?</a>
-                <label className={styles['custom-checkbox']}>
-                    <input type="checkbox" id="remember-me" />
-                    <span className={styles['checkmark']}></span>
-                    <span className={styles['label-text']}>Lembrar de mim</span>
-                </label>
+                {erros.msg && <div className={styles['error-msg']}>{erros.msg}</div>}
             </div>
     
             <div className={styles['create-account']}>
-                <p>Não possui cadastro?</p>
-                <Link href="./cadastroAluno">Criar conta</Link>
+                <Link href="./signupAluno">Não tem uma conta? Cadastre-se</Link>
             </div>
         </div>
     );
 };
-
 export default Login;

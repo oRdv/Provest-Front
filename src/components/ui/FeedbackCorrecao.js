@@ -21,8 +21,6 @@ const FeedbackCorrecao = ({ feedback }) => {
             <li className={styles.competenciaItem}>Nenhuma competência encontrada.</li>
           )}
         </ul>
-
-        <h3 className={styles.finalScore}>Nota Final: <span className={styles.scoreValue}>{feedback?.notaFinal ?? "Nota não encontrada"}</span></h3>
       </div>
     </div>
   );

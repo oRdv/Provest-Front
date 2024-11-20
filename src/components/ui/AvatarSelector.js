@@ -1,28 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from './AvatarSelector.module.css';
 
-const AvatarSelector = ({ onSelect }) => {
-  const [avatars, setAvatars] = useState([]);
-
-  useEffect(() => {
-    const fetchAvatars = async () => {
-      try {
-        const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/icones');
-        const data = await response.json();
-
-        if (response.ok && Array.isArray(data.icones)) {
-          setAvatars(data.icones);
-        } else {
-          console.error('Erro ao buscar os ícones.');
-        }
-      } catch (error) {
-        console.error('Erro ao buscar os ícones:', error);
-      }
-    };
-
-    fetchAvatars();
-  }, []);
-
+const AvatarSelector = ({ onSelect, icons }) => {
   return (
     <div className={styles.avatarModal}>
       <div className={styles.modalHeader}>
@@ -30,7 +9,7 @@ const AvatarSelector = ({ onSelect }) => {
         <button className={styles.modalClose} onClick={() => onSelect(null)}>X</button>
       </div>
       <div className={styles.avatarGrid}>
-        {avatars.map((avatar, index) => (
+        {icons.map((avatar, index) => (
           <div
             key={index}
             className={styles.avatarItem}
@@ -45,9 +24,9 @@ const AvatarSelector = ({ onSelect }) => {
 };
 
 const ProfileIcon = ({ avatar }) => (
-<div className={styles.profileAvatar}>
-  <img src={avatar} alt="Avatar de perfil" />
-</div>
+  <div className={styles.profileAvatar}>
+    <img src={avatar} alt="Avatar de perfil" />
+  </div>
 );
 
 export default AvatarSelector;

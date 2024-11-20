@@ -8,6 +8,28 @@ import Image from "next/image";
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const pages = [
+    { name: "Tarefas", link: "#" },
+    { name: "Chats", link: "./chatGeral" },
+    { name: "Configurações", link: "./configuracoes" },
+    { name: "Calendário", link: "#" },
+    { name: "Escolha o curso", link: "#" },
+    { name: "Vídeo-Aulas", link: "./videoaula" },
+    { name: "Matérias", link: "./materias" },
+    { name: "Redações", link: "./todasRedacoes" },
+    { name: "Perfil", link: "./perfilAluno" },
+  ];
+
+  const filteredPages = pages.filter((page) =>
+    page.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const today = new Date();
+  const day = today.getDate();
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const month = monthNames[today.getMonth()];
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -32,7 +54,12 @@ export default function Home() {
         />
         <div className="search-bar">
           <i className="fas fa-search"></i>
-          <input type="text" placeholder="Pesquisar..." />
+          <input
+            type="text"
+            placeholder="Pesquisar páginas..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
         <Image
           src="/img/icone-sino.png"
@@ -114,114 +141,15 @@ export default function Home() {
           </div>
 
           <ul className="menu-list">
-            <li className="menu-item">
-              <Link href="#">
-                <div>
-                  <img
-                    src="/img/icon-tarefas.png"
-                    alt="Tarefas"
-                    className="menu-icon"
-                  />
-                  <span>Tarefas</span>
-                </div>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link href="./chatGeral">
-                <div>
-                  <img
-                    src="/img/icon-chats.png"
-                    alt="Chats"
-                    className="menu-icon"
-                  />
-                  <span>Chats</span>
-                </div>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link href="./configuracoes">
-                <div>
-                  <img
-                    src="/img/icon-config.png"
-                    alt="Configurações"
-                    className="menu-icon"
-                  />
-                  <span>Configurações</span>
-                </div>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link href="#">
-                <div>
-                  <img
-                    src="/img/ico-calendario.png"
-                    alt="Calendário"
-                    className="menu-icon"
-                  />
-                  <span>Calendário</span>
-                </div>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link href="#">
-                <div>
-                  <img
-                    src="/img/icon-lupa.png"
-                    alt="Escolha o curso"
-                    className="menu-icon"
-                  />
-                  <span>Escolha o curso</span>
-                </div>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link href="./videoaula">
-                <div>
-                  <img
-                    src="/img/icon-video.png"
-                    alt="Vídeo-Aulas"
-                    className="menu-icon"
-                  />
-                  <span>Vídeo-Aulas</span>
-                </div>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link href="./materias">
-                <div>
-                  <img
-                    src="/img/icon-materias.png"
-                    alt="Matérias"
-                    className="menu-icon"
-                  />
-                  <span>Matérias</span>
-                </div>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link href="./todasRedacoes">
-                <div>
-                  <img
-                    src="/img/icon-redações.png"
-                    alt="Redações"
-                    className="menu-icon"
-                  />
-                  <span>Redações</span>
-                </div>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link href="./perfilAluno">
-                <div>
-                  <img
-                    src="/img/icon-perfil2.png"
-                    alt="Perfil"
-                    className="menu-icon"
-                  />
-                  <span>Perfil</span>
-                </div>
-              </Link>
-            </li>
+            {filteredPages.map((page, index) => (
+              <li key={index} className="menu-item">
+                <Link href={page.link}>
+                  <div>
+                    <span>{page.name}</span>
+                  </div>
+                </Link>
+              </li>
+            ))}
           </ul>
           <div className="button-container">
             <button className="back-button">
@@ -282,10 +210,10 @@ export default function Home() {
           <div className="calendar-title">Calendário</div>
           <div className="calendar-item">
             <a href="#" className="date">
-              <div className="day">10</div>
-              <div className="month">Mar</div>
+              <div className="day">{day}</div>
+              <div className="month">{month}</div>
             </a>
-            <div className="event">História e Química</div>
+            <div className="event">Hoje: Evento automático</div>
           </div>
           <div className="calendar-item">
             <a href="#" className="date">

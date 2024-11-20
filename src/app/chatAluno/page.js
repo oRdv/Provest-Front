@@ -4,6 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, push, onValue } from 'firebase/database';
 import Image from 'next/image';
 import { FaArrowLeft, FaPaperPlane } from 'react-icons/fa';
+import { RotatingLines } from 'react-loader-spinner'; // Biblioteca para spinner
 import styles from './page.module.css';
 
 const firebaseConfig = {
@@ -23,16 +24,15 @@ const ChatGeral = () => {
   const [message, setMessage] = useState('');
   const [chat, setChat] = useState([]);
   const [professorName, setProfessorName] = useState('');
+  const [loading, setLoading] = useState(true); // Estado de carregamento
 
   useEffect(() => {
-    
     if (typeof window !== "undefined") {
       const alunoId = localStorage.getItem("alunoId");
       const professorId = localStorage.getItem("professorId");
 
       if (alunoId && professorId) {
         loadMessages(alunoId, professorId);
-        
         fetchProfessorName(professorId);
       } else {
         console.error("IDs de aluno ou professor não encontrados no localStorage.");
@@ -52,32 +52,33 @@ const ChatGeral = () => {
       } else {
         console.warn("Nenhuma mensagem encontrada para este chat.");
       }
+      setLoading(false); // Desativa o loading após as mensagens serem carregadas
     }, (error) => {
       console.error("Erro ao carregar mensagens:", error);
+      setLoading(false); // Desativa o loading em caso de erro
     });
   };
 
   const fetchProfessorName = async (professorId) => {
     try {
-    
       console.log("professorId no localStorage:", professorId);
   
       const response = await fetch(`https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/prof/${professorId}`);
       const data = await response.json();
       console.log("Dados recebidos da API:", data);  
   
-     
       if (data && data.usuario && data.usuario.length > 0) {
         setProfessorName(data.usuario[0].nome); 
       } else {
         setProfessorName("Professor não encontrado");
       }
-      
     } catch (error) {
       console.error("Erro ao buscar o nome do professor:", error);
+      setProfessorName("Erro ao carregar o nome do professor");
+    } finally {
+      setLoading(false); // Desativa o loading quando o nome do professor for carregado
     }
-  }
-  
+  };
 
   const handleSendMessage = () => {
     if (message.trim()) {
@@ -103,11 +104,25 @@ const ChatGeral = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className={styles.loaderContainer}>
+        <RotatingLines
+          strokeColor="#6A0DAD"
+          strokeWidth="5"
+          animationDuration="0.75"
+          width="96"
+          visible={true}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.body}>
       <div className={styles.header}>
         <FaArrowLeft className={styles.backIcon} onClick={() => window.history.back()} />
-        <div className={styles.title}>Chat com {professorName || 'Professor'}</div>
+        <div className={styles.title}>Chat com Professor {professorName || 'Professor'}</div>
         <div className={styles.rightContainer}>
           <span className={styles.subject}>Biologia</span>
           <Image
