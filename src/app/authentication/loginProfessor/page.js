@@ -5,15 +5,25 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import CryptoJS from 'crypto-js';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Ícones de olho
 
 const LoginProfessor = () => {
     const router = useRouter();
     const [formData, setFormData] = useState({ email: '', senha: '' });
     const [erros, setErros] = useState({ msg: '' });
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+    };
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword(!showConfirmPassword);
     };
 
     const loginValidation = async (e) => {
@@ -65,7 +75,7 @@ const LoginProfessor = () => {
             <div className={styles.welcome}>
                 <h1>BEM VINDO PROFESSOR!</h1>
             </div>
-    
+
             <div className={styles['login-form']}>
                 <h1>Login</h1>
                 <form onSubmit={loginValidation}>
@@ -80,26 +90,35 @@ const LoginProfessor = () => {
                             required
                         />
                     </div>
-    
+
                     <div className={styles['form-group']}>
                         <label htmlFor="senha">Senha</label>
-                        <input
-                            type="password"
-                            id="senha"
-                            name="senha"
-                            value={formData.senha}
-                            onChange={handleInputChange}
-                            required
-                        />
+                        <div className={styles['input-container']}>
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                id="senha"
+                                name="senha"
+                                value={formData.senha}
+                                onChange={handleInputChange}
+                                required
+                                placeholder="Digite sua senha"
+                            />
+                            <span
+                                className={styles['password-icon']}
+                                onClick={togglePasswordVisibility}
+                            >
+                                {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                            </span>
+                        </div>
                     </div>
-    
+
                     <div className={styles['button-container']}>
                         <button type="submit" className={styles['btn-login']}>LOGIN</button>
                     </div>
                 </form>
                 {erros.msg && <div className={styles['error-msg']}>{erros.msg}</div>}
             </div>
-    
+
             <div className={styles['create-account']}>
                 <Link href="./cadastroProfessor">Não possui cadastro? Criar conta</Link>
             </div>

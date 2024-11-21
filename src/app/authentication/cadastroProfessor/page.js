@@ -2,6 +2,7 @@
 import styles from './page.module.css';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Ícones de olho
 
 const SignupProfessor = () => {
   const router = useRouter();
@@ -9,11 +10,13 @@ const SignupProfessor = () => {
     nome: '',
     email: '',
     senha: '',
-    curso_id: '',
+    curso_id: '',  // Curso selecionado
+    icone_id: 3,  // Ícone fixo conforme solicitado
   });
   const [cursos, setCursos] = useState([]);
   const [erros, setErros] = useState({ msg: '' });
-  const [showModal, setShowModal] = useState(false); // Controle do modal
+  const [showModal, setShowModal] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     const fetchCursos = async () => {
@@ -32,6 +35,10 @@ const SignupProfessor = () => {
 
     fetchCursos();
   }, []);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -54,7 +61,8 @@ const SignupProfessor = () => {
           nome: formData.nome,
           email: formData.email,
           senha: formData.senha,
-          disciplinas: [],
+          curso_id: formData.curso_id,  // Envia o curso selecionado
+          icone_id: formData.icone_id   // Ícone fixo
         }),
       });
 
@@ -107,14 +115,23 @@ const SignupProfessor = () => {
 
           <div className={styles['form-group']}>
             <label htmlFor="senha">Senha</label>
-            <input
-              type="password"
-              id="senha"
-              name="senha"
-              value={formData.senha}
-              onChange={handleInputChange}
-              required
-            />
+            <div className={styles['input-container']}>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="senha"
+                name="senha"
+                value={formData.senha}
+                onChange={handleInputChange}
+                required
+                placeholder="Digite sua senha"
+              />
+              <span
+                className={styles['password-icon']}
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+              </span>
+            </div>
           </div>
 
           <div className={styles['form-group']}>
@@ -124,17 +141,17 @@ const SignupProfessor = () => {
               name="curso_id"
               value={formData.curso_id}
               onChange={handleCursoChange}
-              className={styles['curso-select']} // Novo estilo para o input de curso
               required
             >
               <option value="">Selecione um curso</option>
               {cursos.map((curso) => (
                 <option key={curso.id} value={curso.id}>
-                  {curso.curso}
+                  {curso.nome}
                 </option>
               ))}
             </select>
           </div>
+
 
           <div className={styles['button-container']}>
             <button type="submit" className={styles['btn-login']}>

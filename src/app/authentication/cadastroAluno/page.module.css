@@ -170,3 +170,34 @@
   width: 545px; 
   margin: 20px auto; 
 }
+
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 960px; 
+}
+
+.input-container input {
+  flex: 1;
+  padding-right: 45px; 
+}
+
+.password-icon {
+  position: absolute;
+  right: 15px; 
+  cursor: pointer;
+  color: var(--lilas);
+  font-size: 20px; 
+  transition: color 0.3s;
+}
+
+.password-icon:hover {
+  color: var(--roxo-escuro); 
+}
+
+
+.password-icon:focus {
+  outline: none;
+}

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Ícones de olho
 
 const Signup = () => {
   const router = useRouter();
@@ -17,6 +18,16 @@ const Signup = () => {
   });
   const [cursos, setCursos] = useState([]);
   const [alert, setAlert] = useState({ open: false, msg: '', severity: '' });
+  const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+};
+
+const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+};
 
   useEffect(() => {
     const fetchCursos = async () => {
@@ -137,15 +148,24 @@ const Signup = () => {
           </div>
 
           <div className={styles['form-group']}>
-            <label htmlFor="senha">Senha</label>
-            <input
-              type="password"
-              id="senha"
-              name="senha"
-              value={formData.senha}
-              onChange={handleInputChange}
-              required
-            />
+          <label htmlFor="senha">Senha</label>
+              <div className={styles['input-container']}>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="senha"
+                  name="senha"
+                  value={formData.senha}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Digite sua senha"
+                />
+                <span
+                  className={styles['password-icon']}
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                </span>
+              </div>
           </div>
 
           <div className={styles['form-group']}>
