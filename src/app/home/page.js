@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./page.modules.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,6 +9,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [notifications, setNotifications] = useState([]);
 
   const pages = [
     { name: "Tarefas", link: "#" },
@@ -25,6 +26,25 @@ export default function Home() {
   const filteredPages = pages.filter((page) =>
     page.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  useEffect(() => {
+    // Buscar notificações do endpoint
+    const fetchNotifications = async () => {
+      try {
+        const response = await fetch(
+          "https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/notificacoes"
+        );
+        const data = await response.json();
+
+        // Atualizar estado com todas as notificações
+        setNotifications(data.notificacoes); // Corrigido: acessando 'notificacoes' do JSON
+      } catch (error) {
+        console.error("Erro ao buscar notificações:", error);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
 
   const today = new Date();
   const day = today.getDate();
@@ -60,6 +80,15 @@ export default function Home() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+          {searchQuery && (
+            <div className="dropdown">
+              {filteredPages.map((page, index) => (
+                <Link key={index} href={page.link}>
+                  <div className="dropdown-item">{page.name}</div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
         <Image
           src="/img/icone-sino.png"
@@ -95,30 +124,25 @@ export default function Home() {
           <h1>Notificações</h1>
         </div>
         <ul className="menu-notificacoes">
-          <li className="notif-item">
-            <Link href="#">
-              <div>
-                <span className="notif-title">Notificação 1: </span>
-                <span className="notif-details">Detalhes da notificação</span>
-              </div>
-            </Link>
-          </li>
-          <li className="notif-item">
-            <Link href="#">
-              <div>
-                <span className="notif-title">Notificação 2: </span>
-                <span className="notif-details">Detalhes da notificação</span>
-              </div>
-            </Link>
-          </li>
-          <li className="notif-item">
-            <Link href="#">
-              <div>
-                <span className="notif-title">Notificação 3: </span>
-                <span className="notif-details">Detalhes da notificação</span>
-              </div>
-            </Link>
-          </li>
+          {notifications.length > 0 ? (
+            notifications.map((notif, index) => (
+              <li key={index} className="notif-item">
+                <Link href="#">
+                  <div>
+                    <span className="notif-title">{notif.titulo}: </span>
+                    <span className="notif-details">{notif.descricao}</span>
+                    <span className="notif-date">
+                      {new Date(notif.data_prova).toLocaleDateString("pt-BR")}
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            ))
+          ) : (
+            <li className="notif-item">
+              <span className="notif-details">Sem notificações</span>
+            </li>
+          )}
         </ul>
       </div>
 
@@ -152,9 +176,11 @@ export default function Home() {
             ))}
           </ul>
           <div className="button-container">
-            <button className="back-button">
-              <span className="arrow">←</span> Logout
-            </button>
+            <Link href="/" className="back-button">
+              <button className="back-button">
+                <span className="arrow">←</span> Logout
+              </button>
+            </Link>
             <Image
               src="/img/Ppreto.png"
               width={60}

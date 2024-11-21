@@ -3,12 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import styles from './page.module.css';
-import AvatarSelector from '@/components/ui/AvatarSelector';
+import AvatarSelector, { ProfileIcon } from '@/components/ui/AvatarSelector';
 
 const ProfileProfPage = () => {
   const [profile, setProfile] = useState({
     name: '',
-    materia: '',
+    curso: '', // Curso selecionado
+    disciplina: '', // Disciplina selecionada
     horarios: '',
     email: '',
     password: '',
@@ -16,22 +17,67 @@ const ProfileProfPage = () => {
 
   const [avatar, setAvatar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [icons, setIcons] = useState([]);
+  const [disciplinas, setDisciplinas] = useState([]); // Armazena as disciplinas
+  const [selectedCurso, setSelectedCurso] = useState(''); // Armazena o curso selecionado
 
   useEffect(() => {
     Modal.setAppElement('#modal-root');
 
+    // Carregar os ícones da API
+    const fetchIcons = async () => {
+      try {
+        const response = await fetch(
+          'https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/icones'
+        );
+        const data = await response.json();
+
+        if (response.ok && Array.isArray(data.icones)) {
+          setIcons(data.icones);
+          const defaultAvatar = data.icones.find((icon) => icon.id === 3);
+          setAvatar(defaultAvatar?.url || '/default-avatar3.png');
+        } else {
+          console.error('Erro ao buscar os ícones.');
+        }
+      } catch (error) {
+        console.error('Erro ao buscar os ícones:', error);
+      }
+    };
+
+    fetchIcons();
+
     // Carregar os dados do professor do localStorage
-    const userProfile = JSON.parse(localStorage.getItem('userProfile'));
+    const userProfile = localStorage.getItem('userProfile');
     if (userProfile) {
+      const parsedProfile = JSON.parse(userProfile);
       setProfile({
-        name: userProfile.name,
-        materia: userProfile.materia,
-        horarios: userProfile.horarios,
-        email: userProfile.email,
-        password: '', // Senha deixada em branco para ser editada
+        name: parsedProfile.name || '',
+        curso: parsedProfile.curso || '', // Carrega o curso selecionado
+        disciplina: parsedProfile.disciplina || '', // Carrega a disciplina selecionada
+        horarios: parsedProfile.horarios || '',
+        email: parsedProfile.email || '',
+        password: '', // Senha é sempre vazia para edição
       });
-      setAvatar(userProfile.avatar || '/default-avatar.png'); // Avatar padrão
+      setAvatar(parsedProfile.avatar || '/default-avatar3.png');
+      setSelectedCurso(parsedProfile.curso || ''); // Ajusta o estado do curso
     }
+
+    // Buscar disciplinas associadas ao curso
+    const fetchDisciplinas = async () => {
+      try {
+        const response = await fetch(
+          'https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/cursos/disciplinas'
+        );
+        const data = await response.json();
+        setDisciplinas(data.curso_disciplina || []);
+        console.log("Disciplinas carregadas:", data.curso_disciplina); // Log para verificar os dados
+      } catch (error) {
+        console.error('Erro ao buscar disciplinas:', error);
+      }
+    };
+
+    fetchDisciplinas();
+
   }, []);
 
   const handleChange = (e) => {
@@ -39,8 +85,28 @@ const ProfileProfPage = () => {
     setProfile({ ...profile, [name]: value });
   };
 
+  const handleCursoChange = (e) => {
+    const selectedCurso = e.target.value;
+    setSelectedCurso(selectedCurso);
+
+    // Encontre as disciplinas do curso selecionado
+    const curso = disciplinas.find(curso => curso.curso === selectedCurso);
+    if (curso) {
+      setProfile({
+        ...profile,
+        disciplina: curso.disciplinas[0] || '', // Defina a primeira disciplina como padrão
+      });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!profile.password) {
+      alert('Por favor, insira uma nova senha.');
+      return;
+    }
+
     const userId = localStorage.getItem('userId');
     if (!userId) {
       alert('Usuário não identificado.');
@@ -68,7 +134,6 @@ const ProfileProfPage = () => {
       alert('Erro inesperado. Verifique sua conexão e tente novamente.');
     }
 
-    // Atualiza o perfil no localStorage
     const updatedProfile = { ...profile, avatar };
     localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
   };
@@ -79,16 +144,12 @@ const ProfileProfPage = () => {
   };
 
   return (
-    <div className={styles["profile-page"]}>
-      <div className={styles["header"]}>
-        <div className={styles["avatar-preview"]} onClick={() => setIsModalOpen(true)}>
-          {avatar ? (
-            <img src={avatar} alt="Avatar" />
-          ) : (
-            <div></div>
-          )}
+    <div className={styles['profile-page']}>
+      <div className={styles['header']}>
+        <div className={styles['avatar-preview']} onClick={() => setIsModalOpen(true)}>
+          <ProfileIcon avatar={avatar} />
         </div>
-        <h1 className={styles["profile-name"]}>{profile.name || 'Nome do Professor'}</h1>
+        <h1 className={styles['profile-name']}>{profile.name || 'Nome do Professor'}</h1>
       </div>
 
       <Modal
@@ -97,31 +158,54 @@ const ProfileProfPage = () => {
         className={styles.modal}
         contentLabel="Select Avatar"
       >
-        <AvatarSelector onSelect={handleAvatarSelect} />
+        <AvatarSelector onSelect={handleAvatarSelect} icons={icons} />
       </Modal>
 
-      <form className={styles["profile-form"]} onSubmit={handleSubmit}>
-        <div className={styles["form-group"]}>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Nome"
-            value={profile.name}
-            readOnly
-          />
+      <form className={styles['profile-form']} onSubmit={handleSubmit}>
+        <div className={styles['form-group']}>
+          <input type="text" id="name" name="name" placeholder="Nome" value={profile.name} readOnly />
         </div>
-        <div className={styles["form-group"]}>
-          <input
-            type="text"
-            id="materia"
-            name="materia"
-            placeholder="Matéria"
-            value={profile.materia}
-            readOnly
-          />
+
+        <div className={styles['form-group']}>
+          <select
+            id="curso"
+            name="curso"
+            value={profile.curso}
+            onChange={handleCursoChange}
+            disabled
+            className={styles['curso-select']}
+          >
+            <option value="">Curso</option>
+            {disciplinas.map((curso) => (
+              <option key={curso.id} value={curso.curso}>
+                {curso.curso}
+              </option>
+            ))}
+          </select>
         </div>
-        <div className={styles["form-group"]}>
+
+        <div className={styles['form-group']}>
+          <select
+            id="disciplina"
+            name="disciplina"
+            value={profile.disciplina} // Valor da disciplina já escolhida
+            onChange={handleChange}
+            className={styles['disciplina-select']}
+          >
+            <option value="">Selecione uma disciplina</option>
+            {selectedCurso &&
+              disciplinas
+                .find((curso) => curso.curso === selectedCurso)
+                ?.disciplinas.map((disciplina, index) => (
+                  <option key={index} value={disciplina}>
+                    {disciplina}
+                  </option>
+                ))}
+          </select>
+        </div>
+
+
+        <div className={styles['form-group']}>
           <input
             type="text"
             id="horarios"
@@ -131,7 +215,8 @@ const ProfileProfPage = () => {
             readOnly
           />
         </div>
-        <div className={styles["form-group"]}>
+
+        <div className={styles['form-group']}>
           <input
             type="email"
             id="email"
@@ -141,7 +226,8 @@ const ProfileProfPage = () => {
             readOnly
           />
         </div>
-        <div className={styles["form-group"]}>
+
+        <div className={styles['form-group']}>
           <input
             type="password"
             id="password"
@@ -152,11 +238,9 @@ const ProfileProfPage = () => {
           />
         </div>
 
-        <div className={styles["form-group"]}>
-          <button type="submit" className={styles["btn-save"]}>
-            Salvar alterações
-          </button>
-        </div>
+        <button type="submit" className={styles['save-button']}>
+          SALVAR
+        </button>
       </form>
     </div>
   );

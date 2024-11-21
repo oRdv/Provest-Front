@@ -31,7 +31,6 @@ const Login = () => {
         e.preventDefault();
         const { email, senha } = formData;
 
-        // Gera o hash da senha usando MD5 (substitua pelo algoritmo correto, se diferente)
         const hashedPassword = CryptoJS.MD5(senha).toString();
 
         const getUsers = async () => {
@@ -60,7 +59,8 @@ const Login = () => {
                         name: user.name,
                         email: user.email,
                         curso: user.curso,
-                        avatar: 2
+                        avatar: 2,
+                        role: 'aluno' 
                     }));
 
 

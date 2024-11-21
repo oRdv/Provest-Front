@@ -16,10 +16,11 @@ const Signup = () => {
     icone_id: 1,
     status: 1,
   });
+  
   const [cursos, setCursos] = useState([]);
   const [alert, setAlert] = useState({ open: false, msg: '', severity: '' });
   const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
