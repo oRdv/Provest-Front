@@ -1,36 +1,32 @@
-"use client";
+'use client';
 
 import styles from './page.module.css';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Ícones de olho
 import { useRouter } from 'next/navigation';
 import CryptoJS from 'crypto-js';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Ícones de olho
 
-const LoginProfessor = () => {
+const Login = () => {
     const router = useRouter();
     const [formData, setFormData] = useState({ email: '', senha: '' });
     const [erros, setErros] = useState({ msg: '' });
     const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
-    };
-
-    const toggleConfirmPasswordVisibility = () => {
-        setShowConfirmPassword(!showConfirmPassword);
     };
 
     const loginValidation = async (e) => {
         e.preventDefault();
         const { email, senha } = formData;
 
-        // Gera o hash da senha usando MD5
+        // Gera o hash da senha usando MD5 (substitua pelo algoritmo correto, se diferente)
         const hashedPassword = CryptoJS.MD5(senha).toString();
 
         const getUsers = async () => {
@@ -52,15 +48,19 @@ const LoginProfessor = () => {
             usuarios.professores.forEach(user => {
                 if (user.email === email && user.senha === hashedPassword) {
                     userStatus = true;
+
+                    // Armazena dados do usuário no localStorage
                     localStorage.setItem('userId', user.id);
                     localStorage.setItem('userProfile', JSON.stringify({
-                        name: user.name,
+                        name: user.nome,
                         email: user.email,
-                        materia: user.materia, // Adaptação para a matéria que o professor leciona
-                        horarios: user.horarios, // Exemplo de campo adicional
-                        avatar: 2 // Id do avatar ou URL padrão
+                        avatar: 2,
+                        role: 'professor' 
                     }));
-                    router.push('/home'); // Direciona para a página inicial após o login
+                    
+
+                    // Redireciona para a página de conclusão ou dashboard
+                    router.push('/concluido');
                 }
             });
         }
@@ -113,17 +113,17 @@ const LoginProfessor = () => {
                     </div>
 
                     <div className={styles['button-container']}>
-                        <button type="submit" className={styles['btn-login']}>LOGIN</button>
+                        <button type="submit" className={styles['btn-login']}>Login</button>
                     </div>
                 </form>
                 {erros.msg && <div className={styles['error-msg']}>{erros.msg}</div>}
             </div>
 
             <div className={styles['create-account']}>
-                <Link href="./cadastroProfessor">Não possui cadastro? Criar conta</Link>
+                <Link href="./cadastroProfessor">Não tem uma conta? Cadastre-se</Link>
             </div>
         </div>
     );
 };
 
-export default LoginProfessor;
+export default Login;

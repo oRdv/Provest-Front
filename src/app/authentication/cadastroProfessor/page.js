@@ -3,6 +3,8 @@ import styles from './page.module.css';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Ícones de olho
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const SignupProfessor = () => {
   const router = useRouter();
@@ -10,12 +12,11 @@ const SignupProfessor = () => {
     nome: '',
     email: '',
     senha: '',
-    curso_id: '',  // Curso selecionado
+    curso_id: '', // Curso selecionado
     icone_id: 3,  // Ícone fixo conforme solicitado
   });
   const [cursos, setCursos] = useState([]);
-  const [erros, setErros] = useState({ msg: '' });
-  const [showModal, setShowModal] = useState(false);
+  const [alert, setAlert] = useState({ open: false, msg: '', severity: '' }); // Estado do alerta
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
@@ -28,8 +29,7 @@ const SignupProfessor = () => {
         const data = await response.json();
         setCursos(data.curso_disciplina || []);
       } catch (error) {
-        setErros({ msg: 'Erro ao carregar cursos. Tente novamente mais tarde.' });
-        setShowModal(true);
+        setAlert({ open: true, msg: 'Erro ao carregar cursos. Tente novamente mais tarde.', severity: 'error' });
       }
     };
 
@@ -49,10 +49,14 @@ const SignupProfessor = () => {
     setFormData({ ...formData, curso_id: e.target.value });
   };
 
+  const handleCloseSnackbar = () => {
+    setAlert({ ...alert, open: false });
+  };
+
   const signupProfessor = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/profs', {
+      const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/prof', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,20 +69,31 @@ const SignupProfessor = () => {
           icone_id: formData.icone_id   // Ícone fixo
         }),
       });
-
+  
       if (response.ok) {
-        alert('Cadastro de professor realizado com sucesso!');
-        router.push('/loginProfessor');
+        const data = await response.json();
+        setAlert({ open: true, msg: 'Cadastro de professor realizado com sucesso!', severity: 'success' });
+        // Salve todos os dados retornados da API no localStorage
+        const userProfile = {
+          name: formData.nome,
+          email: formData.email,
+          materia: data.materia, // Supondo que "materia" seja retornada pela API
+          horarios: data.horarios, // Supondo que "horarios" seja retornada pela API
+          avatar: formData.icone_id,
+        };
+        localStorage.setItem('userProfile', JSON.stringify(userProfile));
+        setTimeout(() => {
+          router.push('/loginProfessor');
+        }, 2000); 
       } else {
         const errorData = await response.json();
-        setErros({ msg: errorData.message || 'Erro ao realizar o cadastro.' });
-        setShowModal(true);
+        setAlert({ open: true, msg: errorData.message || 'Erro ao realizar o cadastro.', severity: 'error' });
       }
     } catch (error) {
-      setErros({ msg: 'Ocorreu um erro na solicitação. Tente novamente mais tarde.' });
-      setShowModal(true);
+      setAlert({ open: true, msg: 'Ocorreu um erro na solicitação. Tente novamente mais tarde.', severity: 'error' });
     }
   };
+  
 
   return (
     <div className={styles['right-side']}>
@@ -146,12 +161,11 @@ const SignupProfessor = () => {
               <option value="">Selecione um curso</option>
               {cursos.map((curso) => (
                 <option key={curso.id} value={curso.id}>
-                  {curso.nome}
+                  {curso.curso}
                 </option>
               ))}
             </select>
           </div>
-
 
           <div className={styles['button-container']}>
             <button type="submit" className={styles['btn-login']}>
@@ -161,18 +175,16 @@ const SignupProfessor = () => {
         </form>
       </div>
 
-      <div className={styles['create-account']}>
-        <a href="./loginProfessor">Já possui uma conta? Faça login</a>
-      </div>
-
-      {showModal && (
-        <div className={styles.modal}>
-          <div className={styles['modal-content']}>
-            <p>{erros.msg}</p>
-            <button onClick={() => setShowModal(false)}>Fechar</button>
-          </div>
-        </div>
-      )}
+      <Snackbar
+        open={alert.open}
+        autoHideDuration={4000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Define o topo central
+      >
+        <Alert onClose={handleCloseSnackbar} severity={alert.severity} sx={{ width: '100%' }}>
+          {alert.msg}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
