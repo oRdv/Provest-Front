@@ -133,7 +133,7 @@ function Recuperar() {
             src="/img/female.png"
             width={360}
             height={300}
-            alt="Desenho de uma mulher pensando"
+            alt=""
           />
         </div>
       </div>
@@ -154,7 +154,7 @@ function Recuperar() {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                placeholder="Digite seu e-mail"
+                placeholder=""
               />
             </div>
 
@@ -167,7 +167,7 @@ function Recuperar() {
                 value={formData.confirmEmail}
                 onChange={handleInputChange}
                 required
-                placeholder="Confirme seu e-mail"
+                placeholder=""
               />
             </div>
 
@@ -181,7 +181,7 @@ function Recuperar() {
                   value={formData.senha}
                   onChange={handleInputChange}
                   required
-                  placeholder="Digite sua senha"
+                  placeholder=""
                 />
                 <span
                   className={styles['password-icon']}
@@ -202,7 +202,7 @@ function Recuperar() {
                   value={formData.confirmSenha}
                   onChange={handleInputChange}
                   required
-                  placeholder="Confirme sua senha"
+                  placeholder=""
                 />
                 <span
                   className={styles['password-icon']}

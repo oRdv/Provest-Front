@@ -48,7 +48,6 @@
   }
   
   .login-form {
-    background-color: var(--background);
     padding: 40px;
     border-radius: 15px;
     width: calc(720px + 35vh);
