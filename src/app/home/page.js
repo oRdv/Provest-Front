@@ -153,15 +153,15 @@ export default function Home() {
           </ul>
           <div className="button-container">
             <button className="back-button">
-              <span className="arrow">←</span> Logout
+            <Link href="@/app/page.js" className="arrow">←</Link>
             </button>
-            <Image
+            {/* <Image
               src="/img/Ppreto.png"
               width={60}
               height={60}
               alt="logo na cor preta"
               className="logo-image"
-            />
+            /> */}
           </div>
         </div>
       </div>

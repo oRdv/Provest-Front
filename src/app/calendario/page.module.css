@@ -1,0 +1,144 @@
+/* body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fdfbe4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .calendar {
+    background-color: #2e2a5a;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    left: -350px;
+    transition: left 0.3s ease;
+    height: 100%;
+  }
+  
+  .calendar.show {
+    left: 0;
+  }
+  
+  .calendarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  
+  .calendarHeader span {
+    cursor: pointer;
+  }
+  
+  .year {
+    color: #b3ff00;
+  }
+  
+  .calendarBody {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+  
+  .dayName {
+    font-weight: bold;
+  }
+  
+  .dayNumber {
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #3e3a6a;
+  }
+  
+  .firstWeek {
+    background-color: #4a4266;
+  }
+  
+  .toggleButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #2e2a5a;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+   */
+
+
+   /* Definindo o estilo para o componente Calendar */
+.calendar {
+  background-color: #2e2a5a;
+  color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 480px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  left: -850px;
+  transition: left 0.3s ease;
+  height: 100%;
+}
+
+.calendar.show {
+  left: 0px;
+}
+
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
+
+.calendarHeader span {
+  cursor: pointer;
+}
+
+.year {
+  color: #b3ff00;
+}
+
+.calendarBody {
+  display: grid;
+  margin-right: 20px;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 20px;
+}
+
+.calendarBody div {
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.dayName {
+  font-weight: bold;
+}
+
+.dayNumber {
+  background-color: #3e3a6a;
+}
+
+.iconLink {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #2e2a5a;
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-left: 300px;
+}

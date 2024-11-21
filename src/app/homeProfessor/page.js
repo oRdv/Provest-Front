@@ -1,109 +1,171 @@
 "use client";
 
 import React, { useState } from 'react';
-import Head from 'next/head';
-import styles from './page.module.css'; 
+import styles from './page.modules.css'; 
 import Link from 'next/link';
 import Image from 'next/image';
 
-const Dashboard = () => {
-    const [menuVisible, setMenuVisible] = useState(false);
+export default function HomeProfessor() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-    const toggleMenu = () => {
-      setMenuVisible(!menuVisible);
-    };
-  
-    return (
-      <div className={styles.container}>
-        {/* Header */}
-        <div className={styles.header}>
-          <div className={styles.menuIcon} onClick={toggleMenu}>
-            <i className="fas fa-bars">
-            <Image
-                src="/img/menu.png"
-                width={30}
-                height={30}
-                alt="Desenho de uma mulher pensando"
-            />
-            </i>
-          </div>
-          <div className={styles.searchBar}>
-            <input type="text" placeholder="Pesquisar..." />
-          </div>
-          <div className={styles.notificationIcon}>
-            <i className="fas fa-bell"> <Image
-                src="/img/notificacao.png"
-                width={25}
-                height={25}
-                alt="Desenho de uma mulher pensando"
-            /></i>
-          </div>
+  const pages = [
+    { name: "Tarefas", link: "#" },
+    { name: "Chats", link: "./chatGeral" },
+    { name: "Configurações", link: "./configuracoes" },
+    { name: "Calendário", link: "#" },
+    { name: "Escolha o curso", link: "#" },
+    { name: "Vídeo-Aulas", link: "./videoaula" },
+    { name: "Matérias", link: "./materias" },
+    { name: "Redações", link: "./todasRedacoes" },
+    { name: "Perfil", link: "./perfilAluno" },
+  ];
+
+  const filteredPages = pages.filter((page) =>
+    page.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const today = new Date();
+  const day = today.getDate();
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const month = monthNames[today.getMonth()];
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const toggleNotifications = () => {
+    setNotificationsOpen(!notificationsOpen);
+  };
+
+  return (
+    <>
+      <title>Dashboard</title>
+      <div className="header">
+        <Image
+          src="/img/icone-menu.png"
+          width={50}
+          height={50}
+          alt="Ícone do Menu"
+          onClick={toggleMenu}
+          className="menu-icon"
+          style={{ cursor: "pointer" }}
+        />
+        <div className="search-bar">
+          <i className="fas fa-search"></i>
+          <input
+            type="text"
+            placeholder="Pesquisar páginas..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
-  
-        {/* Menu */}
-        {menuVisible && (
-          <div className={styles.menu}>
-            <Link href="/tasks">Tarefas</Link>
-            <Link href="/chatGeral">Chats</Link>
-            <Link href="/configuracoes">Configurações</Link>
-            <Link href="/calendar">Calendário</Link>
-            <Link href="/Cronograma">Escolha seu curso </Link>
-            <Link href="/videoaula">Video-Aulas</Link>
-            <Link href="/materias">Matérias</Link>
-            <Link href="/redacao">Redações</Link>
-            <Link href="/perfilAluno">Perfil</Link>
-          </div>
-        )}
-  
-        {/* Dashboard */}
-        <div className={styles.sectionTitle}>DashBoard</div>
-        <div className={styles.dashboardCards}>
-          <div className={styles.card} onClick={() => window.location.href = "/atividades"}>
-            <i className="fas fa-book">
+      </div>
+
+      {(menuOpen || notificationsOpen) && (
+        <div
+          className="overlay2"
+          onClick={() => {
+            setMenuOpen(false);
+            setNotificationsOpen(false);
+          }}
+        ></div>
+      )}
+
+      {/* ABA DO MENU */}
+      {menuOpen && <div className="overlay" onClick={toggleMenu}></div>}
+
+      <div className={`side-menu ${menuOpen ? "active" : ""}`}>
+        <div className="barrinha">
+          <div className="profile-header">
             <Image
-                src="/img/book.png"
-                width={90}
-                height={87}
+              src="/img/profile.png"
+              width={60}
+              height={60}
+              alt="Ícone de perfil"
+              className="profile-icon"
             />
-            </i>
-            <div className={styles.cardTitle}>Atividades</div>
-            <i className="fas fa-plus addIcon"></i>
+            <div>
+              <h1>Bem-vindo, Celso!</h1>
+            </div>
           </div>
-          <div className={styles.card} onClick={() => window.location.href = "/videoaulas"}>
-            <i className="fas fa-video">  <Image
-                src="/img/video.png"
-                width={90}
-                height={87}
-            /></i>
-            <div className={styles.cardTitle}>VídeoAulas</div>
-            <i className="fas fa-plus addIcon"></i>
-          </div>
-        </div>
-  
-        {/* Calendar */}
-        <div className={styles.sectionTitle}>Calendário</div>
-        <div className={styles.calendarCards}>
-          <div className={styles.calendarCard} onClick={() => window.location.href = "/calendario"}>
-            <div className={styles.date}>10 Mar</div>
-            <div className={styles.calendarTitle}>Calendário</div>
-            <div className={styles.event}>Aula hoje às 16hrs</div>
-            <div className={styles.event}>Postar vídeoAula hoje às 10:10hrs</div>
-          </div>
-          <div className={styles.calendarCard} onClick={() => window.location.href = "/calendario"}>
-            <div className={styles.date}>3 Fev</div>
-            <div className={styles.calendarTitle}>Calendário</div>
-            <div className={styles.event}>Aula hoje às 13hrs</div>
-            <div className={styles.event}>Postar vídeoAula hoje às 17hrs</div>
-          </div>
-          <div className={styles.calendarCard} onClick={() => window.location.href = "/calendario"}>
-            <div className={styles.date}>7 Fev</div>
-            <div className={styles.calendarTitle}>Calendário</div>
-            <div className={styles.event}>Aula hoje às 10hrs</div>
-            <div className={styles.event}>Postar vídeoAula hoje às 7:30hrs</div>
+
+          <ul className="menu-list">
+            {filteredPages.map((page, index) => (
+              <li key={index} className="menu-item">
+                <Link href={page.link}>
+                  <div>
+                    <span>{page.name}</span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="button-container">
+            <button className="back-button">
+              <Link href="@/app/page.js" className="arrow">←</Link>
+            </button>
+            {/* <Image
+              src="/img/Ppreto.png"
+              width={60}
+              height={60}
+              alt="logo na cor preta"
+              className="logo-image"
+            /> */}
+            
           </div>
         </div>
       </div>
-    );
-};
 
-export default Dashboard;
+      <div className="container">
+        <div className="dashboard-title">DashBoard</div>
+        <div className="cards">
+          <Link href="./adcAtividades" className="card">
+            <div className="icon">
+              <Image
+                src="/img/book.png"
+                width={100}
+                height={100}
+                alt="Atividades"
+              />
+            </div>
+            <span>Atividades</span>
+            <div className="underline"></div>
+          </Link>
+          <Link href="./minhasVideoaulasProf" className="card">
+            <div className="icon">
+              <Image
+                src="/img/video.png"
+                width={100}
+                height={100}
+                alt="Redação"
+              />
+            </div>
+            <span>Videoaula</span>
+            <div className="underline"></div>
+          </Link>
+          
+        </div>
+        <div className="calendar">
+          <div className="calendar-title">Calendário</div>
+          <div className="calendar-item">
+            <a href="#" className="date">
+              <div className="day">{day}</div>
+              <div className="month">{month}</div>
+            </a>
+            <div className="event">Aula hoje às 16hrs</div>
+          </div>
+          <div className="calendar-item">
+            <a href="#" className="date">
+              <div className="day">1</div>
+              <div className="month">Mar</div>
+            </a>
+            <div className="event">Postar vídeoaula hoje as 17hrs</div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
