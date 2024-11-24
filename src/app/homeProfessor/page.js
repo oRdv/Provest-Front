@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import styles from './page.modules.css'; 
+import styles from './page.modules.css';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -103,20 +103,12 @@ export default function HomeProfessor() {
             ))}
           </ul>
           <div className="button-container">
-            <button className="back-button">
-              <Link href="@/app/page.js" className="arrow">←</Link>
-            </button>
-            {/* <Image
-              src="/img/Ppreto.png"
-              width={60}
-              height={60}
-              alt="logo na cor preta"
-              className="logo-image"
-            /> */}
-            
-          </div>
+            <Link href="/" className="back-button">
+              <span className="arrow">←</span> Logout
+            </Link>
         </div>
       </div>
+    </div >
 
       <div className="container">
         <div className="dashboard-title">DashBoard</div>
@@ -145,7 +137,7 @@ export default function HomeProfessor() {
             <span>Videoaula</span>
             <div className="underline"></div>
           </Link>
-          
+
         </div>
         <div className="calendar">
           <div className="calendar-title">Calendário</div>

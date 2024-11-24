@@ -52,23 +52,22 @@ const Login = () => {
             usuarios.alunos.forEach(user => {
                 if (user.email === email && user.senha === hashedPassword) {
                     userStatus = true;
-
-
+        
+                    // Atualizar corretamente o localStorage
                     localStorage.setItem('userId', user.id);
                     localStorage.setItem('userProfile', JSON.stringify({
-                        name: user.name,
+                        name: user.nome,       // Corrigir para user.nome caso a API retorne o nome com este campo
                         email: user.email,
-                        curso: user.curso,
+                        curso: user.curso || 'Curso não especificado', // Garante que o curso seja salvo ou insere fallback
                         avatar: 2,
-                        role: 'aluno' 
+                        role: 'aluno'
                     }));
-
-
+                    console.log(JSON.parse(localStorage.getItem('userProfile')));
                     router.push('/concluido');
                 }
             });
         }
-
+        
         if (!userStatus) {
             setErros({ msg: 'Credenciais inválidas. Tente novamente.' });
         }

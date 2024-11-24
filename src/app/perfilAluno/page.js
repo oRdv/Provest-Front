@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import styles from './page.module.css';
@@ -29,7 +29,7 @@ const ProfilePage = () => {
 
         if (response.ok && Array.isArray(data.icones)) {
           setIcons(data.icones);
-          const defaultAvatar = data.icones.find(icon => icon.id === 3);
+          const defaultAvatar = data.icones.find((icon) => icon.id === 3);
           setAvatar(defaultAvatar?.url || '/default-avatar3.png');
         } else {
           console.error('Erro ao buscar os ícones.');
@@ -41,15 +41,16 @@ const ProfilePage = () => {
 
     fetchIcons();
 
+    // Carregar os dados do usuário do localStorage
     const userData = JSON.parse(localStorage.getItem('userProfile'));
     if (userData) {
       setProfile({
         name: userData.name,
-        curso: userData.curso, 
+        curso: userData.curso || 'Curso não informado',
         email: userData.email,
         password: '',
-    });
-    
+      });
+
       setAvatar(userData.avatar || '/default-avatar3.png');
     }
   }, []);
@@ -74,13 +75,16 @@ const ProfilePage = () => {
     }
 
     try {
-      const response = await fetch(`/v1/jengt_provest/aluno/senha/${userId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ senha: profile.password }),
-      });
+      const response = await fetch(
+        `https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/aluno/senha/${userId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ senha: profile.password }),
+        }
+      );
 
       if (response.ok) {
         alert('Senha atualizada com sucesso!');
@@ -105,12 +109,17 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className={styles["profile-page"]}>
-      <div className={styles["header"]}>
-        <div className={styles["avatar-preview"]} onClick={() => setIsModalOpen(true)}>
+    <div className={styles['profile-page']}>
+      <div className={styles['header']}>
+        <div
+          className={styles['avatar-preview']}
+          onClick={() => setIsModalOpen(true)}
+        >
           <ProfileIcon avatar={avatar} />
         </div>
-        <h1 className={styles["profile-name"]}>{profile.name || 'Nome do usuário'}</h1>
+        <h1 className={styles['profile-name']}>
+          {profile.name || 'Nome do usuário'}
+        </h1>
       </div>
 
       <Modal
@@ -122,8 +131,8 @@ const ProfilePage = () => {
         <AvatarSelector onSelect={handleAvatarSelect} icons={icons} />
       </Modal>
 
-      <form className={styles["profile-form"]} onSubmit={handleSubmit}>
-        <div className={styles["form-group"]}>
+      <form className={styles['profile-form']} onSubmit={handleSubmit}>
+        <div className={styles['form-group']}>
           <input
             type="text"
             id="name"
@@ -133,7 +142,7 @@ const ProfilePage = () => {
             readOnly
           />
         </div>
-        <div className={styles["form-group"]}>
+        <div className={styles['form-group']}>
           <input
             type="text"
             id="curso"
@@ -143,7 +152,7 @@ const ProfilePage = () => {
             readOnly
           />
         </div>
-        <div className={styles["form-group"]}>
+        <div className={styles['form-group']}>
           <input
             type="email"
             id="email"
@@ -153,7 +162,7 @@ const ProfilePage = () => {
             readOnly
           />
         </div>
-        <div className={styles["form-group"]}>
+        <div className={styles['form-group']}>
           <input
             type="password"
             id="password"
@@ -163,7 +172,9 @@ const ProfilePage = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className={styles["save-button"]}>SALVAR</button>
+        <button type="submit" className={styles['save-button']}>
+          SALVAR
+        </button>
       </form>
     </div>
   );

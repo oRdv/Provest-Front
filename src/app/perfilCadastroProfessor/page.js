@@ -8,8 +8,7 @@ import AvatarSelector, { ProfileIcon } from '@/components/ui/AvatarSelector';
 const ProfileProfPage = () => {
   const [profile, setProfile] = useState({
     name: '',
-    curso: '', // Curso selecionado
-    disciplina: '', // Disciplina selecionada
+    curso: '', // Curso do professor
     horarios: '',
     email: '',
     password: '',
@@ -18,8 +17,6 @@ const ProfileProfPage = () => {
   const [avatar, setAvatar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [icons, setIcons] = useState([]);
-  const [disciplinas, setDisciplinas] = useState([]); // Armazena as disciplinas
-  const [selectedCurso, setSelectedCurso] = useState(''); // Armazena o curso selecionado
 
   useEffect(() => {
     Modal.setAppElement('#modal-root');
@@ -52,51 +49,18 @@ const ProfileProfPage = () => {
       const parsedProfile = JSON.parse(userProfile);
       setProfile({
         name: parsedProfile.name || '',
-        curso: parsedProfile.curso || '', // Carrega o curso selecionado
-        disciplina: parsedProfile.disciplina || '', // Carrega a disciplina selecionada
+        curso: parsedProfile.curso || '', // Curso fixo carregado
         horarios: parsedProfile.horarios || '',
         email: parsedProfile.email || '',
         password: '', // Senha é sempre vazia para edição
       });
       setAvatar(parsedProfile.avatar || '/default-avatar3.png');
-      setSelectedCurso(parsedProfile.curso || ''); // Ajusta o estado do curso
     }
-
-    // Buscar disciplinas associadas ao curso
-    const fetchDisciplinas = async () => {
-      try {
-        const response = await fetch(
-          'https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/cursos/disciplinas'
-        );
-        const data = await response.json();
-        setDisciplinas(data.curso_disciplina || []);
-        console.log("Disciplinas carregadas:", data.curso_disciplina); // Log para verificar os dados
-      } catch (error) {
-        console.error('Erro ao buscar disciplinas:', error);
-      }
-    };
-
-    fetchDisciplinas();
-
   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value });
-  };
-
-  const handleCursoChange = (e) => {
-    const selectedCurso = e.target.value;
-    setSelectedCurso(selectedCurso);
-
-    // Encontre as disciplinas do curso selecionado
-    const curso = disciplinas.find(curso => curso.curso === selectedCurso);
-    if (curso) {
-      setProfile({
-        ...profile,
-        disciplina: curso.disciplinas[0] || '', // Defina a primeira disciplina como padrão
-      });
-    }
   };
 
   const handleSubmit = async (e) => {
@@ -167,43 +131,15 @@ const ProfileProfPage = () => {
         </div>
 
         <div className={styles['form-group']}>
-          <select
+          <input
+            type="text"
             id="curso"
             name="curso"
-            value={profile.curso}
-            onChange={handleCursoChange}
-            disabled
-            className={styles['curso-select']}
-          >
-            <option value="">Curso</option>
-            {disciplinas.map((curso) => (
-              <option key={curso.id} value={curso.curso}>
-                {curso.curso}
-              </option>
-            ))}
-          </select>
+            value={profile.curso} // Exibe o curso
+            readOnly
+            className={styles['curso-input']}
+          />
         </div>
-
-        <div className={styles['form-group']}>
-          <select
-            id="disciplina"
-            name="disciplina"
-            value={profile.disciplina} // Valor da disciplina já escolhida
-            onChange={handleChange}
-            className={styles['disciplina-select']}
-          >
-            <option value="">Selecione uma disciplina</option>
-            {selectedCurso &&
-              disciplinas
-                .find((curso) => curso.curso === selectedCurso)
-                ?.disciplinas.map((disciplina, index) => (
-                  <option key={index} value={disciplina}>
-                    {disciplina}
-                  </option>
-                ))}
-          </select>
-        </div>
-
 
         <div className={styles['form-group']}>
           <input
