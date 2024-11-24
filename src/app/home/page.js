@@ -175,19 +175,12 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <div className="button-container">
+        <div className="button-container">
             <Link href="/" className="back-button">
               <button className="back-button">
                 <span className="arrow">←</span> Logout
               </button>
             </Link>
-            <Image
-              src="/img/Ppreto.png"
-              width={60}
-              height={60}
-              alt="logo na cor preta"
-              className="logo-image"
-            />
           </div>
         </div>
       </div>
