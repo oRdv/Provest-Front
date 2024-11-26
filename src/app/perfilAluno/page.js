@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import styles from './page.module.css';
 import AvatarSelector, { ProfileIcon } from '@/components/ui/AvatarSelector';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Ícones de olho
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState({
@@ -15,6 +16,16 @@ const ProfilePage = () => {
   const [avatar, setAvatar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [icons, setIcons] = useState([]);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   useEffect(() => {
     Modal.setAppElement('#modal-root');
@@ -62,19 +73,22 @@ const ProfilePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    // Verifica se a senha foi preenchida
     if (!profile.password) {
       alert('Por favor, insira uma nova senha.');
       return;
     }
-
+  
+    // Obtém o ID do usuário do localStorage
     const userId = localStorage.getItem('userId');
     if (!userId) {
       alert('Usuário não identificado.');
       return;
     }
-
+  
     try {
+      // Envia a requisição PATCH para o backend com o ID e a senha
       const response = await fetch(
         `https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/aluno/senha/${userId}`,
         {
@@ -82,23 +96,26 @@ const ProfilePage = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ senha: profile.password }),
+          body: JSON.stringify({ senha: profile.password }), // Apenas senha e ID
         }
       );
-
+  
+      // Verifica a resposta do servidor
       if (response.ok) {
         alert('Senha atualizada com sucesso!');
-        setProfile({ ...profile, password: '' }); // Limpa o campo de senha
+        setProfile({ ...profile, password: '' }); // Limpa o campo de senha após sucesso
       } else {
-        const errorData = await response.json();
-        alert(`Erro ao atualizar senha: ${errorData.message || 'Tente novamente mais tarde.'}`);
+        // Se a resposta não for ok, tenta capturar a resposta de erro
+        const errorData = await response.text(); // Use text() para capturar a resposta em HTML
+        console.error('Erro ao atualizar senha:', errorData);
+        alert(`Erro ao atualizar senha: ${errorData}`);
       }
     } catch (error) {
       console.error('Erro ao atualizar senha:', error);
       alert('Erro inesperado. Verifique sua conexão e tente novamente.');
     }
-
-    // Salvar o perfil atualizado no localStorage
+  
+    // Atualiza o perfil no localStorage, se necessário
     const updatedProfile = { ...profile, avatar };
     localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
   };
@@ -163,14 +180,24 @@ const ProfilePage = () => {
           />
         </div>
         <div className={styles['form-group']}>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Mudar senha"
-            value={profile.password}
-            onChange={handleChange}
-          />
+          <label htmlFor="senha">Senha</label>
+          <div className={styles['input-container']}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              id="senha"
+              name="password" // O nome deve ser "password" para corresponder ao estado
+              value={profile.password} // Use o estado correto
+              onChange={handleChange} // Use a função de manipulação já criada
+              required
+              placeholder="Digite sua senha"
+            />
+            <span
+              className={styles['password-icon']}
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+            </span>
+          </div>
         </div>
         <button type="submit" className={styles['save-button']}>
           SALVAR

@@ -77,3 +77,36 @@
 .save-button:hover {
   background-color: var(--roxo-claro);
 }
+
+.input-container {
+  position: relative; /* Necessário para posicionar o ícone dentro do contêiner */
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-container input {
+  flex: 1; /* Faz o input ocupar o espaço restante */
+  padding-right: 40px; /* Garante espaço para o ícone no final */
+  outline: none;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--lilas);
+  font-size: 18px;
+  color: var(--roxo-escuro); /* Ajusta a cor do texto */
+}
+
+.password-icon {
+  position: absolute; /* Permite posicionar o ícone dentro do contêiner */
+  right: 10px; /* Distância do ícone em relação ao lado direito */
+  top: 50%; /* Centraliza verticalmente */
+  transform: translateY(-50%); /* Alinha o ícone no centro vertical */
+  cursor: pointer;
+  color: var(--lilas);
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+.password-icon:hover {
+  color: var(--roxo-escuro);
+}
