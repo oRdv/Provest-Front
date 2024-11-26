@@ -1,20 +1,20 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, push, onValue } from 'firebase/database';
 import Image from 'next/image';
 import { FaArrowLeft, FaPaperPlane } from 'react-icons/fa';
-import { RotatingLines } from 'react-loader-spinner'; // Biblioteca para spinner
+import { RotatingLines } from 'react-loader-spinner'; 
 import styles from './page.module.css';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBPR-s9gjxwaFogDx7CEt7_Zwjrlayn8Io",
-  authDomain: "chat-provest.firebaseapp.com",
-  databaseURL: "https://chat-provest-default-rtdb.firebaseio.com",
-  projectId: "chat-provest",
-  storageBucket: "chat-provest.firebasestorage.app",
-  messagingSenderId: "552821901016",
-  appId: "1:552821901016:web:e9cccbbd59922bc6cf39ad"
+  apiKey: "AIzaSyC81SDmVswAJgRxW7iSCIcDF8",
+  authDomain: "chatprovest.firebaseapp.com",
+  databaseURL: "https://chatprovest-default-rtdb.firebaseio.com",
+  projectId: "chatprovest",
+  storageBucket: "chatprovest.firebasestorage.app",
+  messagingSenderId: "102794475959",
+  appId: "1:102794475959:web:efc6d230160fdf94d0d032"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -24,83 +24,81 @@ const ChatGeral = () => {
   const [message, setMessage] = useState('');
   const [chat, setChat] = useState([]);
   const [professorName, setProfessorName] = useState('');
-  const [loading, setLoading] = useState(true); // Estado de carregamento
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const alunoId = localStorage.getItem("alunoId");
-      const professorId = localStorage.getItem("professorId");
+    if (typeof window !== 'undefined') {
+      const alunoId = localStorage.getItem('alunoId');
+      const professorId = localStorage.getItem('professorId');
 
       if (alunoId && professorId) {
-        loadMessages(alunoId, professorId);
+        const chatKey =
+          alunoId < professorId ? `${alunoId}_${professorId}` : `${professorId}_${alunoId}`;
+        loadMessages(chatKey);
         fetchProfessorName(professorId);
       } else {
-        console.error("IDs de aluno ou professor não encontrados no localStorage.");
+        console.error('IDs de aluno ou professor não encontrados no localStorage.');
       }
     }
   }, []);
 
-  const loadMessages = (alunoId, professorId) => {
-    const chatRef = ref(database, `messages/${alunoId}_${professorId}`);
-    console.log("Attempting to load messages from Firebase...");
-
-    onValue(chatRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const messages = Object.values(snapshot.val());
-        console.log("Loaded messages:", messages); 
-        setChat(messages);
-      } else {
-        console.warn("Nenhuma mensagem encontrada para este chat.");
+  const loadMessages = (chatKey) => {
+    const chatRef = ref(database, `messages/${chatKey}`);
+    onValue(
+      chatRef,
+      (snapshot) => {
+        if (snapshot.exists()) {
+          const messages = Object.values(snapshot.val());
+          setChat(messages);
+        } else {
+          console.warn('Nenhuma mensagem encontrada para este chat.');
+        }
+        setLoading(false);
+      },
+      (error) => {
+        console.error('Erro ao carregar mensagens:', error);
+        setLoading(false);
       }
-      setLoading(false); // Desativa o loading após as mensagens serem carregadas
-    }, (error) => {
-      console.error("Erro ao carregar mensagens:", error);
-      setLoading(false); // Desativa o loading em caso de erro
-    });
+    );
   };
 
   const fetchProfessorName = async (professorId) => {
     try {
-      console.log("professorId no localStorage:", professorId);
-  
-      const response = await fetch(`https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/prof/${professorId}`);
+      const response = await fetch(
+        `https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/prof/${professorId}`
+      );
       const data = await response.json();
-      console.log("Dados recebidos da API:", data);  
-  
-      if (data && data.usuario && data.usuario.length > 0) {
-        setProfessorName(data.usuario[0].nome); 
+      if (data?.usuario?.[0]?.nome) {
+        setProfessorName(data.usuario[0].nome);
       } else {
-        setProfessorName("Professor não encontrado");
+        setProfessorName('Professor não encontrado');
       }
     } catch (error) {
-      console.error("Erro ao buscar o nome do professor:", error);
-      setProfessorName("Erro ao carregar o nome do professor");
+      console.error('Erro ao buscar o nome do professor:', error);
+      setProfessorName('Erro ao carregar o nome do professor');
     } finally {
-      setLoading(false); // Desativa o loading quando o nome do professor for carregado
+      setLoading(false);
     }
   };
 
   const handleSendMessage = () => {
     if (message.trim()) {
-      const alunoId = localStorage.getItem("alunoId");
-      const professorId = localStorage.getItem("professorId");
+      const alunoId = localStorage.getItem('alunoId');
+      const professorId = localStorage.getItem('professorId');
 
+      const chatKey =
+        alunoId < professorId ? `${alunoId}_${professorId}` : `${professorId}_${alunoId}`;
       const newMessage = {
-        senderId: alunoId, 
-        receiverId: professorId, 
+        senderId: alunoId,
+        receiverId: professorId,
         text: message,
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
 
-      const chatRef = ref(database, `messages/${alunoId}_${professorId}`);
+      const chatRef = ref(database, `messages/${chatKey}`);
       push(chatRef, newMessage)
-        .then(() => {
-          console.log("Mensagem enviada com sucesso:", newMessage);
-          setMessage('');
-        })
-        .catch((error) => {
-          console.error("Erro ao enviar mensagem:", error);
-        });
+        .then(() => setMessage(''))
+        .catch((error) => console.error('Erro ao enviar mensagem:', error));
     }
   };
 
@@ -122,28 +120,18 @@ const ChatGeral = () => {
     <div className={styles.body}>
       <div className={styles.header}>
         <FaArrowLeft className={styles.backIcon} onClick={() => window.history.back()} />
-        <div className={styles.title}>Chat com Professor {professorName || 'Professor'}</div>
-        <div className={styles.rightContainer}>
-          <span className={styles.subject}>Biologia</span>
-          <Image
-            src="/img/icon-chatAluno.png"
-            alt="Imagem na barra azul"
-            width={40}
-            height={40}
-            className={styles.headerImage}
-          />
-        </div>
+        <div className={styles.title}>Chat com {professorName || 'Professor'}</div>
       </div>
 
       <div className={styles.chatContainer}>
         {chat.map((msg, index) => (
           <div
             key={index}
-            className={`${styles.message} ${msg.senderId === localStorage.getItem("alunoId") ? styles.sent : styles.received}`}
+            className={`${styles.message} ${
+              msg.senderId === localStorage.getItem('alunoId') ? styles.sent : styles.received
+            }`}
           >
-            <div className={styles.messageContent}>
-              {msg.text}
-            </div>
+            <div className={styles.messageContent}>{msg.text}</div>
             <div className={styles.time}>{msg.time}</div>
           </div>
         ))}
@@ -154,7 +142,7 @@ const ChatGeral = () => {
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Estou com uma dúvida em"
+          placeholder="Escreva sua mensagem"
           className={styles.input}
           onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
         />

@@ -54,16 +54,16 @@ const toggleConfirmPasswordVisibility = () => {
     setFormData({ ...formData, curso_id: e.target.value });
   };
 
-  const checkEmailExists = async (email) => {
-    try {
-      const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/alunos');
-      if (!response.ok) throw new Error('Erro ao verificar emails existentes');
-      const data = await response.json();
-      return data.alunos.some((aluno) => aluno.email === email);
-    } catch (error) {
-      throw new Error('Erro ao verificar emails. Tente novamente mais tarde.');
-    }
-  };
+  // const checkEmailExists = async (email) => {
+  //   try {
+  //     const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/alunos');
+  //     if (!response.ok) throw new Error('Erro ao verificar emails existentes');
+  //     const data = await response.json();
+  //     return data.alunos.some((aluno) => aluno.email === email);
+  //   } catch (error) {
+  //     throw new Error('Erro ao verificar emails. Tente novamente mais tarde.');
+  //   }
+  // };
 
   const signupUser = async (e) => {
     e.preventDefault();
