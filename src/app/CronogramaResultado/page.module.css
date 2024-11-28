@@ -35,10 +35,10 @@
 
   .largeBox {
     background-color: #e8e6f1;
-    padding: 30px;
+    padding: 50px;
     border-radius: 10px;
     width: 400px;
-    height: 600px;
+    height: auto;
     font-size: 18px;
     margin-left: 20px;
   }
@@ -64,11 +64,3 @@
     height: 50px;
     margin-right: 20px;
   }
-  
-  /* body {
-    font-family: 'Arial', sans-serif;
-    background-color: #fffcf4;
-    margin: 0;
-    padding: 0;
-  } */
-  

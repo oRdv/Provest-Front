@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link';
 import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';  
@@ -75,86 +76,11 @@ const ProfilePage = () => {
             />
           </div>
 
-          {/* Links Section */}
-          <div className={styles.links}>
-            <div className={styles.linkItem}>
-              <div className={styles.imageWrapper}>
-                <Image
-                  src="/img/Vector.png"  // Imagem para a atividade
-                  alt="Image representing activities"
-                  width={30}
-                  height={27}
-                />
-              </div>
-              <i className="fas fa-book" onClick={() => navigateTo('https://example.com/atividades')} />
-              <a href="/adcAtividades" className={styles.link}>Atividades</a>
-              <a
-                className={styles.add}
-                href="/adcAtividades"
-              >
-                + Adicionar nova atividade
-              </a>
-              <input
-                className="file-input"
-                id="file-input-atividades"
-                type="file"
-                style={{ display: 'none' }}
-              />
-            </div>
-
-            <div className={styles.linkItem}>
-              {/* Imagem de Vídeo Aula */}
-              <div className={styles.imageWrapper}>
-                <Image
-                  src="/img/aula.png"  
-                  alt="Image representing video classes"
-                  width={30}
-                  height={27}
-                />
-              </div>
-              <i className="fas fa-video" onClick={() => navigateTo('https://example.com/videoaulas')} />
-              <a href="/adcVideoaula" className={styles.link}>Vídeo Aulas</a>
-              <a
-                className={styles.add}
-                href="/adcVideoaula"
-              >
-                + Adicionar nova vídeo aula
-              </a>
-              <input
-                className="file-input"
-                id="file-input-videoaulas"
-                type="file"
-                style={{ display: 'none' }}
-              />
-            </div>
-
-            <div className={styles.linkItem}>
-              {/* Imagem de Calendário */}
-              <div className={styles.imageWrapper}>
-                <Image
-                  src="/img/calendario.png" 
-                  alt="Image representing calendar"
-                  width={37}
-                  height={29}
-                />
-              </div>
-              <i className="fas fa-calendar-alt" onClick={() => navigateTo('https://example.com/calendario')} />
-              <a href="#" className={styles.link}>Calendário</a>
-              <a
-                className={styles.add}
-                href="#"
-                onClick={() => handleFileInputClick('file-input-calendario')}
-              >
-                + Adicionar novo lembrete
-              </a>
-              <input
-                className="file-input"
-                id="file-input-calendario"
-                type="file"
-                style={{ display: 'none' }}
-              />
-            </div>
-          </div>
+          <div className={styles.buttons}>
+        <Link href="/home" legacyBehavior>
+          <span className={styles.button}>SALVAR</span>
+        </Link>
+      </div>
         </div>
       </div>
     </>
