@@ -67,3 +67,27 @@ font-weight: bold;
     margin-top: 10px;
     margin-left: 550px;
 }
+
+.selected {
+    background-color: #d3f8d3; /* Exemplo de cor para a resposta selecionada */
+    cursor: pointer;
+  }
+  .correctAnswer {
+    margin-top: 10px;
+    font-weight: bold;
+    color: green;
+  }
+
+  .selected {
+    background-color: #d3f8d3;
+    cursor: pointer;
+  }
+  .correctAnswer {
+    margin-top: 10px;
+    font-weight: bold;
+    color: green;
+  }
+  .buttonContainer {
+    margin-top: 20px;
+  }
+  

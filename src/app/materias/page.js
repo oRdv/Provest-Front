@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import styles from "./page.module.css";
 
@@ -17,10 +18,10 @@ const EventPage = () => {
 
         <div className={styles.subjects}>
           <div className={styles.subjectList}>
-            <a href="/videos/matematica" className={styles.subject} style={{ backgroundColor: "#e57373" }}>
+            <a href="/submaterias/matematica" className={styles.subject} style={{ backgroundColor: "#e57373" }}>
               MATEMÁTICA
             </a>
-            <a href="/videos/historia" className={styles.subject} style={{ backgroundColor: "#f06292" }}>
+            <a href="/submaterias/historia" className={styles.subject} style={{ backgroundColor: "#f06292" }}>
               HISTÓRIA
             </a>
             <a href="/videos/lingua-portuguesa" className={styles.subject} style={{ backgroundColor: "#ffb74d" }}>
