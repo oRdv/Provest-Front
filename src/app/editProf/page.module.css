@@ -7,12 +7,15 @@
   }
   
   .profileImage {
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     cursor: pointer;
   }
   
   .title {
     color: #C6E6A3;
+    font-size: 40px;
     margin: 30px 0 0 0;
   }
   
@@ -23,67 +26,50 @@
   }
   
   .description {
-    font-size: 22px;
+    font-size: 25px;
     text-align: center;
     color: #000000;
-    height: 60px;         
-  }
-  
-  .inputGroup {
-    margin: 30px 0;
-    
+    margin-top: 2%;
   }
   
   .inputGroup label {
     display: block;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     opacity: 60%;
-    margin-bottom: 10px;
-    margin-right: 290px;
+    margin-top: 3%;
+    margin-bottom: 15px;
+    margin-right: 470px;
   }
   
   .input {
-    width: 29%;
-    padding: 15px;
+    width: 30%;
+    padding: 20px;
     border: 2px solid #BCB3DF;
     border-radius: 25px;
-    font-size: 16px;
+    font-size: 18px;
     text-align: start;
     outline: none;
     background-color: transparent;
   }
   
-  .links {
+  .button {
+    background-color: var(--lilas);
+    width: 30vh; 
     display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .linkItem {
-    display: flex;
-    align-items: center;
     justify-content: center;
-    margin: 5px 0;
-    margin-top: 30px;
-  }
-  
-  .link {
-    color: #201F4B;
-    text-decoration: none;
-    font-weight: bold;
-    margin: 0 10px;
-    font-size: 18px;
-  }
-  
-  .add {
-    color: #8373C2;
-    font-weight: normal;
+    align-items: center;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 25px; 
+    border-radius: 30px;
     cursor: pointer;
-    font-size: 18px;
+    margin: 0 auto;
+    margin-top: 5%; 
   }
-  
-  .file-input {
-    display: none;
+
+  .button:hover {
+    background-color: var(--roxo-claro);
   }
   

@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import Link from 'next/link';
 import styles from './page.module.css';
 import AvatarSelector, { ProfileIcon } from '@/components/ui/AvatarSelector';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Ícones de olho
@@ -202,6 +203,13 @@ const ProfilePage = () => {
         <button type="submit" className={styles['save-button']}>
           SALVAR
         </button>
+
+        <div className={styles.buttons}>
+        <Link href="/home" legacyBehavior>
+          <span className={styles.button}>HOME</span>
+        </Link>
+      </div>
+
       </form>
     </div>
   );

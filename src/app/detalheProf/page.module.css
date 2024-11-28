@@ -31,15 +31,15 @@
 }
 
 .image {
-  width: 400px; 
-  height: 450px;
+  margin-top: 30%;
+  width: 500px; 
+  height: 550px;
   border-radius: 30px; 
 }
 
 .infoContainer {
   max-width: 700px;
   text-align: left;
-  margin-top: 20px;
 }
 
 .title {

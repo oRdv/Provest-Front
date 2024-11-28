@@ -34,7 +34,7 @@
 }
 
 .profile-form {
-  max-width: 600px;
+  max-width: 750px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 8px;
@@ -59,7 +59,7 @@
 
 .save-button {
   background-color: var(--lilas);
-  width: 50vh; 
+  width: 40vh; 
   height: 60px; 
   display: flex;
   justify-content: center;
@@ -71,10 +71,31 @@
   border-radius: 30px;
   cursor: pointer;
   margin: 0 auto;
-  margin-top: 20px; 
+  margin-top: 60px; 
 }
 
 .save-button:hover {
+  background-color: var(--roxo-claro);
+}
+
+.button {
+  background-color: var(--lilas);
+  width: 40vh; 
+  height: 60px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 18px; 
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 25px; 
+}
+
+.button:hover {
   background-color: var(--roxo-claro);
 }
 
