@@ -87,6 +87,7 @@ const ProfilePage = () => {
       alert('Usuário não identificado.');
       return;
     }
+    
   
     try {
       // Envia a requisição PATCH para o backend com o ID e a senha
@@ -100,6 +101,9 @@ const ProfilePage = () => {
           body: JSON.stringify({ senha: profile.password }), // Apenas senha e ID
         }
       );
+      
+      console.log('Enviando dados para o servidor:', { senha: profile.password, userId });
+
   
       // Verifica a resposta do servidor
       if (response.ok) {

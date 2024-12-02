@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import { FaChevronLeft, FaPause, FaChevronRight } from "react-icons/fa";
+
 // Função para buscar vídeos da API
 const fetchVideos = async () => {
   try {
@@ -10,12 +11,17 @@ const fetchVideos = async () => {
       "https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/videoaulas"
     );
     const data = await response.json();
-    return data.videoaulas; // Retorna o array de vídeo-aulas
+    // Garante que cada item tenha `videoaulas` como um array
+    return data.map((item) => ({
+      ...item,
+      videoaulas: Array.isArray(item.videoaulas) ? item.videoaulas : [],
+    }));
   } catch (error) {
     console.error("Erro ao buscar vídeos:", error);
     return [];
   }
 };
+
 // Função para extrair o ID do vídeo do YouTube a partir do link
 const extractYouTubeId = (url) => {
   const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/]+\/.*\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -26,17 +32,19 @@ const extractYouTubeId = (url) => {
 const VideoPage = () => {
   const [videoaulas, setVideoaulas] = useState([]); // Estado para armazenar os vídeos
   const [currentVideo, setCurrentVideo] = useState(null); // Estado para armazenar o vídeo atual
+
   // Carregar os vídeos quando o componente for montado
   useEffect(() => {
     const loadVideos = async () => {
       const videos = await fetchVideos();
       setVideoaulas(videos);
-      if (videos.length > 0) {
+      if (videos.length > 0 && videos[0].videoaulas.length > 0) {
         setCurrentVideo(videos[0].videoaulas[0]); // Define o primeiro vídeo como o atual
       }
     };
     loadVideos();
   }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>UniCamp - Eletroquímica - VídeoAula</div>

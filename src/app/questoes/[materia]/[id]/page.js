@@ -6,83 +6,105 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 const Questoes = () => {
-  const { materia, id } = useParams(); // `id` é o ID do tópico
+  const { materia, id } = useParams();
+  const router = useRouter();
   const [questao, setQuestao] = useState(null);
-  const [respostaSelecionada, setRespostaSelecionada] = useState(null); // Estado para a resposta selecionada
-  const [respostaCorreta, setRespostaCorreta] = useState(null); // Estado para a resposta correta
-  const [openSnackbar, setOpenSnackbar] = useState(false); // Estado para controle do Snackbar
-  const [snackbarMessage, setSnackbarMessage] = useState(''); // Mensagem do Snackbar
-  const [isRespostaVerificada, setIsRespostaVerificada] = useState(false); // Controle de verificação de resposta
-  const router = useRouter(); // Hook de roteamento para navegar para a próxima questão
+  const [respostaSelecionada, setRespostaSelecionada] = useState(null);
+  const [respostaCorreta, setRespostaCorreta] = useState(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [respostaFinalizada, setRespostaFinalizada] = useState(false);
+  const [questoesRestantes, setQuestoesRestantes] = useState(true);
 
-  useEffect(() => {
-    if (id) {
-      const fetchData = async () => {
-        try {
-          const response = await fetch(
-            `https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/topico/${id}`
-          );
-          const data = await response.json();
-
-          // Log da resposta da API
-          console.log("Resposta da API:", data);
-
-          // Verifique se a resposta contém as questões
-          if (!data.topico?.exercicios || data.topico.exercicios.length === 0) {
-            console.error('Nenhuma questão encontrada para o tópico!');
-            return;
-          }
-
-          // Filtra a questão com o id recebido
-          const questaoFiltrada = data.topico.exercicios.find((questao) => questao.id === parseInt(id));
-
-          // Se a questão for encontrada, definimos o estado
-          if (questaoFiltrada) {
-            setQuestao(questaoFiltrada);
-          } else {
-            console.error('Questão com ID não encontrada!');
-          }
-        } catch (error) {
-          console.error('Erro ao buscar os dados da questão:', error);
-        }
-      };
-
-      fetchData();
-    }
-  }, [id]);
-
-  const handleRespostaClick = (resposta) => {
-    setRespostaSelecionada(resposta); // Atualiza a resposta selecionada
+  const colorMap = {
+    matematica: '#e57373',
+    historia: '#f06292',
+    linguaPortuguesa: '#ffb74d',
+    ingles: '#fff176',
+    fisica: '#aed581',
+    quimica: '#4db6ac',
+    biologia: '#64b5f6',
+    geografia: '#9575cd',
   };
 
-  const handleVerResposta = () => {
-    if (respostaSelecionada) {
-      const respostaCorreta = questao.alternativas.find(
-        (alt) => alt.resposta === 1
-      );
-      setRespostaCorreta(respostaCorreta?.opcao); // Define a resposta correta
+  const headerColor = colorMap[materia] || '#ccc';
 
-      // Verifica se a resposta do usuário está correta
-      if (respostaSelecionada === respostaCorreta?.opcao) {
-        setSnackbarMessage('Resposta correta!');
-      } else {
-        setSnackbarMessage('Resposta incorreta, tente novamente!');
+  useEffect(() => {
+    const fetchQuestao = async () => {
+      try {
+        const topicoIdMap = {
+          matematica: 58,
+          historia: 59,
+          linguaPortuguesa: 60,
+          fisica: 61,
+          quimica: 62,
+          biologia: 63,
+        };
+        const topicoId = topicoIdMap[materia] || 58;
+
+        const response = await fetch(
+          `https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/topico/${topicoId}`
+        );
+        const data = await response.json();
+
+        if (!data.topico?.exercicios || data.topico.exercicios.length === 0) {
+          setQuestoesRestantes(false);
+          return;
+        }
+
+        const questaoFiltrada = data.topico.exercicios.find((q) => q.id === parseInt(id));
+        if (questaoFiltrada) {
+          setQuestao(questaoFiltrada);
+          const respostaCorreta = questaoFiltrada.alternativas.find((alt) => alt.resposta === 1);
+          setRespostaCorreta(respostaCorreta?.opcao);
+        } else {
+          setQuestoesRestantes(false);
+        }
+      } catch (error) {
+        console.error('Erro ao buscar questão:', error);
+        setQuestoesRestantes(false);
       }
-      setOpenSnackbar(true); // Abre o Snackbar
-      setIsRespostaVerificada(true); // Marca que a resposta foi verificada
+    };
+
+    if (id && materia) {
+      fetchQuestao();
+    }
+  }, [materia, id]);
+
+  const handleRespostaClick = (opcao) => {
+    if (!respostaFinalizada) {
+      setRespostaSelecionada(opcao);
+    }
+  };
+
+  const handleVerificarResposta = () => {
+    if (respostaSelecionada) {
+      setSnackbarMessage(
+        respostaSelecionada === respostaCorreta ? 'Resposta correta!' : 'Resposta incorreta!'
+      );
+      setOpenSnackbar(true);
+      setRespostaFinalizada(true);
     }
   };
 
   const handleProximaQuestao = () => {
-    const proximoId = parseInt(id) + 1; // Incrementa o ID para a próxima questão
-    router.push(`/questoes/${materia}/${proximoId}`); // Navega para o próximo ID da questão
+    const proximoId = parseInt(id) + 1;
+    router.push(`/questoes/${materia}/${proximoId}`);
+  };
+
+  const handleVoltarParaMaterias = () => {
+    router.push('/materias');
   };
 
   return (
     <div>
-      <header className={styles.header}>{materia?.toUpperCase()}</header>
+      <h1
+        className={styles.header}
+        style={{ backgroundColor: headerColor, color: '#fff' }}
+      >
+        {materia?.toUpperCase()}
+      </h1>
 
-      {/* Exibição do Snackbar no topo */}
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
@@ -94,46 +116,62 @@ const Questoes = () => {
         </Alert>
       </Snackbar>
 
-      {questao ? (
-        <div className={styles.content}>
-          <div className={styles.title}>Questão</div>
-          <div className={styles.question}>{questao.questao}</div>
-          <div className={styles.options}>
-            {questao.alternativas && Array.isArray(questao.alternativas) && questao.alternativas.length > 0 ? (
-              questao.alternativas.map((alt, index) => (
-                <p
-                  key={alt.id}
-                  className={respostaSelecionada === alt.opcao ? styles.selected : ''}
-                  onClick={() => handleRespostaClick(alt.opcao)} // Marca a alternativa ao clicar
-                >
-                  {String.fromCharCode(97 + index)}) {alt.opcao}
-                </p>
-              ))
-            ) : (
-              <p>Alternativas não disponíveis</p>
-            )}
-          </div>
+      {questoesRestantes ? (
+        questao ? (
+          <div className={styles.content}>
+            <h2 className={styles.title}>Questão</h2>
+            <p className={styles.question}>{questao.questao}</p>
+            <div className={styles.options}>
+              {questao.alternativas.map((alt, index) => {
+                const isSelected = respostaSelecionada === alt.opcao;
+                const isCorrect = respostaCorreta === alt.opcao;
+                const isIncorrect = isSelected && respostaCorreta !== alt.opcao;
 
-          <div className={styles.buttonContainer}>
+                return (
+                  <p
+                    key={index}
+                    className={`${styles.option} ${
+                      respostaFinalizada
+                        ? isCorrect
+                          ? styles.correct
+                          : isIncorrect
+                          ? styles.incorrect
+                          : ''
+                        : isSelected
+                        ? styles.selected
+                        : ''
+                    }`}
+                    onClick={() => handleRespostaClick(alt.opcao)}
+                  >
+                    {String.fromCharCode(97 + index)}) {alt.opcao}
+                  </p>
+                );
+              })}
+            </div>
             <button
               className={styles.button}
-              onClick={handleVerResposta} // Mostra a resposta correta ao clicar
+              onClick={handleVerificarResposta}
+              disabled={!respostaSelecionada || respostaFinalizada}
             >
-              Ver resposta correta
+              Verificar Resposta
+            </button>
+            <button className={styles.button} onClick={handleProximaQuestao}>
+              Próxima Questão
             </button>
           </div>
-
-          {isRespostaVerificada && (
-            <div className={styles.correctAnswer}>
-              <p>Resposta correta: {respostaCorreta}</p>
-              <button className={styles.button} onClick={handleProximaQuestao}>
-                Próxima questão
-              </button>
-            </div>
-          )}
-        </div>
+        ) : (
+          <p>Carregando questão...</p>
+        )
       ) : (
-        <p>Carregando...</p>
+        <div className={styles.noMoreQuestions}>
+          <div className={styles.messageBox}>
+            <h2>🎉 Parabéns!</h2>
+            <p>Você concluiu todas as questões desta matéria.</p>
+            <button className={styles.button} onClick={handleVoltarParaMaterias}>
+              Voltar para todas as matérias
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

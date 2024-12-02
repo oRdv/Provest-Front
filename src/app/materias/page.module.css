@@ -88,3 +88,21 @@
     background-color: #6a1b9a;
     transform: translateY(-2px); 
 }
+
+/* Estilo para o botão de voltar */
+.backButton {
+    position: absolute; /* Posicionamento fixo ou absoluto */
+    top: 20px; /* Ajuste a posição conforme necessário */
+    left: 20px; /* Ajuste a distância da esquerda */
+    z-index: 1000; /* Coloca o botão acima de outros elementos */
+    font-size: 2rem; /* Ajuste o tamanho da seta */
+    color: #000; /* Cor da seta */
+    background: none; /* Sem fundo */
+    border: none; /* Sem borda */
+    cursor: pointer; /* Mão ao passar o mouse */
+  }
+  
+  .backButton:hover {
+    color: #007bff; /* Altere a cor ao passar o mouse */
+  }
+  

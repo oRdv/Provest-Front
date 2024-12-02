@@ -98,16 +98,17 @@
 .calendarModal {
   position: fixed;
   top: 0;
-  left: 0; /* Alterado para aparecer na esquerda */
-  width: 300px;
+  left: 0;
+  width: 350px;
   height: 100%;
   background-color: #2c2f40;
   color: white;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sombra ajustada para a esquerda */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  overflow-y: auto;
 }
 
 /* Cabeçalho do Calendário */
@@ -128,35 +129,44 @@
 
 /* Corpo do Calendário */
 .calendarBody {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  margin-top: 20px;
 }
 
-.dayName,
-.dayNumber {
-  text-align: center;
-  padding: 5px;
-  font-size: 14px;
-  border-radius: 4px;
-}
-
-.dayNumber {
-  background: #444;
-  color: white;
-}
-
-/* Estilo para os números dos dias */
-.dayNumber {
+/* Adicionar evento dentro do modal */
+.addEventContainer {
+  margin-top: 30px;
+  padding: 20px;
   background-color: #3e3a6a;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-.iconLink {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: #2e2a5a;
-  font-size: 1.5em;
+.addEventContainer h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #b3ff00;
+}
+
+.addEventContainer input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+
+.addEventContainer button {
+  width: 100%;
+  padding: 10px;
+  background-color: #b3ff00;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #2c2f40;
   cursor: pointer;
-  margin-left: 300px;
+}
+
+.addEventContainer button:hover {
+  background-color: #99cc00;
 }

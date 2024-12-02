@@ -1,10 +1,17 @@
-'use client'
+'use client';
 import React from "react";
+import { FaArrowLeft } from "react-icons/fa"; 
+import Link from "next/link";  // Importando Link do Next.js
 import styles from "./page.module.css";
 
 const EventPage = () => {
   return (
     <div className={styles.body}>
+      {/* Usando Link do Next.js para navegação */}
+      <Link href="/home" className={styles.backButton}>
+        <FaArrowLeft /> 
+      </Link>
+
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.event}>
@@ -24,24 +31,24 @@ const EventPage = () => {
             <a href="/submaterias/historia" className={styles.subject} style={{ backgroundColor: "#f06292" }}>
               HISTÓRIA
             </a>
-            <a href="/videos/lingua-portuguesa" className={styles.subject} style={{ backgroundColor: "#ffb74d" }}>
+            <a href="/submaterias/lingua-portuguesa" className={styles.subject} style={{ backgroundColor: "#ffb74d" }}>
               LÍNGUA PORTUGUESA
             </a>
-            <a href="/videos/ingles" className={styles.subject} style={{ backgroundColor: "#fff176" }}>
+            <a href="/submaterias/ingles" className={styles.subject} style={{ backgroundColor: "#fff176" }}>
               INGLÊS
             </a>
           </div>
           <div className={styles.subjectList}>
-            <a href="/videos/fisica" className={styles.subject} style={{ backgroundColor: "#aed581" }}>
+            <a href="/submaterias/fisica" className={styles.subject} style={{ backgroundColor: "#aed581" }}>
               FÍSICA
             </a>
-            <a href="/videos/quimica" className={styles.subject} style={{ backgroundColor: "#4db6ac" }}>
+            <a href="/submaterias/quimica" className={styles.subject} style={{ backgroundColor: "#4db6ac" }}>
               QUÍMICA
             </a>
-            <a href="/videos/biologia" className={styles.subject} style={{ backgroundColor: "#64b5f6" }}>
+            <a href="/submaterias/biologia" className={styles.subject} style={{ backgroundColor: "#64b5f6" }}>
               BIOLOGIA
             </a>
-            <a href="/videos/geografia" className={styles.subject} style={{ backgroundColor: "#9575cd" }}>
+            <a href="/submaterias/geografia" className={styles.subject} style={{ backgroundColor: "#9575cd" }}>
               GEOGRAFIA
             </a>
           </div>

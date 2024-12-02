@@ -3,34 +3,52 @@ import { useEffect, useState } from 'react';
 import styles from './page.module.css';
 
 const Submateria = ({ params }) => {
-    const { materia } = params; // Extraindo o parâmetro "materia"
+    const { materia } = params;
     const [topicos, setTopicos] = useState([]);
-    const [videos, setVideos] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Fetch para tópicos
+    // Mapeamento de cores baseado nas matérias
+    const colorMap = {
+        matematica: '#e57373',
+        historia: '#f06292',
+        linguaPortuguesa: '#ffb74d',
+        ingles: '#fff176',
+        fisica: '#aed581',
+        quimica: '#4db6ac',
+        biologia: '#64b5f6',
+        geografia: '#9575cd',
+    };
+
+    const headerColor = colorMap[materia] || '#ccc'; // Cor padrão
+
+    // IDs de tópicos por matéria
+    const topicoIdMap = {
+        matematica: 58,
+        historia: 59,
+        linguaPortuguesa: 60,
+        ingles: 61,
+        fisica: 62,
+        quimica: 63,
+        biologia: 64,
+        geografia: 65,
+    };
+
     useEffect(() => {
         if (materia) {
             const fetchData = async () => {
-                const topicoIdMap = {
-                    matematica: 58,
-                    historia: 59,
-                    linguaPortuguesa: 60,
-                    fisica: 61,
-                    quimica: 62,
-                    biologia: 63,
-                };
-                const id = topicoIdMap[materia] || 58;
-
+                const id = topicoIdMap[materia];
+                setIsLoading(true);
                 try {
                     const response = await fetch(
                         `https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/topico/${id}`
                     );
                     const data = await response.json();
-
-                    // Ajustando para acessar o array correto
-                    setTopicos(data.topico.exercicios || []);
+                    setTopicos(data.topico?.exercicios || []);
                 } catch (error) {
                     console.error('Erro ao buscar tópicos:', error);
+                    setTopicos([]);
+                } finally {
+                    setIsLoading(false);
                 }
             };
 
@@ -38,59 +56,37 @@ const Submateria = ({ params }) => {
         }
     }, [materia]);
 
-    // Fetch para vídeos
-    useEffect(() => {
-        if (materia) {
-            const fetchVideos = async () => {
-                try {
-                    const response = await fetch(
-                        `https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/videoaulas`
-                    );
-                    const data = await response.json();
-                    const filteredVideos = data.filter((video) => video.materia === materia);
-                    setVideos(filteredVideos);
-                } catch (error) {
-                    console.error('Erro ao buscar vídeos:', error);
-                }
-            };
-
-            fetchVideos();
-        }
-    }, [materia]);
-
     return (
         <div>
-            {/* Seção de vídeos */}
-            <div className={styles.videos}>
-                {videos.map((video, index) => (
-                    <div key={index} className={styles.video}>
-                        <h3>{video.titulo}</h3>
-                        <iframe
-                            src={video.url}
-                            frameBorder="0"
-                            allowFullScreen
-                        ></iframe>
-                    </div>
-                ))}
-            </div>
+            <h1
+                className={styles.header}
+                style={{ backgroundColor: headerColor, color: '#fff' }}
+            >
+                {materia?.toUpperCase()}
+            </h1>
 
-            {/* Cabeçalho da matéria */}
-            <h1 className={styles.header}>{materia?.toUpperCase()}</h1>
-
-            {/* Seção de tópicos */}
             <div className={styles.content}>
-                {topicos.map((topico, index) => (
-                    <a
-                        key={index}
-                        href={`/questoes/${materia}/${topico.id}`}
-                        className={styles.item}
-                    >
-                        <div className={styles.itemText}>{topico.questao}</div>
-                        <div className={styles.itemIcon}>
-                            <i className="fas fa-chevron-right"></i>
-                        </div>
-                    </a>
-                ))}
+                {isLoading ? (
+                    <p>Carregando questões...</p>
+                ) : topicos.length > 0 ? (
+                    topicos.map((topico, index) => (
+                        <a
+                            key={index}
+                            href={`/questoes/${materia}/${topico.id}`}
+                            className={styles.item}
+                        >
+                            <div className={styles.itemText}>{topico.questao}</div>
+                            <div className={styles.itemIcon}>
+                                <i className="fas fa-chevron-right"></i>
+                            </div>
+                        </a>
+                    ))
+                ) : (
+                    <div className={styles.noData}>
+                        <p>Não há questões disponíveis para esta matéria.</p>
+                        <button onClick={() => window.location.href = '/materias'}>Voltar à página inicial</button>
+                    </div>
+                )}
             </div>
         </div>
     );
