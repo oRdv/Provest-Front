@@ -7,8 +7,10 @@ import Image from 'next/image';
 function Config() {
   return (
     <div className="container">
+      <div className="bodytela">
       <div className="header">
         <h1 className={styles.title}>CONFIGURAÇÕES</h1>
+      </div>
       </div>
       <div className="menu">
         <div className="item">

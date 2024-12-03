@@ -9,7 +9,7 @@
 
 .header {
   display: flex;
-  padding: 30px;
+  padding: 35px;
   align-items: center;
 }
 
@@ -20,21 +20,23 @@
 
 /* BARRA DE PESQUISA */
 .header .search-bar input {
-  width: 100%;
+  width: 80%;
   padding: 23px;
   border-radius: 40px;
-  background-color: #BCB3DF;
+  margin-left: 100px;
+  background-color: #ab99bb;
   opacity: 50%; 
   border: none;
-  padding-left: 40px;
+  padding-left: 50px;
 }
 
 /* DASHBORAD */
 .dashboard-title {
   font-size: 43px;
   font-weight: bolder;
-  color: #d4a5e6;
+  color: #7E58A3;
   margin: 10px;
+  margin-bottom: 40px;
 }
 
 .cards {
@@ -75,189 +77,6 @@
   background-color: #d4a5e6;
 }
 
-.card:nth-child(1) .underline {
-  background-color: #a8e6cf;
-}
-
-.card:nth-child(3) .underline {
-  background-color: #a8e6cf;
-}
-
-.calendar {
-  margin-top: 40px;
-}
-
-.calendar-title {
-  font-size: 43px;
-  color: #2c2c54;
-  margin-bottom: 10px;
-}
-
-.calendar-item {
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  background-color: #fdfcf5;
-  margin-bottom: 30px;
-  box-shadow: 0 7px 5px rgba(0, 0, 0, 0.1);
-}
-
-.calendar-item .date {
-  background-color: #fdfcf5;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 30px;
-  text-align: center;
-  margin-right: 60px;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-}
-
-.calendar-item .date .day {
-  font-size: 30px;
-  color: #2c2c54;
-}
-
-.calendar-item .date .month {
-  font-size: 20px;
-  color: #2c2c54;
-}
-
-.calendar-item .event {
-  flex-grow: 1;
-  font-size: 30px;
-  color: #2c2c54;
-}
-
-.calendar-item {
-  color: #2c2c54;
-}
-
-.notification-icon {
-  position: fixed;
-  top: 20px; 
-  right: -140px; 
-  width: 270px;
-  padding: 15px;
-  z-index: 1000; 
-}
-
-/* CONFIGURAÇÃO DAS COISAS DE DENTRO DA BARRA */
-.barrinha {
-  font-size: 15px; /* BEM-VINDO CELSO */
-  color: #000000;
-  height: 100vh;
-  margin-top: 50px;
-  padding: 40px;
-}
-
-/* CONFIGURAÇÕES DA BARRA */
-.side-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 510px;
-  height: 100%;
-  background-color: #FFFFF1; 
-  color: white;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  z-index: 1000;
-}
-
-.side-menu.active {
-  transform: translateX(0);
-}
-
-.header .menu-icon {
-  cursor: pointer;
-}
-
-/* SOMBRA DE FUNDO */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  opacity: 40%; 
-  z-index: 900; 
-}
-
-/* TIRA AS BOLINHAS DA LISTA */
-.menu-list {
-  list-style-type: none;
-}
-
-/* AS CAIXAS ROXINHAS */
-.menu-item {
-  background-color: #E4E2ED;
-  padding: 15px 20px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-/* TEXTO DENTRO DAS CAIXAS ROXAS */
-.menu-item a {
-  color: #2c2c54;
-  font-size: 22px;
-  margin-left: left;
-}
-
-.menu-item:hover {
-  background-color: #D1CEDB;
-}
-
-.profile-header {
-  display: flex;
-  align-items: center;
-  margin-top: -40px;
-  gap: 30px; /* espaçamento entre o perfil e o bem vindo */
-  margin-bottom: 30px; /* espaçamento entre o celso e as caixas roxas */
-}
-
-/* ICONE DAS MATERIAS */
-.menu-item:nth-child(7) .menu-icon {
-  width: 23px;
-  margin-left: 85px;
-}
-
-/* ICONE DAS REDAÇÕES */
-.menu-item:nth-child(8) .menu-icon {
-  width: 45px;
-  margin-left: 75px;
-}
-
-.button-container {
-  display: flex;
-  margin-top: 10px;
-}
-
-.back-button {
-  background-color: transparent;
-  border: none;
-  color: red; 
-  display: flex;
-  margin-top: 20px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  gap: 30px; /* espaçamento da seta com o logout */
-}
-
-.button-container {
-  display: flex;
-}
-
-.logo-image {
-  margin-top: 20px;
-}
-
-
 .barra-branca h1 {
   position: absolute;
   left: 50%;
@@ -268,43 +87,4 @@
 .logo-image {
   margin-top: -5px;
   margin-left: 20px;
-}
-
-/* conteúdo da barra azul */
-.notif-item {
-  padding: 20px;
-  color: white;
-  border-bottom: 0.2px solid #eee; 
-  margin: 30px; 
-}
-
-.notif-title, .notif-details {
-  display: block;
-}
-
-.notif-title {
-  font-weight: bold; 
-  color: #C6E6A3;
-  font-size: 20px;
-  margin-bottom: 10px; 
-}
-
-.notif-details {
-  font-size: 18px; 
-  color: #ddd; 
-}
-
-.notification-icon {
-  cursor: pointer;
-  font-size: 3rem;
-  margin-left: 90px;
-}
-
-.menu-icon {
-  width: 40px;
-  height: auto;
-  margin-right: 90px;
-  margin-left: 80px;
-  vertical-align: middle;
-  cursor: pointer;
 }

@@ -94,7 +94,7 @@ font-weight: bold;
     cursor: pointer;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 30px;
     margin: 5px 0;
     transition: background-color 0.2s ease;
   }
@@ -105,7 +105,7 @@ font-weight: bold;
   
   .selected {
     background-color: #d1e7dd;
-    border-color: #0f5132;
+    border-color: #BCB3DF;
   }
   
   .correct {
@@ -123,7 +123,7 @@ font-weight: bold;
   .button {
     margin: 10px;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #BCB3DF;
     color: white;
     border: none;
     border-radius: 5px;
@@ -140,7 +140,6 @@ font-weight: bold;
     justify-content: center;
     align-items: center;
     height: 70vh;
-    background-color: #f9f9f9;
   }
   
   .messageBox {
