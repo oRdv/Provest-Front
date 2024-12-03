@@ -2,7 +2,7 @@
 import styles from './page.module.css';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; // Ícones de olho
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
@@ -12,29 +12,36 @@ const SignupProfessor = () => {
     nome: '',
     email: '',
     senha: '',
-    curso_id: '', // Curso selecionado
-    icone_id: 3,  // Ícone fixo conforme solicitado
+    curso_id: '',
+    icone_id: 3,
   });
   const [cursos, setCursos] = useState([]);
-  const [alert, setAlert] = useState({ open: false, msg: '', severity: '' }); // Estado do alerta
+  const [alert, setAlert] = useState({ open: false, msg: '', severity: '' });
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     const fetchCursos = async () => {
       try {
-        const response = await fetch('https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/cursos/disciplinas');
+        const response = await fetch(
+          'https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/cursos/disciplinas'
+        );
         if (!response.ok) {
           throw new Error('Erro ao buscar cursos');
         }
         const data = await response.json();
         setCursos(data.curso_disciplina || []);
       } catch (error) {
-        setAlert({ open: true, msg: 'Erro ao carregar cursos. Tente novamente mais tarde.', severity: 'error' });
+        setAlert({
+          open: true,
+          msg: 'Erro ao carregar cursos. Tente novamente mais tarde.',
+          severity: 'error',
+        });
       }
     };
 
     fetchCursos();
   }, []);
+
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -45,8 +52,9 @@ const SignupProfessor = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleCursoChange = (e) => {
-    setFormData({ ...formData, curso_id: e.target.value });
+  const handleCursoChange = (event) => {
+    const { value } = event.target;
+    setFormData({ ...formData, curso_id: value });
   };
 
   const handleCloseSnackbar = () => {
@@ -69,7 +77,7 @@ const SignupProfessor = () => {
           icone_id: formData.icone_id   // Ícone fixo
         }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         setAlert({ open: true, msg: 'Cadastro de professor realizado com sucesso!', severity: 'success' });
@@ -77,14 +85,13 @@ const SignupProfessor = () => {
         const userProfile = {
           name: formData.nome,
           email: formData.email,
-          materia: data.materia, // Supondo que "materia" seja retornada pela API
-          horarios: data.horarios, // Supondo que "horarios" seja retornada pela API
+          materia: formData.materia, // Supondo que "materia" seja retornada pela API
           avatar: formData.icone_id,
         };
         localStorage.setItem('userProfile', JSON.stringify(userProfile));
         setTimeout(() => {
-          router.push('/loginProfessor');
-        }, 2000); 
+          router.push('/authentication/loginProfessor');
+        }, 2000);
       } else {
         const errorData = await response.json();
         setAlert({ open: true, msg: errorData.message || 'Erro ao realizar o cadastro.', severity: 'error' });
@@ -93,7 +100,7 @@ const SignupProfessor = () => {
       setAlert({ open: true, msg: 'Ocorreu um erro na solicitação. Tente novamente mais tarde.', severity: 'error' });
     }
   };
-  
+
 
   return (
     <div className={styles['right-side']}>
@@ -179,12 +186,13 @@ const SignupProfessor = () => {
         open={alert.open}
         autoHideDuration={4000}
         onClose={handleCloseSnackbar}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Define o topo central
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert onClose={handleCloseSnackbar} severity={alert.severity} sx={{ width: '100%' }}>
           {alert.msg}
         </Alert>
       </Snackbar>
+
     </div>
   );
 };

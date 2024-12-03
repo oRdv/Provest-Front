@@ -25,10 +25,9 @@ const Login = () => {
     const loginValidation = async (e) => {
         e.preventDefault();
         const { email, senha } = formData;
-
-        // Gera o hash da senha usando MD5 (substitua pelo algoritmo correto, se diferente)
+    
         const hashedPassword = CryptoJS.MD5(senha).toString();
-
+    
         const getUsers = async () => {
             const url = 'https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/profs';
             try {
@@ -40,35 +39,37 @@ const Login = () => {
                 return [];
             }
         };
-
+    
         const usuarios = await getUsers();
         let userStatus = false;
-
+    
         if (usuarios && usuarios.professores) {
             usuarios.professores.forEach(user => {
                 if (user.email === email && user.senha === hashedPassword) {
                     userStatus = true;
-
-                    // Armazena dados do usuário no localStorage
+    
+                    // Corrigir o nome da chave para 'disciplinas' no localStorage
                     localStorage.setItem('userId', user.id);
                     localStorage.setItem('userProfile', JSON.stringify({
                         name: user.nome,
                         email: user.email,
+                        disciplinas: user.disciplinas, // Corrigido de 'discplinas' para 'disciplinas'
                         avatar: 2,
                         role: 'professor' 
                     }));
-                    
-
+                    console.log(user);
+    
                     // Redireciona para a página de conclusão ou dashboard
                     router.push('/concluido');
                 }
             });
         }
-
+    
         if (!userStatus) {
             setErros({ msg: 'Credenciais inválidas. Tente novamente.' });
         }
     };
+    
 
     return (
         <div className={styles['right-side']}>

@@ -27,7 +27,7 @@ export default function Success() {
         height={300} 
         className={styles.image}
       />
-      <p className={styles.text}>CADASTRO CONCLUÍDO COM SUCESSO!</p>
+      <p className={styles.text}>LOGIN CONCLUÍDO COM SUCESSO!</p>
       <div className={styles.buttons}>
         <Link href="/home" legacyBehavior>
           <span className={styles.button}>HOME</span>
