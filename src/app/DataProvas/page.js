@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+// import "../calendario/page.module.css";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -124,10 +124,10 @@ export default function Home() {
       {/* Calendário Modal Lateral */}
       {isCalendarOpen && (
         <div className={styles.calendarModal}>
-          <div className={styles.calendarHeader}>
+          {/* <div className={styles.calendarHeader}>
             <span>{selectedDate.toLocaleString("default", { month: "long" })} &gt;</span>
             <span className={styles.year}>{selectedDate.getFullYear()}</span>
-          </div>
+          </div> */}
           <div className={styles.calendarBody}>
             <Calendar
               onChange={handleDateChange}

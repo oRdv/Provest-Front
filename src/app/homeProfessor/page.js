@@ -146,14 +146,18 @@ export default function HomeProfessor() {
               <div className="day">{day}</div>
               <div className="month">{month}</div>
             </a>
+            <Link href="./DataProvas">
             <div className="event">Aula hoje às 16hrs</div>
+            </Link>
           </div>
           <div className="calendar-item">
             <a href="#" className="date">
               <div className="day">1</div>
               <div className="month">Mar</div>
             </a>
+            <Link href="./DataProvas">
             <div className="event">Postar vídeoaula hoje as 17hrs</div>
+            </Link>
           </div>
         </div>
       </div>
