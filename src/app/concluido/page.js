@@ -32,7 +32,7 @@ export default function Success() {
         <Link href="/home" legacyBehavior>
           <span className={styles.button}>HOME</span>
         </Link>
-        <Link href={redirectTo} legacyBehavior>
+        <Link href="/perfilAluno"legacyBehavior>
           <span className={styles.button}>ACESSAR MEU PERFIL</span>
         </Link>
       </div>
