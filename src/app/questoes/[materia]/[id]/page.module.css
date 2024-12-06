@@ -5,13 +5,17 @@
   margin: 0;
   padding: 20px;
 }
+
 .header {
   background-color: #b56565;
   color: white;
   padding: 14px 490px;
   margin-top: 29px;
-  font-size: 29px;
+  font-size: 50px;
+  height: 100px;
   width: fit-content;
+  display: flex;
+  align-items: center;
   border-radius: 5px;
 }
 
@@ -139,24 +143,24 @@ font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 80vh;
 }
 
 .messageBox {
   background-color: #fff;
-  border: 2px solid #ddd;
+  border: 2px solid var(--lilas);
   border-radius: 8px;
   padding: 40px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
+  max-width: 800px;
   width: 90%;
 }
 
 .messageBox h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #4caf50;
+  color: var(--verde-claro);
 }
 
 .messageBox p {
@@ -166,15 +170,15 @@ font-weight: bold;
 }
 
 .messageBox .button {
-  background-color: #4caf50;
+  background-color: var(--verde-claro);
   color: #fff;
   border: none;
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 1.25rem;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .messageBox .button:hover {
-  background-color: #388e3c;
+  background-color:var(--verde-claro);;
 }

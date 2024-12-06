@@ -28,12 +28,15 @@ const ChatGeral = () => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const alunoId = localStorage.getItem('alunoId');
-      const professorId = localStorage.getItem('professorId');
-
+      const alunoId = localStorage.getItem('usuarioId');
+      const professorId = localStorage.getItem('profsId');
+  
       if (alunoId && professorId) {
         const chatKey =
           alunoId < professorId ? `${alunoId}_${professorId}` : `${professorId}_${alunoId}`;
+        
+        console.log("Chat Key: ", chatKey);  // Verifique a chave do chat
+  
         loadMessages(chatKey);
         fetchProfessorName(professorId);
       } else {
@@ -41,15 +44,22 @@ const ChatGeral = () => {
       }
     }
   }, []);
-
+  
   const loadMessages = (chatKey) => {
     const chatRef = ref(database, `messages/${chatKey}`);
     onValue(
       chatRef,
       (snapshot) => {
         if (snapshot.exists()) {
-          const messages = Object.values(snapshot.val());
-          setChat(messages);
+          const messagesObj = snapshot.val();
+          const messages = Object.values(messagesObj).map((message) => ({
+            text: message.text,
+            time: message.time,
+            senderId: message.senderId,
+            receiverId: message.receiverId,
+          }));
+          
+          setChat(messages); // Agora `setChat` receberá um array com as mensagens
         } else {
           console.warn('Nenhuma mensagem encontrada para este chat.');
         }
@@ -61,7 +71,9 @@ const ChatGeral = () => {
       }
     );
   };
-
+  
+  
+  
   const fetchProfessorName = async (professorId) => {
     try {
       const response = await fetch(
@@ -120,22 +132,28 @@ const ChatGeral = () => {
     <div className={styles.body}>
       <div className={styles.header}>
         <FaArrowLeft className={styles.backIcon} onClick={() => window.history.back()} />
-        <div className={styles.title}>Chat com {professorName || 'Professor'}</div>
+        <div className={styles.title}>Chat com {professorName}</div>
       </div>
-
+      
       <div className={styles.chatContainer}>
-        {chat.map((msg, index) => (
-          <div
-            key={index}
-            className={`${styles.message} ${
-              msg.senderId === localStorage.getItem('alunoId') ? styles.sent : styles.received
-            }`}
-          >
-            <div className={styles.messageContent}>{msg.text}</div>
-            <div className={styles.time}>{msg.time}</div>
-          </div>
-        ))}
+  {chat.length === 0 ? (
+    <div className={styles.noMessages}>Nenhuma mensagem ainda.</div>
+  ) : (
+    chat.map((msg, index) => (
+      <div
+        key={index}
+        className={`${styles.message} ${
+          msg.senderId === localStorage.getItem('usuarioId') ? styles.sent : styles.received
+        }`}
+      >
+        <div className={styles.messageContent}>{msg.text}</div>
+        <div className={styles.time}>{msg.time}</div>
       </div>
+    ))
+  )}
+</div>
+
+
 
       <div className={styles.footer}>
         <input

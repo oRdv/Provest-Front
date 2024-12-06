@@ -43,27 +43,30 @@ const Login = () => {
         const usuarios = await getUsers();
         let userStatus = false;
     
-        if (usuarios && usuarios.professores) {
+        if (usuarios && usuarios.professores) {  // Se você tiver um array de professores
             usuarios.professores.forEach(user => {
                 if (user.email === email && user.senha === hashedPassword) {
                     userStatus = true;
-    
-                    // Corrigir o nome da chave para 'disciplinas' no localStorage
+        
+                    // Atualizar corretamente o localStorage com o tipo de usuário 'professor'
                     localStorage.setItem('userId', user.id);
                     localStorage.setItem('userProfile', JSON.stringify({
                         name: user.nome,
                         email: user.email,
-                        disciplinas: user.disciplinas, // Corrigido de 'discplinas' para 'disciplinas'
+                        curso: user.curso || 'Curso não especificado',
                         avatar: 2,
-                        role: 'professor' 
+                        role: 'profs'  // Define como 'professor' para esse usuário
                     }));
-                    console.log(user);
-    
-                    // Redireciona para a página de conclusão ou dashboard
+        
+                    // Armazenando o tipo de usuário (professor)
+                    localStorage.setItem("userType", "professor");  // Armazenar o tipo de usuário
+        
+                    console.log(JSON.parse(localStorage.getItem('userProfile')));
                     router.push('/concluido');
                 }
             });
         }
+        
     
         if (!userStatus) {
             setErros({ msg: 'Credenciais inválidas. Tente novamente.' });

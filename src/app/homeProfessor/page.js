@@ -11,17 +11,11 @@ export default function HomeProfessor() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const pages = [
-    { name: "Tarefas", link: "#" },
     { name: "Chats", link: "./chatGeral" },
     { name: "Configurações", link: "./configuracoes" },
-    { name: "Calendário", link: "#" },
-    { name: "Escolha o curso", link: "#" },
-    { name: "Vídeo-Aulas", link: "./videoaula" },
-    { name: "Matérias", link: "./materias" },
-    { name: "Redações", link: "./todasRedacoes" },
-    { name: "Perfil", link: "./perfilAluno" },
+    { name: "Perfil", link: "./perfilCadastroProfessor" },
   ];
-
+  
   const filteredPages = pages.filter((page) =>
     page.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -137,31 +131,8 @@ export default function HomeProfessor() {
             <span>Videoaula</span>
             <div className="underline"></div>
           </Link>
-
-        </div>
-        <div className="calendar">
-          <div className="calendar-title">Calendário</div>
-          <div className="calendar-item">
-            <a href="#" className="date">
-              <div className="day">{day}</div>
-              <div className="month">{month}</div>
-            </a>
-            <Link href="./DataProvas">
-            <div className="event">Aula hoje às 16hrs</div>
-            </Link>
-          </div>
-          <div className="calendar-item">
-            <a href="#" className="date">
-              <div className="day">1</div>
-              <div className="month">Mar</div>
-            </a>
-            <Link href="./DataProvas">
-            <div className="event">Postar vídeoaula hoje as 17hrs</div>
-            </Link>
-          </div>
         </div>
       </div>
     </>
   );
 }
-

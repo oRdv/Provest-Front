@@ -53,15 +53,19 @@ const Login = () => {
                 if (user.email === email && user.senha === hashedPassword) {
                     userStatus = true;
         
-                    // Atualizar corretamente o localStorage
+                    // Atualizar corretamente o localStorage com o tipo de usuário 'aluno'
                     localStorage.setItem('userId', user.id);
                     localStorage.setItem('userProfile', JSON.stringify({
                         name: user.nome,       // Corrigir para user.nome caso a API retorne o nome com este campo
                         email: user.email,
                         curso: user.curso || 'Curso não especificado', // Garante que o curso seja salvo ou insere fallback
                         avatar: 2,
-                        role: 'aluno'
+                        role: 'alunos'          // Define como 'aluno' para esse usuário
                     }));
+        
+                    // Armazenando o tipo de usuário (aluno)
+                    localStorage.setItem("userType", "alunos");  // Armazenar o tipo de usuário
+        
                     console.log(JSON.parse(localStorage.getItem('userProfile')));
                     router.push('/concluido');
                 }
