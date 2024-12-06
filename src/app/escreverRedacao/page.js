@@ -18,7 +18,7 @@ function EscreverRedacao() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const maxLines = 30;
-  const maxCharsPerLine = 75;
+  const maxCharsPerLine = 80;
 
   const extrairCompetencias = (texto) => {
     const partes = texto.split(/\*\*\s|\s\*\*/).slice(1);
@@ -99,7 +99,7 @@ function EscreverRedacao() {
     try {
       const payload = { tema: selectedTheme, redacao: text };
 
-      const response = await fetch("https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/correcao/redacao", {
+      const response = await fetch("http://localhost:3001/v1/jengt_provest/correcao/redacao", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -117,7 +117,7 @@ function EscreverRedacao() {
       setFeedback({
         tema: selectedTheme,
         comentario: "Análise da correção",
-        competencias: Array.from({ length: 17 }, (_, index) => ({
+        competencias: Array.from({ length: 19 }, (_, index) => ({
           competencias: competencias[index * 2] || "",
           explicacao: competencias[index * 2 + 1] || ""
         })),

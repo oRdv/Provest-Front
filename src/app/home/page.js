@@ -10,13 +10,12 @@ export default function Home() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [notifications, setNotifications] = useState([]);
+  const [userName, setUserName] = useState("Usuário");
 
   const pages = [
-    { name: "Tarefas", link: "#" },
     { name: "Chats", link: "./chatGeral" },
     { name: "Configurações", link: "./configuracoes" },
-    { name: "Calendário", link: "#" },
-    { name: "Escolha o curso", link: "#" },
+    { name: "Calendário", link: "./DataProvas" },
     { name: "Vídeo-Aulas", link: "./videoaula" },
     { name: "Matérias", link: "./materias" },
     { name: "Redações", link: "./todasRedacoes" },
@@ -26,6 +25,18 @@ export default function Home() {
   const filteredPages = pages.filter((page) =>
     page.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  useEffect(() => {
+    // Recuperar informações do usuário do localStorage
+    const userProfile = localStorage.getItem("userProfile");
+    if (userProfile) {
+        const user = JSON.parse(userProfile);
+        const fullName = user.name || "Usuário"; // Nome completo ou fallback
+        const firstName = fullName.split(" ")[0]; // Pega apenas o primeiro nome
+        setUserName(firstName); // Atualiza o estado com o primeiro nome
+    }
+}, []);
+
 
   useEffect(() => {
     // Buscar notificações do endpoint
@@ -160,7 +171,7 @@ export default function Home() {
               className="profile-icon"
             />
             <div>
-              <h1>Bem-vindo, Celso!</h1>
+               <h1>Bem-vindo, {userName}!</h1>
             </div>
           </div>
 
@@ -188,7 +199,7 @@ export default function Home() {
       <div className="container">
         <div className="dashboard-title">DashBoard</div>
         <div className="cards">
-          <Link href="./chatGeral" className="card">
+          <Link href="./materias" className="card">
             <div className="icon">
               <Image
                 src="/img/Vector.png"
@@ -200,7 +211,7 @@ export default function Home() {
             <span>Atividades</span>
             <div className="underline"></div>
           </Link>
-          <Link href="./todasRedacoes" className="card">
+          <Link href="./redacao" className="card">
             <div className="icon">
               <Image
                 src="/img/agenda.png"
@@ -212,7 +223,7 @@ export default function Home() {
             <span>Redação</span>
             <div className="underline"></div>
           </Link>
-          <Link href="../todasAnotacoes" className="card">
+          <Link href="./cadernoAluno" className="card">
             <div className="icon">
               <Image
                 src="/img/icon-anotHome.png"
@@ -232,7 +243,7 @@ export default function Home() {
               <div className="day">{day}</div>
               <div className="month">{month}</div>
             </a>
-            <div className="event">Hoje: Evento automático</div>
+            <div className="event">Hoje: Apresentação TCC!</div>
           </div>
           <div className="calendar-item">
             <a href="#" className="date">

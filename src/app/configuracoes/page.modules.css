@@ -1,56 +1,137 @@
+/* Container */
 .container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    background-color: #FFFFF1;
-    font-family: sans-serif;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFF1;
+  font-family: sans-serif;
+  height: 100vh; /* O container ocupará 100% da altura da tela */
+  overflow-y: auto; /* Permite rolagem caso o conteúdo ultrapasse a altura */
+}
+
+/* Header */
+.header {
+  margin-top: -30px;
+  background-color: #201F4B;
+  padding: 5rem;
+  border-radius: 0px 0px 25px 25px;
+  margin-bottom: 65px;
+  letter-spacing: 3px;
+  font-size: 25px;
+  color: #C6E6A3;
+  text-align: center; /* Centraliza o título */
+  width: 100%; /* Ajuste da largura */
+}
+
+/* Menu */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 69px;
+  padding: 0.3rem 7rem 3rem;
+}
+
+/* Item */
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd; /* Separar visualmente os itens */
+}
+
+.icon {
+  margin-right: 20px; /* Menor espaço */
+  width: 50px;
+  opacity: 80%;
+}
+
+/* Labels */
+.label {
+  font-size: 38px;
+  color: black;
+  opacity: 60%;
+}
+
+/* SVG */
+svg {
+  margin-left: auto; 
+  width: 20px; /* Ajusta o ícone do chevron */
+  height: 20px; /* Ajusta o ícone do chevron */
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
   .header {
-    background-color: #201F4B;
-    display: flex;
-    padding: 5rem;
-    text-align: center;
-    border-radius: 0px 0px 25px 25px ;
-    margin-bottom: 65px;
-    letter-spacing: 3px;
-    font-size: 25px;
-    color: #C6E6A3;
-  }
-  
-  .textBlock p {
-    line-height: 1.6; 
-    text-align: justify;
+    padding: 3rem; /* Reduz o padding em telas menores */
+    font-size: 22px; /* Ajusta o tamanho da fonte */
   }
   
   .menu {
-    display: flex;
-    flex-direction: column;
-    gap: 69px;
-    padding: 0.3rem 7rem 3rem;
+    padding: 0.3rem 4rem 3rem; /* Ajusta o padding */
   }
-  
-  .item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 17px;
-    cursor: pointer;
+
+  .label {
+    font-size: 30px; /* Diminui o tamanho da fonte */
   }
 
   .icon {
-    margin-right: 50px;
-    width: 50px;
-    opacity: 80%;
+    margin-right: 10px; /* Menor espaço entre o ícone e o texto */
+  }
+
+  .item {
+    padding: 10px; /* Menor espaçamento entre os itens */
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 2rem; /* Menor padding */
+    font-size: 20px; /* Menor fonte */
   }
   
+  .menu {
+    padding: 0.3rem 2rem 3rem; /* Ajusta padding */
+  }
+
   .label {
-    font-size: 38px;
-    color: black;
-    opacity: 60%;
+    font-size: 24px; /* Diminui mais o tamanho da fonte */
+  }
+
+  .item {
+    padding: 8px; /* Menor espaçamento entre os itens */
+  }
+
+  .icon {
+    width: 40px; /* Ícones menores */
+    margin-right: 5px; /* Menor espaço entre o ícone e o texto */
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 1rem; /* Ajuste de padding para telas muito pequenas */
+    font-size: 18px; /* Menor tamanho de fonte */
+  }
+  
+  .menu {
+    padding: 0.3rem 1rem 3rem; /* Ajusta padding */
+  }
+
+  .label {
+    font-size: 20px; /* Fontes ainda menores */
+  }
+
+  .icon {
+    width: 35px; /* Ícones ainda menores */
+  }
+
+  .item {
+    padding: 5px; /* Reduz o espaçamento nos itens */
   }
 
   svg {
-    margin-left: auto; 
+    width: 15px; /* Reduz o tamanho do ícone de seta */
+    height: 15px; /* Reduz o tamanho do ícone de seta */
   }
+}

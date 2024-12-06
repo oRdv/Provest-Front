@@ -1,33 +1,33 @@
 
 .body {
-    font-family: 'Arial', sans-serif;
-    background-color: #fdfcf5;
-    margin: 0;
-    padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #fdfcf5;
+  margin: 0;
+  padding: 20px;
 }
 .header {
-    background-color: #b56565;
-    color: white;
-    padding: 14px 490px;
-    margin-top: 29px;
-    font-size: 29px;
-    width: fit-content;
-    border-radius: 5px;
+  background-color: #b56565;
+  color: white;
+  padding: 14px 490px;
+  margin-top: 29px;
+  font-size: 29px;
+  width: fit-content;
+  border-radius: 5px;
 }
 
 .content {
-    margin-top: 20px;
-    padding: 60px;
-    width: 2100px;
-    font-size: 28px;
+  margin-top: 20px;
+  padding: 60px;
+  width: 2100px;
+  font-size: 28px;
 }
 
 .intro {
-    background-color: #f0f0f5;
-    padding: 60px;
-    border-radius: 5px;
-    margin-bottom: 50px;
-    margin-left: 250px;
+  background-color: #f0f0f5;
+  padding: 60px;
+  border-radius: 5px;
+  margin-bottom: 50px;
+  margin-left: 250px;
 }
 
 .title{
@@ -38,145 +38,143 @@ font-weight: bold;
 }
 
 .question {
-    font-size: 30px;
-    margin-top: 40px;
-    margin-bottom: 68px;
+  font-size: 30px;
+  margin-top: 40px;
+  margin-bottom: 68px;
 }
 
 .options {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .options p {
-    margin: 30px 0;
+  margin: 30px 0;
 }
 
 .buttonContainer {
-    margin-top: 60px;
-    text-align: center;
+  margin-top: 60px;
+  text-align: center;
 }
 
 .button {
-    background-color: #b56565;
-    color: white;
-    padding: 10px 60px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 22px;
-    margin-top: 10px;
-    margin-left: 550px;
+  background-color: #b56565;
+  color: white;
+  padding: 10px 60px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 22px;
+  margin-top: 10px;
+  margin-left: 550px;
 }
 
 .selected {
-    background-color: #d3f8d3; /* Exemplo de cor para a resposta selecionada */
-    cursor: pointer;
-  }
-  .correctAnswer {
-    margin-top: 10px;
-    font-weight: bold;
-    color: green;
-  }
+  background-color: #d3f8d3; /* Exemplo de cor para a resposta selecionada */
+  cursor: pointer;
+}
+.correctAnswer {
+  margin-top: 10px;
+  font-weight: bold;
+  color: green;
+}
 
-  .selected {
-    background-color: #d3f8d3;
-    cursor: pointer;
-  }
-  .correctAnswer {
-    margin-top: 10px;
-    font-weight: bold;
-    color: green;
-  }
-  .buttonContainer {
-    margin-top: 20px;
-  }
-  .option {
-    cursor: pointer;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 5px 0;
-    transition: background-color 0.2s ease;
-  }
-  
-  .option:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .selected {
-    background-color: #d1e7dd;
-    border-color: #0f5132;
-  }
-  
-  .correct {
-    background-color: #d4edda;
-    border-color: #28a745;
-    color: #155724;
-  }
-  
-  .incorrect {
-    background-color: #f8d7da;
-    border-color: #dc3545;
-    color: #721c24;
-  }
-  
-  .button {
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
+.selected {
+  background-color: #d3f8d3;
+  cursor: pointer;
+}
+.correctAnswer {
+  margin-top: 10px;
+  font-weight: bold;
+  color: green;
+}
+.buttonContainer {
+  margin-top: 20px;
+}
+.option {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  margin: 5px 0;
+  transition: background-color 0.2s ease;
+}
 
-  .noMoreQuestions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70vh;
-    background-color: #f9f9f9;
-  }
-  
-  .messageBox {
-    background-color: #fff;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    width: 90%;
-  }
-  
-  .messageBox h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #4caf50;
-  }
-  
-  .messageBox p {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    color: #333;
-  }
-  
-  .messageBox .button {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .messageBox .button:hover {
-    background-color: #388e3c;
-  }
-  
+.option:hover {
+  background-color: #f1f1f1;
+}
+
+.selected {
+  background-color: #d1e7dd;
+  border-color: #BCB3DF;
+}
+
+.correct {
+  background-color: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+.incorrect {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+.button {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #BCB3DF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.noMoreQuestions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.messageBox {
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 90%;
+}
+
+.messageBox h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #4caf50;
+}
+
+.messageBox p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.messageBox .button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.messageBox .button:hover {
+  background-color: #388e3c;
+}
