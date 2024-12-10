@@ -20,6 +20,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
+      <head>
+        {/* Ícone para o navegador */}
+        <link rel="icon" href="/img/iconProvest.png" />
+        {/* Ícone para dispositivos móveis */}
+        <link rel="apple-touch-icon" href="/img/iconProvest.png" />
+        <meta name="theme-color" content="#ffffff" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
         <div id="modal-root" className=""></div>
