@@ -68,20 +68,29 @@ function Chat() {
 
   const fetchLastMessages = async (usuarios) => {
     const lastMessagesData = {};
+    const usuarioIdLogado = localStorage.getItem("userId");
+  
     for (const usuario of usuarios) {
-      const chatRef = ref(database, `chats/${usuario.id}`);
+      const chatKey = [usuarioIdLogado, usuario.id].sort().join("_"); // Gera a chave única do chat
+      const chatRef = ref(database, `messages/${chatKey}`);
+  
       onValue(chatRef, (snapshot) => {
+        console.log("Mensagens no chat:", snapshot.val());
         const messages = snapshot.val();
         if (messages) {
-          const lastMessage = messages[messages.length - 1]?.text || "Sem mensagens";
+          const messageArray = Object.values(messages);
+          const sortedMessages = messageArray.sort((a, b) => new Date(a.time) - new Date(b.time));
+          const lastMessage = sortedMessages[sortedMessages.length - 1]?.text || "Sem mensagens";
           lastMessagesData[usuario.id] = lastMessage;
         } else {
           lastMessagesData[usuario.id] = "Sem mensagens";
         }
-        setLastMessages(lastMessagesData); // Atualiza o estado com a última mensagem
+        setLastMessages({ ...lastMessagesData });
       });
+      
     }
   };
+  
 
   const handleChatClick = (usuarioId) => {
     const usuarioIdLogado = localStorage.getItem("userId");

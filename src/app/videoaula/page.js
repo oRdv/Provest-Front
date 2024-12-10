@@ -2,68 +2,115 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./page.module.css";
-import { FaChevronLeft, FaPause, FaChevronRight } from "react-icons/fa";
-
-// Função para buscar vídeos da API
-const fetchVideos = async () => {
-  try {
-    const response = await fetch(
-      "https://provest-ehefgcbyg0g2d6gy.brazilsouth-01.azurewebsites.net/v1/jengt_provest/videoaulas"
-    );
-    const data = await response.json();
-    // Garante que cada item tenha `videoaulas` como um array
-    return data.map((item) => ({
-      ...item,
-      videoaulas: Array.isArray(item.videoaulas) ? item.videoaulas : [],
-    }));
-  } catch (error) {
-    console.error("Erro ao buscar vídeos:", error);
-    return [];
-  }
-};
-
-// Função para extrair o ID do vídeo do YouTube a partir do link
-const extractYouTubeId = (url) => {
-  const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/]+\/.*\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-  const match = url.match(regex);
-  return match ? match[1] : null;
-};
 
 const VideoPage = () => {
-  const [videoaulas, setVideoaulas] = useState([]); // Estado para armazenar os vídeos
-  const [currentVideo, setCurrentVideo] = useState(null); // Estado para armazenar o vídeo atual
+  const [videos, setVideos] = useState([]);
 
-  // Carregar os vídeos quando o componente for montado
   useEffect(() => {
-    const loadVideos = async () => {
-      const videos = await fetchVideos();
-      setVideoaulas(videos);
-      if (videos.length > 0 && videos[0].videoaulas.length > 0) {
-        setCurrentVideo(videos[0].videoaulas[0]); // Define o primeiro vídeo como o atual
-      }
-    };
-    loadVideos();
+    // Definindo os vídeos manualmente
+    const videoLinks = [
+      {
+        subject: "Matemática",
+        videos: [
+          {
+            title: "Funções e gráficos - Matemática",
+            url: "https://www.youtube.com/embed/Wb0ceNgBM00",
+          },
+          {
+            title: "Equações de 1º grau - Matemática",
+            url: "https://www.youtube.com/embed/2yqqNtunyxI",
+          },
+        ],
+      },
+      {
+        subject: "História",
+        videos: [
+          {
+            title: "Revolução Francesa - História",
+            url: "https://www.youtube.com/embed/eg47cCMcQr0",
+          },
+          {
+            title: "Era Vargas - História",
+            url: "https://www.youtube.com/embed/jQU6Ojetq8M",
+          },
+        ],
+      },
+      {
+        subject: "Química",
+        videos: [
+          {
+            title: "Ácidos e bases - Química",
+            url: "https://www.youtube.com/embed/lFDq-SaFjeE",
+          },
+          {
+            title: "Reações químicas - Química",
+            url: "https://www.youtube.com/embed/mLzJzQ9q0Zo",
+          },
+        ],
+      },
+      {
+        subject: "Física",
+        videos: [
+          {
+            title: "Leis de Newton - Física",
+            url: "https://www.youtube.com/embed/0Z9l9s7yDoM",
+          },
+          {
+            title: "Movimento Uniformemente Variado - Física",
+            url: "https://www.youtube.com/embed/oERg3fse2YI",
+          },
+        ],
+      },
+      {
+        subject: "Biologia",
+        videos: [
+          {
+            title: "Células - Biologia",
+            url: "https://www.youtube.com/embed/DQw4YcS8XxI",
+          },
+          {
+            title: "Genética - Biologia",
+            url: "https://www.youtube.com/embed/Tm-GzeFPOmE",
+          },
+        ],
+      },
+      {
+        subject: "Português",
+        videos: [
+          {
+            title: "Interpretação de texto - Português",
+            url: "https://www.youtube.com/embed/X-OCAYOaZ7o",
+          },
+          {
+            title: "Figuras de linguagem - Português",
+            url: "https://www.youtube.com/embed/p_M0bZ3yTVw",
+          },
+        ],
+      },
+    ];
+    
+
+    setVideos(videoLinks);
   }, []);
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>UniCamp - Eletroquímica - VídeoAula</div>
-      {/* Exibe o vídeo atual */}
-      {currentVideo && (
-        <div className={styles.videoPlaceholder}>
-          <div className={styles.videoContainer}>
-            <iframe
-              className={styles.video}
-              width="100%"
-              height="400"
-              src={`https://www.youtube.com/embed/${extractYouTubeId(currentVideo.link)}`}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
+      {/* Exibe o primeiro vídeo manualmente para testar */}
+      {videos.length > 0 && videos[0].videos[0] && (
+        <div className={styles.videoContainer}>
+          <iframe
+            className={styles.video}
+            width="100%"
+            height="400"
+            src={videos[0].videos[0].url}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </div>
       )}
+
       <div className={styles.content}>
         <p>Olá, estudante!</p>
         <p>Para iniciar os seus estudos sobre esse tema, selecionamos esse conteúdo para você.</p>
@@ -79,19 +126,26 @@ const VideoPage = () => {
 
       {/* Lista de vídeos disponíveis */}
       <div className={styles.videoList}>
-        {videoaulas.length > 0 &&
-          videoaulas.map((videoaula, index) => (
+        {videos.length > 0 &&
+          videos.map((subject, index) => (
             <div key={index} className={styles.videoItem}>
-              <h3>{videoaula.nome}</h3>
+              <h2>{subject.subject}</h2>
               <div className={styles.videoSubList}>
-                {videoaula.videoaulas.map((video, videoIndex) => (
+                {subject.videos.map((video, videoIndex) => (
                   <div
                     key={videoIndex}
                     className={styles.videoLink}
-                    onClick={() => setCurrentVideo(video)} // Altera o vídeo atual
+                    onClick={() => {
+                      const videoContainer = document.querySelector(
+                        `iframe[src="${video.url}"]`
+                      );
+                      if (videoContainer) {
+                        videoContainer.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
                   >
-                    <h4>{video.titulo}</h4>
-                    <p>Duração: {video.duracao}</p>
+                    <h4>{video.title}</h4>
+                    <p>Duração: Não especificada</p>
                   </div>
                 ))}
               </div>
